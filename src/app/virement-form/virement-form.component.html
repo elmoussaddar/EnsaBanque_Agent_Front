@@ -1,0 +1,87 @@
+<!-- Section: Design Block -->
+<section class="text-center">
+    <!-- Background image -->
+    <div class="p-5 bg-image" style="
+        background-image: url('https://mdbootstrap.com/img/new/textures/full/171.jpg');
+        height: 300px;
+        "></div>
+    <!-- Background image -->
+
+    <div class="card mx-4 mx-md-5 shadow-5-strong" style="
+        margin-top: -100px;
+        background: hsla(0, 0%, 100%, 0.8);
+        backdrop-filter: blur(30px);
+        ">
+        <div class="card-body py-5 px-md-5">
+
+            <div class="row d-flex justify-content-center">
+                <div class="col-lg-8">
+                    <h2 class="fw-bold mb-5">Effectuer un virement</h2>
+                    <div class="col-lg-8" >
+                        <div class="alert alert-danger"  role="alert" *ngIf="showNotEnoughCredit">You do not have enough Credit !</div>
+                      
+                    </div>
+                    <form>
+                        <!-- 2 column grid layout with text inputs for the first and last names -->
+                        <div class="row">
+                            <div class="col-md-6 mb-4">
+                                <div class="form-outline">
+                                    <input type="text" id="form3Example1" class="form-control" />
+                                    <label class="form-label" for="form3Example1">Nom</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-4">
+                                <div class="form-outline">
+                                    <input type="text" id="form3Example2" class="form-control" />
+                                    <label class="form-label" for="form3Example2">Prénom</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Montant -->
+                        <div class="form-outline mb-4">
+                            <input type="email"
+                             id="form3Example3"
+                              class="form-control" [(ngModel)]="virementRequest.montant"
+                               #Montant="ngModel" name="Montant" required pattern="[0-9,]+" />
+                            <label class="form-label" for="form3Example3">Montant</label>
+                            <div class="col-lg-8" *ngIf="(Montant.touched && !Montant.valid)">
+                                <div class="alert alert-danger" *ngIf="(Montant.errors && Montant.errors.required)">Amount Field is required</div>
+                                <div class="alert alert-danger"*ngIf="(Montant.errors && Montant.errors.pattern)" > Invalid Format for Amount: Must only contain numbers </div>
+                               
+                            </div>
+                        </div>
+                        <!--N° de compte-->
+                        <div class="form-outline mb-4">
+                            <input type="text" id="form3Example3"
+                             class="form-control" [(ngModel)]="virementRequest.ribDest"
+                              #RibDest="ngModel" name="RibDest" 
+                              required
+                              pattern="[0-9]+"
+                              maxlength="24"
+                              minlength="24"
+                              />
+                            <label class="form-label" for="form3Example3">N° de compte</label>
+                            <div class="col-lg-8" *ngIf="(RibDest.touched && !RibDest.valid)">
+                                <div class="alert alert-danger" *ngIf="(RibDest.errors && RibDest.errors.required)">Account Number Field is required</div>
+                                <div class="alert alert-danger"*ngIf="(RibDest.errors && RibDest.errors.pattern)" > Invalid Format for Account Number: Must only contain numbers </div>
+                                <div class="alert alert-danger" *ngIf="(RibDest.errors && RibDest.errors.maxlength)">Account Number Field can only contain 24 numbers</div>
+                                <div class="alert alert-danger"*ngIf="(RibDest.errors && RibDest.errors.minlength)"> Account Number Field must contain 24 numbers </div>
+                            </div>
+                        </div>
+
+                        <!-- Submit button -->
+                        <input type="submit"
+                         class="btn btn-primary btn-block mb-4"  
+                         (click)="effectuerVirementClicked()"
+                         [disabled]="!(Montant.valid && RibDest.valid)"
+                         >
+                            
+                              
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Section: Design Block -->
