@@ -1,4 +1,6 @@
 
+    
+    
     .card{
         padding: 20px 40px;
         margin-top: 5px;
@@ -41,7 +43,7 @@
                 cursor: pointer
             
             }.btn-block:hover{
-                color: #fff !important
+                color: rgb(0, 0, 0) !important
             
             }
             
@@ -99,4 +101,16 @@ body {
     }
     }
   
-   
+    .headingContainer{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 80px;
+        margin-bottom: 20px;
+    }
+    
+    .button{
+        width: 10%;
+       position: absolute;
+       right: 10px;
+    }

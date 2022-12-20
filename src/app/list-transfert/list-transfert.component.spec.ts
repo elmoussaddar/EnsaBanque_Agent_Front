@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PaymentFactureComponent } from './payment-facture.component';
+import { ListTransfertComponent } from './list-transfert.component';
 
-describe('PaymentFactureComponent', () => {
-  let component: PaymentFactureComponent;
-  let fixture: ComponentFixture<PaymentFactureComponent>;
+describe('ListTransfertComponent', () => {
+  let component: ListTransfertComponent;
+  let fixture: ComponentFixture<ListTransfertComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PaymentFactureComponent ]
+      declarations: [ ListTransfertComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PaymentFactureComponent);
+    fixture = TestBed.createComponent(ListTransfertComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -1,0 +1,431 @@
+<main  class="main">
+    <div class=" mainContainer">
+          
+        <div class=" px-0 py-0  formContainer">
+            <div class="row d-flex justify-content-center">
+                <div class="col-6 text-center">
+                  
+                    <div class="card">
+                        <h5 class="text-center mb-4">Transfer Ref : {{transfert.refTransfert}}</h5>
+        
+                        <form class="form-card" #TransfertDetailsForm="ngForm" (ngSubmit)="createAccountClicked()">
+                            
+                           
+                           
+        
+                            <div class="row justify-content-between text-left">
+                                <div class="form-group col-sm-6 flex-column d-flex"> 
+                                    <label class="form-control-label px-3">IDAgent
+                                       </label>
+        
+                                         <input type="text"
+                                         [(ngModel)]="transfert.idAgent"
+                                      
+                                          id="IdAgent" 
+                                          name="IdAgent"
+                                          [disabled]="true"
+                                           required 
+                                           > 
+                                        </div>
+        
+                                       
+                                <div class="form-group col-sm-6 flex-column d-flex"> 
+                                    <label class="form-control-label px-3">Date d'Emission Transfert
+                                      </label> 
+                                        
+                                        <input type="datetime" 
+                                        [(ngModel)]="transfert.dateEmissionTransfert"
+                                        id="dateEmissionTransfert"
+                                        name="dateEmissionTransfert" 
+                                        [disabled]="true"                                       
+                                        > </div>
+                                        
+                                      
+                            </div>
+        
+                         
+                           
+        
+                            <div class="row justify-content-between text-left">
+        
+                                <div class="form-group col-sm-6 flex-column d-flex">
+        
+                                     <label class="form-control-label px-3">Nom Sender
+                                       </label> 
+                                         
+                                         <input type="text"
+                                         [(ngModel)]="transfert.nomSender"
+                                         id="NomSender" 
+                                         name="NomSender" 
+                                         [disabled]="true"
+                                         required 
+                                         pattern="^[a-zA-Z]+"
+                                         >
+                                 </div>
+        
+                                 <div class="form-group col-sm-6 flex-column d-flex">
+        
+                                    <label class="form-control-label px-3">Prenom Sender
+                                       </label> 
+                                        
+                                        <input type="text"
+                                        [(ngModel)]="transfert.prenomSender"
+
+                                        id="PrenomSender" 
+                                        name="PrenomSender" 
+                                        [disabled]="true"
+                                        required
+                                        pattern="[0-9+]+"
+                                       >
+                                </div>
+        
+                               
+                               
+                            </div>
+
+                            <div class="row justify-content-between text-left">
+        
+                                <div class="form-group col-sm-6 flex-column d-flex">
+        
+                                     <label class="form-control-label px-3">Nom Beneficiaire
+                                       </label> 
+                                         
+                                         <input type="text"
+                                         [(ngModel)]="transfert.nomBeneficiere"
+                                         id="NomBeneficiere" 
+                                         name="NomBeneficiere" 
+                                         [disabled]="true"
+                                         required 
+                                         pattern="^[a-zA-Z]+"
+                                        >
+                                 </div>
+        
+                                 <div class="form-group col-sm-6 flex-column d-flex">
+        
+                                    <label class="form-control-label px-3">Prenom Beneficiaire
+                                       </label> 
+                                        
+                                        <input type="text"
+                                        [(ngModel)]="transfert.prenomBeneficiere"
+
+                                        id="PrenomBeneficiaire" 
+                                        name="PrenomBeneficiaire" 
+                                        [disabled]="true"
+                                        required
+                                        pattern="[0-9+]+"
+                                       >
+                                </div>
+        
+                               
+                               
+                            </div>
+
+                            <div class="row justify-content-between text-left">
+        
+                                <div class="form-group col-sm-6 flex-column d-flex">
+        
+                                     <label class="form-control-label px-3">Montant Du Transfert
+                                       </label> 
+                                         
+                                         <input type="text"
+                                         [(ngModel)]="transfert.montantTransfert"
+
+                                         id="MontantTransfert" 
+                                         name="MontantTransfert" 
+                                         [disabled]="true"
+                                         required 
+                                         pattern="^[0-9.]"
+                                       >
+                                 </div>
+        
+                                 <div class="form-group col-sm-6 flex-column d-flex">
+        
+                                    <label class="form-control-label px-3">Etat Du Transfert
+                                       </label> 
+                                        
+                                        <input type="text"
+                                        [(ngModel)]="transfert.etatTransfert"
+                                        id="EtatTransfert" 
+                                        name="EtatTransfert" 
+                                        [disabled]="true"
+                                        required
+                                        pattern="^[a-zA-Z]+"
+                                      >
+                                </div>
+        
+                               
+                               
+                            </div>
+
+                            <div class="row justify-content-between text-left" *ngIf="((transfert.etatTransfert === 'a servire') && payTransferButtonClicked )">
+        
+                                <div class="form-group col-sm-4 flex-column d-flex"> 
+        
+                                    <label class="form-control-label px-3">Titre
+                                        <span class="text-danger"> *</span></label> 
+                                        
+                                     
+                                            <select id="Titre" 
+                                           [(ngModel)]="beneficiaire.titre"
+                                            #Titre="ngModel"
+                                            name="accountType"
+                                            required
+                                           
+                                             >
+                                                <option *ngFor="let titre of titres" value="{{titre}}" >{{titre}}</option>
+                                            </select>
+                                </div>
+
+                                <div class="form-group col-sm-4 flex-column d-flex"> 
+        
+                                    <label class="form-control-label px-3">Nom Beneficiaire
+                                    </label> 
+                                     
+                                     <input type="text"
+                                     [(ngModel)]="beneficiaire.nom"
+                                     id="NomBeneficiere" 
+                                     name="NomBeneficiere" 
+                                     [disabled]="false"
+                                     required
+                                     pattern="^[a-zA-Z]+"
+                                   >
+                                </div>
+                                <div class="form-group col-sm-4 flex-column d-flex"> 
+        
+                                    <label class="form-control-label px-3">Prenom Beneficiaire
+                                    </label> 
+                                     
+                                     <input type="text"
+                                     [(ngModel)]="beneficiaire.prenom"
+                                     id="PrenomBeneficiaire" 
+                                     name="PrenomBeneficiaire" 
+                                     [disabled]="false"
+                                     required
+                                     pattern="^[a-zA-Z]+"
+                                   >
+                                </div>
+                            </div>
+
+                            <div class="row justify-content-between text-left" *ngIf="((transfert.etatTransfert === 'a servire') && payTransferButtonClicked )">
+        
+                                <div class="form-group col-sm-6 flex-column d-flex">
+        
+                                    <label class="form-control-label px-3">Type de Piece d'Identite
+                                        <span class="text-danger"> *</span></label> 
+                                        
+                                     
+                                            <select id="TypePieceIdentity" 
+                                           [(ngModel)]="beneficiaire.typePieceIdentity"
+                                            #TypePieceIdentity="ngModel"
+                                            name="TypePieceIdentity"
+                                            required
+                                           
+                                             >
+                                                <option *ngFor="let typePieceIdentity of typesPieceIdentity" value="{{typePieceIdentity}}" >{{typePieceIdentity}}</option>
+                                            </select>
+                                 </div>
+        
+                                 <div class="form-group col-sm-6 flex-column d-flex">
+        
+                                    <label class="form-control-label px-3">Numero de Piece d'Identite
+                                       </label> 
+                                        
+                                        <input type="text"
+                                        [(ngModel)]="beneficiaire.numPieceIdentity"
+                                        id="NumPieceIdentity" 
+                                        name="NumPieceIdentity" 
+                                        [disabled]="false"
+                                        required
+                                        pattern="^[A-Z0-9]+"
+                                      >
+                                </div>
+        
+                               
+                               
+                            </div>
+        
+                            <div class="row justify-content-between text-left" *ngIf="((transfert.etatTransfert === 'a servire') && payTransferButtonClicked )">
+        
+                                <div class="form-group col-sm-4 flex-column d-flex">
+        
+                                    <label class="form-control-label px-3">Date expiration PI
+                                        <span class="text-danger"> *</span></label> 
+                                        
+                                     
+                                        <input type="date"
+                                        [(ngModel)]="beneficiaire.dateExpirationPieceIdentity"
+                                        id="DateExpirationPieceIdentite" 
+                                        name="DateExpirationPieceIdentite" 
+                                        [disabled]="false"
+                                        required
+                                        
+                                      >
+                                 </div>
+        
+                                 <div class="form-group col-sm-4 flex-column d-flex">
+        
+                                    <label class="form-control-label px-3">Date de Naissance
+                                       </label> 
+                                        
+                                        <input type="date"
+                                        [(ngModel)]="beneficiaire.DateNaissance"
+                                        id="DateNaissance" 
+                                        name="datenaissance" 
+                                        [disabled]="false"
+                                        required
+                                      >
+                                </div>
+                                <div class="form-group col-sm-4 flex-column d-flex">
+        
+                                    <label class="form-control-label px-3">Profession
+                                       </label> 
+                                        
+                                        <input type="text"
+                                        [(ngModel)]="beneficiaire.Profession"
+                                        id="Profession" 
+                                        name="Profession" 
+                                        [disabled]="false"
+                                        
+                                        pattern="^[a-zA-Z]+"
+                                      >
+                                </div>
+        
+                               
+                               
+                            </div>
+                           
+                            <div class="row justify-content-between text-left" *ngIf="((transfert.etatTransfert === 'a servire') && payTransferButtonClicked )">
+        
+                                <div class="form-group col-sm-4 flex-column d-flex">
+        
+                                    <label class="form-control-label px-3">Paye de Nationalite
+                                        <span class="text-danger"> *</span></label> 
+                                        
+                                     
+                                        <input type="text"
+                                        [(ngModel)]="beneficiaire.payeNationality"
+                                        id="payeNationality" 
+                                        name="payeNationality" 
+                                        [disabled]="false"
+                                        required
+                                        pattern="^[a-zA-Z]+"
+
+                                        
+                                      >
+                                 </div>
+        
+                                 <div class="form-group col-sm-4 flex-column d-flex">
+        
+                                    <label class="form-control-label px-3">Adresse Legale
+                                       </label> 
+                                        
+                                        <input type="text"
+                                        [(ngModel)]="beneficiaire.adresseLegal"
+                                        id="adresseLegal" 
+                                        name="adresseLegal" 
+                                        [disabled]="false"
+                                        required
+                                        pattern="^[a-zA-Z0-9]+"
+
+                                      >
+                                </div>
+                                <div class="form-group col-sm-4 flex-column d-flex">
+        
+                                    <label class="form-control-label px-3">GSM
+                                       </label> 
+                                        
+                                        <input type="text"
+                                        [(ngModel)]="beneficiaire.GSM"
+                                        id="GSM" 
+                                        name="GSM" 
+                                        [disabled]="false"
+                                        
+                                        pattern="^[0-9+]+"
+                                      >
+                                </div>
+        
+                               
+                               
+                            </div>
+                            <div class="row justify-content-between text-left" *ngIf="((transfert.etatTransfert === 'a servire') && payTransferButtonClicked )">
+        
+                                <div class="form-group col-sm-4 flex-column d-flex">
+        
+                                    <label class="form-control-label px-3">Paye d'Adresse
+                                        <span class="text-danger"> *</span></label> 
+                                        
+                                     
+                                        <input type="text"
+                                        [(ngModel)]="beneficiaire.payeAdresse"
+                                        id="payeAdresse" 
+                                        name="payeAdresse" 
+                                        [disabled]="false"
+                                        required
+                                        pattern="^[a-zA-Z]+"
+
+                                        
+                                      >
+                                 </div>
+        
+                                 <div class="form-group col-sm-4 flex-column d-flex">
+        
+                                    <label class="form-control-label px-3">Ville
+                                       </label> 
+                                        
+                                        <input type="text"
+                                        [(ngModel)]="beneficiaire.Ville"
+                                        id="Ville" 
+                                        name="Ville" 
+                                        [disabled]="false"
+                                        required
+                                        pattern="^[a-zA-Z]+"
+
+                                      >
+                                </div>
+                                <div class="form-group col-sm-4 flex-column d-flex">
+        
+                                    <label class="form-control-label px-3">Email
+                                       </label> 
+                                        
+                                        <input type="text"
+                                        [(ngModel)]="beneficiaire.Email"
+                                        id="Email" 
+                                        name="Email" 
+                                        [disabled]="false"
+                                        
+                                        pattern="^[a-zA-Z0-9.]+@gmail.com$"
+                                      >
+                                </div>
+        
+                               
+                               
+                            </div>
+                          
+                            <div class="row justify-content-center mt-5">
+        
+                                <div class="form-group col-sm-6">
+                                    
+                                    <button type="submit" class="btn btn-success btn-outline-success text-white"
+                                    [disabled]=" false" (click)="payTransfertClicked()">{{((transfert.etatTransfert === 'a servire') && payTransferButtonClicked) ? "Confirme Transfert": "Pay Transfert"}}</button> 
+
+                                    <button type="submit" class="btn btn-danger"
+                                    [disabled]="false" (click)="goBack()">Cancel</button> 
+                                
+                                </div>
+        
+                            </div>
+                      
+              
+            </form>
+        
+            </div>
+        </div>
+
+          
+    </div>
+        </div>
+    </div>
+  </main>
+
+
+  
