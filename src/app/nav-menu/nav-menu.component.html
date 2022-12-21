@@ -1,64 +1,51 @@
-<nav class="navbar navbar-expand-md navbar-light bg-light fixed-top">
-    <div class="container">
-        <a class="navbar-brand" href="#"> <span id="ensaSpan">Ensa</span><span id="paySpan">Banque</span></a>
+
+<nav class="navbar navbar-expand-md navbar-light bg-primary fixed-top" >
+    <div style="display :flex; justify-content: space-between;">
+        <a class="navbar-brand" style="margin-left: 50px;padding-top:5px ;"> <span id="ensaSpan">TRANSFERT</span><span id="paySpan"> APPLICATION</span></a>
        
-        <div class="collapse navbar-collapse" id="navbarResponsive">
-            <ul class="navbar-nav ml-auto buttonList">
-
-              
-                <li class="nav-item active"  *ngIf="isLoggedIn">
-                    <a class="nav-link" routerLink="clientHome/profile">
-                        Profile
-                       
-                    </a>
-                </li>
-                <li class="nav-item active"  *ngIf="(isLoggedIn)">
-                    <a class="nav-link" routerLink="clientHome/bankTransfert">
-                        Bank Transfert
-                       
-                    </a>
-                </li>
-                <li class="nav-item active"  *ngIf="(isLoggedIn)">
-                    <a class="nav-link" routerLink="clientHome/payBills">
-                        pay Bills
-                      
-                    </a>
-                </li>
-              
-                <li class="nav-item"  *ngIf="!isLoggedIn">
-                    <a class="nav-link">Terms</a>
-                </li>
-              
-               
-                <li
-                    class="nav-item"
+        
+  <div style="margin-left:300px;" id="navbarSupportedContent">
+    <ul class="navbar-nav">
+      <li class="nav-item active" *ngIf="isLoggedIn">
+        <a class="nav-link" routerLink="clientHome/Home">Home</a>
+      </li>
+      <li class="nav-item" *ngIf="isLoggedIn">
+        <a class="nav-link" routerLink="clientHome/profile">Profile</a>
+      </li>
+      <li class="nav-item" *ngIf="isLoggedIn">
+          <a class="nav-link"  routerLink="clientHome/addClient">Add Clients</a>
+      </li>
+      <li class="nav-item" *ngIf="isLoggedIn">
+        <a class="nav-link" routerLink="clientHome/liste-clients">All Clients</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="clientHome/bankTransfert">Transfert</a>
+      </li>
+      <li class="nav-item"  *ngIf="(isLoggedIn)">
+        <a class="nav-link" routerLink="clientHome/payBills">
+            pay Bills 
+        </a>
+    </li>
+    <li class="nav-item" *ngIf="isLoggedIn"  >
                    
-                >
-                  
-                </li>
-                <li class="nav-item" *ngIf="isLoggedIn"  >
-                    <!-- Topbar Navbar -->
-                    <ul class="navbar-nav ml-auto">
-                        <div class="topbar-divider d-none d-sm-block"></div>
+        <ul class="navbar-nav ml-auto">
+            <div class="topbar-divider d-none d-sm-block">
 
-                        <!-- Nav Item - User Information -->
-                       
-                                <div class="dropdown-divider"></div>
-                                <div class="p-1">
-                                    <button
-                                        class="btn btn-warning w-100 mt-1"
-                                        (click)="onLogout()" >
+            </div>
+            <div class="dropdown-divider"></div>
+            <div class="p-1">
+                <button
+                    class="btn btn-warning w-100 mt-1"
+                    (click)="onLogout()" style="margin-left:25px;">
 
-                                        <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"
-                                        ></i>
-                                        Logout
-                                    </button>
-                                </div>
-                            
-                        
-                    </ul>
-                </li>
-            </ul>
-        </div>
+                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"
+                    ></i>
+                    Logout
+                </button>
+            </div>
+        </ul>
+    </li>
+    </ul>
+  </div>
     </div>
 </nav>

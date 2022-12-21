@@ -29,18 +29,18 @@ export class ClientLoginFormComponent implements OnInit {
      private tokenStorage: TokenStorageService,
      private clientService: ClientService
      ) { }
-
+     cheminImage:any ="../../assets/background.jpg";
   ngOnInit(): void {
 
     
    
-      this.isLoggedIn = true;
+      this.isLoggedIn = false;
     
 
   }
 
   submitClientLogInForm(form:any){
- this.router.navigate(['/clientHome/profile']);
+ this.router.navigate(['/clientHome/Home']);
     const { logIn, password } = this.client;
 
    

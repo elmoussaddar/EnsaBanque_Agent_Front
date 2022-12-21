@@ -1,17 +1,23 @@
 #ensaSpan{
     font-size: 28pt;
-    color: rgb(36, 36, 124);
+    color: rgb(255, 255, 255);
     font-weight: bold;
 }
 #paySpan{
     font-size: 28pt;
-    color: hsl(278, 100%, 21%);
+    color: hsl(42, 68%, 88%);
     font-weight: bold;
 }
 
 .navbar{
-    padding: 0px !important;
+    padding-top: 10px !important;
 }
 .buttonList{
     margin-left: 70%;
+}
+
+.nav-link{
+    color: #fff;
+    font-weight: bold;
+    font-size: 15px;
 }

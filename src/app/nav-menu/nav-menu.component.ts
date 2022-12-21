@@ -17,18 +17,13 @@ export class NavMenuComponent implements OnInit {
     constructor(private router: Router, private tokenStorage:TokenStorageService,private clientService :ClientService) {}
 
     numTel= window.sessionStorage.getItem("username");
-
     ngOnInit(): void {
-        this.isLoggedIn=true;
-       
-     
-
-     
+        this.isLoggedIn=true; 
     }
-
+    isExpanded: boolean=false;
     onLogout() {
-        this.router.navigate(['/']);
+        this.router.navigate(['/login']);
         this.tokenStorage.signOut();
-        window.location.reload();    
+        //window.location.reload();    
     }
 }

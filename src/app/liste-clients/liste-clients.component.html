@@ -1,0 +1,181 @@
+<div class="container"  id="main-container" style="padding-top:100px;">
+    <div class="h2 mb-5 p-3 border shadow" style="background-color: #3286E6;color : #fff;">
+        All Clients list
+        <div class="float-end">
+            <div class="input-group">
+                <input type="search" class="form-control" (ngModelChange) = "searchClient(key.value)" #key="ngModel" ngModel
+                name="key" placeholder="rechercher">
+            </div>
+        </div>
+    </div>
+    <div class="row row-cols-1 row-cols-md-3 g-4 d-flex justify-content-around">
+        <div class="col-md-3 card text-center border shadow mx-2" *ngFor="let client of clients">
+            <div class="card-header">
+            Client No {{client?.id}}
+            </div>
+            <div class="card-body">
+            <div class="card-title">
+                <div class="d-flex justify-content-between">
+                    <div class=" mb-3 p-2 rounded-pill float-start" style = "width : 35%;background-color: #1FD1FD; color : #fff;">username</div>
+                    <span class="fw-bold ms-5">{{client?.username}}</span>
+                </div>
+                <!-- <div class="d-flex justify-content-between">
+                    <div class=" mb-3 p-2 rounded-pill float-start" style = "width : 35%;background-color: #1FD1FD; color : #fff;">first_name</div>
+                    <span class="fw-bold ms-5">{{client?.first_name}}</span>
+                </div> -->
+            </div>
+                <div class="d-flex justify-content-around">
+                    <a (click) = "onOpenModal(client,'infos')" class="btn btn-primary m-1">Details</a>
+                    <a (click) = "onOpenModal(client,'update')" class="btn btn-success m-1">Modifier</a>
+                    <a (click) = "onOpenModal(client,'delete')" class="btn btn-danger m-1">Supprimer</a>
+                </div>
+            
+            </div>
+        </div>
+    </div>
+
+    <!-- display infos of client Modal -->
+    <div class="modal fade" id="infosClientModal" tabindex="-1" role="dialog" aria-labelledby="infosClientModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+             <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="infosClientModalLabel">Informations sur le Client  {{clientChoosed?.username}}</h5>
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body text-center">
+                    <div class="row">
+                        <div class="col-9 mx-auto">
+                            <div class="card-text mt-5">
+                                <div class="d-flex justify-content-between">
+                                    <div class=" mb-3 p-2 rounded-pill" style = "width : 40%;background-color: #1FD1FD; color : #fff;">ID Client</div>
+                                    <span class="fw-bold ms-5">{{clientChoosed?.id}}</span>
+                                </div><hr>
+                                <div class="d-flex justify-content-between">
+                                    <div class=" mb-3 p-2 rounded-pill" style = "width : 40%;background-color: #1FD1FD; color : #fff;">Password</div>
+                                    <span class="fw-bold ms-5">{{clientChoosed?.password}}</span>
+                                </div><hr>
+                                <div class="d-flex justify-content-between">
+                                    <div class=" mb-3 p-2 rounded-pill" style = "width : 40%;background-color: #1FD1FD; color : #fff;">Nom</div>
+                                    <span class="fw-bold ms-5">{{clientChoosed?.username}}</span>
+                                </div><hr>
+                                <div class="d-flex justify-content-between">
+                                    <div class=" mb-3 p-2 rounded-pill" style = "width : 40%;background-color: #1FD1FD; color : #fff;">Naissance</div>
+                                    <span class="fw-bold ms-5">{{clientChoosed?.birthday}}</span>
+                                </div><hr>
+                                <div class="d-flex justify-content-between">
+                                    <div class=" mb-3 p-2 rounded-pill" style = "width : 40%;background-color: #1FD1FD; color : #fff;">Email</div>
+                                    <span class="fw-bold ms-5">{{clientChoosed?.email}}</span>
+                                </div><hr>
+                                <div class="d-flex justify-content-between">
+                                    <div class=" mb-3 p-2 rounded-pill" style = "width : 40%;background-color: #1FD1FD; color : #fff;">Telephone</div>
+                                    <span class="fw-bold ms-5">{{clientChoosed?.phoneNumber}}</span>
+                                </div><hr>
+                                <div class="d-flex justify-content-between">
+                                    <div class=" mb-3 p-2 rounded-pill" style = "width : 40%;background-color: #1FD1FD; color : #fff;">Adresse</div>
+                                    <span class="fw-bold ms-5">{{clientChoosed?.address}}</span>
+                                </div><hr>
+                                <div class="d-flex justify-content-between">
+                                    <div class=" mb-3 p-2 rounded-pill" style = "width : 40%;background-color: #1FD1FD; color : #fff;">Identity paper number</div>
+                                    <span class="fw-bold ms-5">{{clientChoosed?.identity_paper_number}}</span>
+                                </div><hr>
+                                <div class="modal-footer">
+                                    <button type="button" id="" data-bs-dismiss="modal" class="btn btn-secondary">Fermer</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="updateClientModal" tabindex="-1" role="dialog" aria-labelledby="clientUpdateModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <h5 class="modal-title" id="updateClientModalLabel">Modifier Client {{updateClient?.username}}</h5>
+                  <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                  </button>
+               </div>
+               <div class="modal-body">
+                  <form #editForm="ngForm">
+                    <div class="form-group">
+                        <label for="name">ID Client ( <span style="color: #f00;"> ne pas modifier</span> )</label>
+                        <input type="text" ngModel="{{updateClient?.id}}" name="id" class="form-control" id="name" aria-describedby="emailHelp">
+                     </div>
+                     <div class="form-group">
+                        <label for="name">Nom</label>
+                        <input type="text" ngModel="{{updateClient?.username}}" name="username" class="form-control" id="name" aria-describedby="emailHelp" placeholder="username">
+                     </div>
+                     <!-- <div class="form-group">
+                        <label for="name">Prénom</label>
+                        <input type="text" ngModel="{{updateClient?.first_name}}" name="first_name" class="form-control" id="name" aria-describedby="emailHelp" placeholder="first_name">
+                     </div> -->
+                     <div class="form-group">
+                        <label for="name">Naissance</label>
+                        <input type="text" ngModel="{{updateClient?.birthday}}" name="birthday" class="form-control" id="name" aria-describedby="emailHelp" placeholder="birthday">
+                     </div>
+                     <div class="form-group">
+                        <label for="name">Email</label>
+                        <input type="text" ngModel="{{updateClient?.email}}" name="email" class="form-control" id="name" aria-describedby="emailHelp" placeholder="email">
+                     </div>
+                     <div class="form-group">
+                        <label for="name">Telephone</label>
+                        <input type="text" ngModel="{{updateClient?.phoneNumber}}" name="phoneNumber" class="form-control" id="name" aria-describedby="emailHelp" placeholder="phoneNumber">
+                     </div>
+                     <div class="form-group">
+                        <label for="name">Adresse</label>
+                        <input type="text" ngModel="{{updateClient?.address}}" name="address" class="form-control" id="name" aria-describedby="emailHelp" placeholder="address">
+                     </div>
+                     <div class="form-group">
+                        <label for="name">Password</label>
+                        <input type="text" ngModel="{{updateClient?.password}}" name="password" class="form-control" id="name" aria-describedby="emailHelp" placeholder="password">
+                     </div>
+                     <div class="form-group">
+                        <label for="name">Numéro d'identity_paper_number</label>
+                        <input type="text" ngModel="{{updateClient?.identity_paper_number}}" name="identity_paper_number" class="form-control" id="name" aria-describedby="emailHelp" placeholder="numero carte bancaire">
+                     </div>
+                     <div class="form-group">
+                        <label for="name">identity_paper_type</label>
+                        <input type="text" ngModel="{{updateClient?.identity_paper_type}}" name="identity_paper_type" class="form-control" id="name" aria-describedby="emailHelp" placeholder="identity_paper_type">
+                     </div>
+                     <div class="modal-footer">
+                        <button type="button" id="" data-bs-dismiss="modal" class="btn btn-secondary">Fermer</button>
+                        <button (click)="onUpdateClient(editForm.value)" data-bs-dismiss="modal" class="btn btn-primary" >Enregistrer</button>
+                     </div>
+                  </form>
+               </div>
+            </div>
+         </div>
+    </div>
+
+    <div class="modal fade" id="deleteClientModal" tabindex="-1" role="dialog" aria-labelledby="deleteModelLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <h5 class="modal-title" id="deleteModelLabel">Supprimer Client</h5>
+                  <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                  </button>
+               </div>
+               <div class="modal-body">
+                  <p>Etes vous sûr de vouloir supprier le client  {{deleteClient?.username}} ?</p>
+                  <div class="modal-footer">
+                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                     <button (click)="onDeleteClient(deleteClient)"  class="btn btn-danger" data-bs-dismiss="modal">Yes</button>
+                  </div>
+               </div>
+         </div>
+       </div>
+    </div>
+
+    <div *ngIf="clients?.length == 0" class="col-lg-12 col-md-12 col-xl-12 mt-5">
+        <div class="alert alert-info text-center" role="alert">
+            <h4 class="alert-heading">AUCUN CLIENTS!</h4>
+            <p>Aucun Client n'a été trouvé</p>
+        </div>
+    </div>
+</div>

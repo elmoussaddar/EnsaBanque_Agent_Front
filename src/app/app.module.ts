@@ -2,7 +2,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
-
+import {MatSidenavModule} from '@angular/material/sidenav';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
@@ -17,8 +17,21 @@ import { ProfileComponent } from './profile/profile.component';
 import { VirementDoneComponent } from './virement-done/virement-done.component';
 import { VirementFormComponent } from './virement-form/virement-form.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
-
+import {MatIconModule} from '@angular/material/icon';
+import {MatListModule} from '@angular/material/list';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatMenuModule} from '@angular/material/menu';
+import {MatButtonModule} from '@angular/material/button';
+import {MatGridListModule} from '@angular/material/grid-list';
+import {MatInputModule} from '@angular/material/input';
+import {MatCardModule} from '@angular/material/card';
+import {MatTreeModule} from '@angular/material/tree';
+import {MatTabsModule} from '@angular/material/tabs';
+import { AddClientComponent } from './add-client/add-client.component';
+import { HomeComponent } from './home/home.component';
+import { ListeClientsComponent } from './liste-clients/liste-clients.component';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatRadioModule} from '@angular/material/radio';
 @NgModule({
   declarations: [
     AppComponent,VirementFormComponent,
@@ -26,7 +39,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
      HeaderComponent,ClientLoginFormComponent,
       ClientHomeComponent, CreateAccountFormComponent,
        PaymentFactureComponent, ChangePasswordComponent,
-        ListFactureComponent,ProfileComponent
+        ListFactureComponent,ProfileComponent, AddClientComponent, HomeComponent, ListeClientsComponent
   ],
   imports: [
     BrowserModule,
@@ -35,6 +48,19 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
+    MatSidenavModule,
+    MatListModule,
+    MatIconModule,
+    MatToolbarModule,
+    MatMenuModule,
+    MatButtonModule,
+    MatGridListModule,
+    MatInputModule,
+    MatCardModule,
+    MatTreeModule,
+    MatTabsModule,
+    MatCheckboxModule,
+    MatRadioModule
   ],
   providers: [],
   bootstrap: [AppComponent]

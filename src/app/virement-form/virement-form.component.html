@@ -14,74 +14,223 @@
         ">
         <div class="card-body py-5 px-md-5">
 
-            <div class="row d-flex justify-content-center">
-                <div class="col-lg-8">
-                    <h2 class="fw-bold mb-5">Effectuer un virement</h2>
-                    <div class="col-lg-8" >
-                        <div class="alert alert-danger"  role="alert" *ngIf="showNotEnoughCredit">You do not have enough Credit !</div>
-                      
-                    </div>
-                    <form>
-                        <!-- 2 column grid layout with text inputs for the first and last names -->
-                        <div class="row">
-                            <div class="col-md-6 mb-4">
-                                <div class="form-outline">
-                                    <input type="text" id="form3Example1" class="form-control" />
-                                    <label class="form-label" for="form3Example1">Nom</label>
-                                </div>
-                            </div>
-                            <div class="col-md-6 mb-4">
-                                <div class="form-outline">
-                                    <input type="text" id="form3Example2" class="form-control" />
-                                    <label class="form-label" for="form3Example2">Prénom</label>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Montant -->
-                        <div class="form-outline mb-4">
-                            <input type="email"
-                             id="form3Example3"
-                              class="form-control" [(ngModel)]="virementRequest.montant"
-                               #Montant="ngModel" name="Montant" required pattern="[0-9,]+" />
-                            <label class="form-label" for="form3Example3">Montant</label>
-                            <div class="col-lg-8" *ngIf="(Montant.touched && !Montant.valid)">
-                                <div class="alert alert-danger" *ngIf="(Montant.errors && Montant.errors.required)">Amount Field is required</div>
-                                <div class="alert alert-danger"*ngIf="(Montant.errors && Montant.errors.pattern)" > Invalid Format for Amount: Must only contain numbers </div>
+            <div class="container mt-5" style="padding-top:10px ;">
+                <div class="h2 mb-5 p-3 border" style="background-color: #3286E6;color : #fff">
+                    TRANSFERT MONEY
+                </div>
+                <div class="card">
+                    <div class="card-body" style="background-color: #D4D5D5;">
+                        <form #clientForm="ngForm" (ngSubmit)="onSearch()">
+                              <div class="row mb-1">
+                                <div>
+                                    <label for="firstName" class="form-label">Transfert Type</label>
                                
+                                <select [(ngModel)]='transfert_type' name="dropdownOption" id="dropdownOption" class='form-control'>
+                                    <option value="1">DEBIT DE COMPTE</option>
+                                    <option value="2">EN ESPECE</option>
+                                    </select>
+                                </div>
                             </div>
-                        </div>
-                        <!--N° de compte-->
-                        <div class="form-outline mb-4">
-                            <input type="text" id="form3Example3"
-                             class="form-control" [(ngModel)]="virementRequest.ribDest"
-                              #RibDest="ngModel" name="RibDest" 
-                              required
-                              pattern="[0-9]+"
-                              maxlength="24"
-                              minlength="24"
-                              />
-                            <label class="form-label" for="form3Example3">N° de compte</label>
-                            <div class="col-lg-8" *ngIf="(RibDest.touched && !RibDest.valid)">
-                                <div class="alert alert-danger" *ngIf="(RibDest.errors && RibDest.errors.required)">Account Number Field is required</div>
-                                <div class="alert alert-danger"*ngIf="(RibDest.errors && RibDest.errors.pattern)" > Invalid Format for Account Number: Must only contain numbers </div>
-                                <div class="alert alert-danger" *ngIf="(RibDest.errors && RibDest.errors.maxlength)">Account Number Field can only contain 24 numbers</div>
-                                <div class="alert alert-danger"*ngIf="(RibDest.errors && RibDest.errors.minlength)"> Account Number Field must contain 24 numbers </div>
+                            <div *ngIf="transfert_type==1" class="row mb-1">
+                                <div style="padding-top: 10px;">
+                                    <label class="form-label">Phone Number</label>
+                                    <input required id="phoneNumber" class="form-control shadow" type="text" placeholder="Enter your Phone Number"
+                                     name="phoneNumber">
+                                  </div>
+                                <div style="padding-top: 20px ;">
+                                <button type="submit" class="btn btn-primary">Search</button></div>
                             </div>
-                        </div>
-
-                        <!-- Submit button -->
-                        <input type="submit"
-                         class="btn btn-primary btn-block mb-4"  
-                         (click)="effectuerVirementClicked()"
-                         [disabled]="!(Montant.valid && RibDest.valid)"
-                         >
+                            <div *ngIf="transfert_type==2" class="row mb-1">
+                                <div style="padding-top: 10px;">
+                                    <label for="identity_paper_type" class="form-label">Identity Paper Type</label>
+                                    <select [(ngModel)]='identity_paper_type ' name="dropdownOption" id="dropdownOption" class='form-control'>
+                                    <option value="1">C.I.N</option>
+                                    <option value="2">Passport</option>
+                                    <option value="3">Driver License</option>
+                                    </select>
+                                </div>
+                                <div style="padding-top: 10px;">
+                                    <label class="form-label">Identity Paper Number</label>
+                                    <input required id="phoneNumber" class="form-control shadow" type="text" placeholder="Enter your Identity Paper Number"
+                                     name="Identity_paper_number">
+                                  </div>
+                                <div style="padding-top: 20px ;">
+                                <button  class="btn btn-primary" type="submit" >Search</button></div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="card" *ngIf="Search==true" style="margin-top:20px">
+                    <div class="card-body" style="background-color: #D4D5D5;">
+                        <form  #clientForm="ngForm" style="padding-bottom: 20px;">
+                              <span style="font-weight: bold; font-size: 20px; margin: vertical 5px;">Sender Client Informations </span> <hr>
+                            <div class="row mb-1">
+                              <div class="col-md-6">
+                                <label for="firstName" class="form-label">First Name</label>
+                                <input required id="username" class="form-control shadow" type="text" placeholder="Enter your First Name"
+                                 name="firstName">
+                              </div>
+                              <div class="col-md-6">
+                                <label for="lastName" class="form-label">Last Name</label>
+                                <input required id="username" class="form-control shadow" type="text" placeholder="Enter your Last Name"
+                                 name="lastName">
+                              </div>
+                            </div>
+                            <div class="row" style="padding-top: 15px;">
+                              <div class="col-md-6">
+                                <label class="form-label">Phone Number</label>
+                                <input required id="phoneNumber" class="form-control shadow" type="text" placeholder="Enter your Phone Number"
+                                name="phoneNumber">
+                              </div>
+                              <div class="col-md-6">
+                                <label class="form-label">Email</label>
+                                <input required id="email" class="form-control shadow" type="text" name="" placeholder="Enter your email"
+                                name="email">
+                              </div>
+                              <div class="row" style="padding-top: 15px;">
+                                <div class="col-md-6">
+                                  <label class="form-label">Birthday</label>
+                                  <input required id="birthday" class="form-control shadow" type="date" placeholder="Enter your Phone Number"
+                                  [(ngModel)] = 'client.birthday' name="birthday">
+                                </div>
+                                <div class="col-md-6">
+                                  <label class="form-label">Gender</label>
+                                  <select [(ngModel)]='client.gender' name="dropdownOption" id="dropdownOption" class='form-control'>
+                                    <option value="1">Male</option>
+                                    <option value="2">Female</option>
+                                    </select>
+                                </div>
+                              </div>
+                              <div class="row" style="padding-top: 15px;">
+                                <div class="col-md-6">
+                                  <label class="form-label">Address</label>
+                                  <input required id="address" class="form-control shadow" type="text" placeholder="Enter your address"
+                                  [(ngModel)] = 'client.address' name="address">
+                                </div>
+                                <div class="col-md-2">
+                                  <label class="form-label">City</label>
+                                  <input required id="city" class="form-control shadow" type="text" placeholder="Enter your city"
+                                  [(ngModel)] = 'client.city' name="city">
+                                </div>
+                                <div class="col-md-2">
+                                  <label class="form-label">Zip Code</label>
+                                  <input required id="zip_code" class="form-control shadow" type="number" placeholder="Enter your zip code"
+                                  [(ngModel)] = 'client.zip_code' name="zip_code">
+                                </div>
+                                <div class="col-md-2">
+                                  <label class="form-label">Country</label>
+                                  <input required id="country" class="form-control shadow" type="text" placeholder="Enter your country"
+                                  [(ngModel)] = 'client.country' name="country">
+                                </div>
+                                <div class="col-md-6" style="padding-top: 15px;">
+                                  <label for="identity_paper_type" class="form-label">Identity Paper Type</label>
+                                  <select [(ngModel)]='client.identity_paper_type' name="dropdownOption" id="dropdownOption" class='form-control'>
+                                  <option value="1">C.I.N</option>
+                                  <option value="2">Passport</option>
+                                  <option value="3">Driver License</option>
+                                  </select>
+                              </div>
+                              <div class="col-md-6" style="padding-top: 15px;">
+                                  <label class="form-label">Identity Paper Number</label>
+                                  <input required id="Identity_paper_number" class="form-control shadow" type="text" placeholder="Enter your Identity Paper Number"
+                                   name="Identity_paper_number" [(ngModel)] = 'client.identity_paper_number' name="Identity_paper_number">
+                                </div>
+                              </div>
+                              <div style="padding-top: 20px;" >
+                                <label class="form-label">Amount</label>
+                                <input required id="amount" class="form-control shadow" type="text" name="" placeholder="Enter the Amount"
+                                name="amount">
+                              </div>
+                              <div  style="padding-top: 20px;">
+                                <label class="form-label">Notification</label>
+                                  <mat-card class="form-control shadow" >
+                                    <mat-card-content>
+                                  <section class="example-section">
+                                    <mat-checkbox  >Checked</mat-checkbox>
+                                  </section>
+                                </mat-card-content>
+                            </mat-card></div>
+                            <div >
+                                <label class="example-margin" style="padding-top: 20px; padding-bottom:20px;"> Cost management</label>
+                                <mat-card>
+                                    <mat-card-content>
+                                  <section class="example-section">
+                                    <mat-radio-group>
+                                      <mat-radio-button class="example-margin" value="1"  style="margin-right:70px; "> Costs to be paid by the ordering customer</mat-radio-button>
+                                      <mat-radio-button class="example-margin" value="2" style="margin-right:70px; "> Fees to be paid by the beneficiary client</mat-radio-button>
+                                      <mat-radio-button class="example-margin" value="3"> Shared costs between clients (Principal and beneficiary)</mat-radio-button>
+                                    </mat-radio-group>
                             
-                              
+                                  </section>
+                                  </mat-card-content>
+                                </mat-card>
+                                  </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="card" style="margin-top:20px" *ngIf="Search==true">
+                    <div class="card-body" style="background-color: #D4D5D5;">
+                      <span style="font-weight: bold; font-size: 20px; margin: vertical 5px;">Receiver Client Informations </span> <hr>
+                            <div class="row mb-1">
+                        <form #clientForm="ngForm" (ngSubmit)="onSearchReceiver()">
+                          <div style="padding-top: 10px;">
+                            <label class="form-label">Identity Paper Number</label>
+                            <input required id="phoneNumber" class="form-control shadow" type="text" placeholder="Enter your Identity Paper Number"
+                             name="Identity_paper_number">
+                          </div>
+                          <div style="padding-top: 20px ;padding-bottom: 20px;">
+                            <button type="submit" class="btn btn-primary">Search</button>
+                          </div>
+                            <div *ngIf="SearchReceiver==true" class="row mb-1" style="padding-top: 15px;">
+                                <div class="col-md-6">
+                                  <label for="firstName" class="form-label">First Name</label>
+                                  <input required id="username" class="form-control shadow" type="text" placeholder="Enter your First Name"
+                                   name="firstName">
+                                </div>
+                                <div class="col-md-6">
+                                  <label for="lastName" class="form-label">Last Name</label>
+                                  <input required id="username" class="form-control shadow" type="text" placeholder="Enter your Last Name"
+                                   name="lastName">
+                                </div>
+                              <div style="padding-top: 15px;">
+                                <label class="form-label">Phone Number</label>
+                                <input required id="phoneNumber" class="form-control shadow" type="text" placeholder="Enter your Phone Number"
+                                 name="phoneNumber">
+                              </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+              </div>
+              <div style="margin-top: 20px ;padding-bottom: 20px;" *ngIf="SearchReceiver==true">
+                <form #clientForm="ngForm" (ngSubmit)="onSendOTP()"> 
+                  <button type="submit" class="btn btn-primary">Send OTP Code</button>
+                </form>
+              </div>
+              <div class="card" style="margin-top:20px" *ngIf="sendOTP==true">
+                <div class="card-body" style="background-color: #D4D5D5;">
+                  <span style="font-weight: bold; font-size: 20px; margin: vertical 5px;">OTP Verification</span> <hr>
+                        <div class="row mb-1">
+                    <form #clientForm="ngForm" (ngSubmit)="verifyOTP()">
+                      <div style="padding-top: 10px;">
+                        <label class="form-label">OTP Code</label>
+                        <input required id="phoneNumber" class="form-control shadow" type="text" placeholder="Enter the OTP received by SMS"
+                         name="Identity_paper_number">
+                      </div>
+                      <div style="padding-top: 20px ;padding-bottom: 20px;">
+                        <button type="submit" class="btn btn-primary">Verify</button>
+                      </div>
                     </form>
                 </div>
             </div>
+          </div>
+          <form #clientForm="ngForm" (ngSubmit)="finalize()" *ngIf="OTPVerified==true">
+            <div style="padding-top: 20px ;padding-bottom: 20px;">
+              <button type="submit" class="btn btn-danger">Finish Transaction</button>
+            </div>
+          </form>
         </div>
     </div>
-</section>
+
 <!-- Section: Design Block -->
