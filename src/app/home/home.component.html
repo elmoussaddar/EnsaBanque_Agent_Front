@@ -19,9 +19,12 @@
             <img src="../../../assets/images/undraw_book_lover_re_rwjy.svg" class="card-img-top" alt="...">
             <div class="card-body">
                 <div class="d-grid gap-2">
-                    <button type="submit" class="btn btn-primary mt-5 mb-5 btn-lg" routerLink = "clientHome/profile">
+                    <form (ngSubmit)="goToProfile()" style="margin: auto;">
+                        <button type="submit" class="btn btn-primary mt-5 mb-5 btn-lg">
                         Consult agent profile
                     </button>
+                    </form>
+                    
                 </div>
             </div>
         </div>
@@ -31,9 +34,12 @@
             <img src="../../../assets/images/undraw_group_hangout_re_4t8r.svg" class="card-img-top" alt="...">
             <div class="card-body">
                 <div class="d-grid gap-2">
-                    <button type="submit" class="btn btn-primary mt-4 mb-5 btn-lg"  routerLink="/creationCompteClient">
-                        Add client
-                    </button>
+                    <form (ngSubmit)="goToAddClient()" style="margin: auto;">
+                        <button type="submit" class="btn btn-primary mt-4 mb-5 btn-lg">
+                            Add client
+                        </button>
+                    </form>
+                    
                 </div>
             </div>
         </div>
@@ -43,9 +49,11 @@
             <img src="../../../assets/images/undraw_people_re_8spw.svg" class="card-img-top" alt="...">
             <div class="card-body">
                 <div class="d-grid gap-2">
-                    <button type="submit" class="btn btn-primary mt-5 mb-5 btn-lg" routerLink="/listeClients">
-                        get clients list
-                    </button>
+                    <form (ngSubmit)="goToGetClients()" style="margin: auto;">
+                        <button type="submit" class="btn btn-primary mt-5 mb-5 btn-lg">
+                            get clients list
+                        </button>
+                    </form>
                 </div>
             </div>
         </div>

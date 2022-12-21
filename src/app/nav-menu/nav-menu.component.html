@@ -12,11 +12,21 @@
       <li class="nav-item" *ngIf="isLoggedIn">
         <a class="nav-link" routerLink="clientHome/profile">Profile</a>
       </li>
-      <li class="nav-item" *ngIf="isLoggedIn">
-          <a class="nav-link"  routerLink="clientHome/addClient">Add Clients</a>
-      </li>
-      <li class="nav-item" *ngIf="isLoggedIn">
-        <a class="nav-link" routerLink="clientHome/liste-clients">All Clients</a>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Clients
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <li *ngIf="isLoggedIn">
+            <a class="dropdown-item" routerLink="clientHome/addClient">Add Clients</a>
+          </li>
+          <li *ngIf="isLoggedIn">
+            <a class="dropdown-item" routerLink="clientHome/liste-clients">All Clients</a>
+          </li>
+          <li *ngIf="isLoggedIn">
+            <a class="dropdown-item" routerLink="clientHome/liste-clients">Serve Client</a>
+          </li>
+        </ul>
       </li>
       <li class="nav-item">
         <a class="nav-link" routerLink="clientHome/bankTransfert">Transfert</a>
