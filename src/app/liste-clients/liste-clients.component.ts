@@ -12,28 +12,26 @@ export class ListeClientsComponent implements OnInit {
   public updateClient: Client | undefined;
   public deleteClient: Client = new Client();
   public clientChoosed : Client = new Client();
-  public clients: Client[] = []; /*[
+  public clients: Client[] = [
  
     {
-      id : "gvhj",
-      nom : "faya",
-      prenom : "fred",
+      firstName : "faya",
+      lastName : "fred",
       password : "dqfberbreqg",
-      naissance : new Date("27-06-2001"),
+      birthday : new Date("27-06-2001"),
       email : "fsbsndbtd",
-      telephone : "eqefafa",
-      adresse : "eqefafa",
-      ville : "eqefafa",
-      codePostal : 446995,
-      numCarteBancaire : "uhijzjejfzfjz",
-      rib : "eqefafa",
-      civilite : "eqefafa",
-      cni : "eqefafa",
-      solde : 64655959,
-      produit : "eqefafa",
-      is_new : true
+      phoneNumber : "eqefafa",
+      address : "eqefafa",
+      city : "eqefafa",
+      zip_code : 446995,
+      identity_paper_number : "uhijzjejfzfjz",
+      identity_paper_type : "eqefafa",
+      gender : "eqefafa",
+      id : 64655959,
+      username : "fred001",
+      country : "Morroco"
     }
-  ];*/
+  ];
 
   constructor(private clientService : ClientServicesService) { }
 

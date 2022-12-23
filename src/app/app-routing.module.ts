@@ -10,6 +10,7 @@ import { ListFactureComponent } from './list-facture/list-facture.component';
 import { ListeClientsComponent } from './liste-clients/liste-clients.component';
 import { PaymentFactureComponent } from './payment-facture/payment-facture.component';
 import { ProfileComponent } from './profile/profile.component';
+import { ServeClientComponent } from './serve-client/serve-client.component';
 import { VirementDoneComponent } from './virement-done/virement-done.component';
 import { VirementFormComponent } from './virement-form/virement-form.component';
 
@@ -27,7 +28,8 @@ const routes: Routes = [
       {path:"addClient" , component:AddClientComponent},
       {path:"Home",component:HomeComponent},
       {path:"liste-clients" ,component:ListeClientsComponent}
-  ]}
+  ]},
+  {path:"serveClient", component: ServeClientComponent}
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
