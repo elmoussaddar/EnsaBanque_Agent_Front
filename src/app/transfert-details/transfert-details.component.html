@@ -156,7 +156,10 @@
                                
                                
                             </div>
+                           
 
+                           
+                                <form class="form-card" #TransfertDetailsForm="ngForm" (ngSubmit)="createAccountClicked()">
                             <div class="row justify-content-between text-left" *ngIf="((transfert.etatTransfert === 'a servire') && payTransferButtonClicked )">
         
                                 <div class="form-group col-sm-4 flex-column d-flex"> 
@@ -400,6 +403,11 @@
                                
                                
                             </div>
+                            </form>
+                        
+                        
+                          
+                     
                           
                             <div class="row justify-content-center mt-5">
         
