@@ -1,0 +1,54 @@
+<section class="wrapper">
+    <div class="container-fostrap">
+        <div>
+           
+            <div class="container">
+                 <div class="search">
+                     <div class="row">
+                        
+                        <div class="col-md-12"> 
+                                    <div> <div class="search-2"> <i class='bx bxs-map' ></i> 
+                                        <input type="text" placeholder="Entrer la reference du transfert"> 
+                                        <button>Search</button>
+                                     </div> 
+                                    </div> 
+                                </div>
+                             </div> 
+                            </div>
+        </div>
+        </div>
+        <div class="content mt-5">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-4">
+                        <div class="card">
+                         
+                            <div class="card-content">
+                                <h4 class="card-title">
+                                    <a>Transfert
+                                  </a>
+                                </h4>
+                                <p class="">
+                                 <span class="labelText">Ref :</span> <span class="text-primary fw-bold"> {{transfert.refTransfert}}</span>
+                                </p>
+                                <p class="">
+                                    <span class="labelText">  Etat : </span> <span class="text-primary fw-bold"> {{transfert.etatTransfert}}</span>
+                                  </p>
+                                  <p class="">
+                                    <span class="labelText">  Beneficiere : </span> <span class="text-primary fw-bold">{{transfert.prenomSender}} {{transfert.nomSender}} </span>
+                                  </p>
+                            </div>
+                            <div class="card-read-more">
+                                <a  class="btn btn-link btn-block" (click)="ViewDetailsClicked(transfert.idTransfert)">
+                                    View Transfert Details
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                  
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

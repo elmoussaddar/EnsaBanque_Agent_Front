@@ -33,6 +33,8 @@ import { ListeClientsComponent } from './liste-clients/liste-clients.component';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatRadioModule} from '@angular/material/radio';
 import { ServeClientComponent } from './serve-client/serve-client.component';
+import { ListTransfertComponent } from './list-transfert/list-transfert.component';
+import { TransfertDetailsComponent } from './transfert-details/transfert-details.component';
 @NgModule({
   declarations: [
     AppComponent,VirementFormComponent,
@@ -40,7 +42,7 @@ import { ServeClientComponent } from './serve-client/serve-client.component';
      HeaderComponent,ClientLoginFormComponent,
       ClientHomeComponent, CreateAccountFormComponent,
        PaymentFactureComponent, ChangePasswordComponent,
-        ListFactureComponent,ProfileComponent, AddClientComponent, HomeComponent, ListeClientsComponent, ServeClientComponent
+        ListFactureComponent,ProfileComponent, AddClientComponent, HomeComponent, ListeClientsComponent, ServeClientComponent, ListTransfertComponent, TransfertDetailsComponent
   ],
   imports: [
     BrowserModule,
