@@ -5,16 +5,25 @@
     <div class="card">
         <div class="card-body" style="background-color: #D4D5D5;">
             <form #clientForm="ngForm" (ngSubmit)="searchRef()">
-                  <span style="font-weight: bold; font-size: 20px; margin: vertical 5px;">Transfert Informations</span> <hr>
+                <span style="font-weight: bold; font-size: 20px; margin: vertical 5px;">Transfert Informations</span> <hr>
                 <div class="row mb-1">
                   <div>
+                    <label for="firstName" class="form-label">Payement Type</label>
+                    <select [disabled]="payment_done" [(ngModel)]='payment_type' name="dropdownOption" id="dropdownOption" class='form-control'>
+                      <option value="1">In Cash</option>
+                      <option value="2">On Wallet</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="row mb-1" style="padding-top: 15px;">
+                  <div>
                     <label for="firstName" class="form-label">Transfer reference</label>
-                    <input required id="username" class="form-control shadow" type="text" placeholder="Enter the Transfer reference"
+                    <input [disabled]="payment_done" required id="username" class="form-control shadow" type="text" placeholder="Enter the Transfer reference"
                     [(ngModel)] = 'client.firstName' name="firstName">
                   </div>
                   
                     <div style="padding-top: 40px ; padding-bottom: 25px;">
-                    <button type="submit" class="btn btn-primary" >Search</button>
+                    <button [disabled]="payment_done" type="submit" class="btn btn-primary" >Search</button>
                     </div>
                 </div>
             </form>
@@ -45,43 +54,41 @@
                         <label for="firstName" class="form-label" style="font-weight: bold;">Receiver Full Name</label>
                         <span style="color: #3286E6; font-size: 20px;"> nom + prenom</span>
                     </div>
-                  
-                    
                 </div>
             </div>
         </div>
     </div>
     <div class="card" style="margin-top:20px" *ngIf="search_ref==true">
         <div class="card-body" style="background-color: #D4D5D5;">
-            <form #clientForm="ngForm" (ngSubmit)="searchRef()">
+            <form #clientForm="ngForm" *ngIf="payment_type == 1">
                 <span style="font-weight: bold; font-size: 20px; margin: vertical 5px;">Receiver Informations</span> <hr>
                 <div class="row mb-1">
                     <div class="col-md-6">
                       <label for="firstName" class="form-label">First Name</label>
-                      <input required id="username" class="form-control shadow" type="text" placeholder="Enter your First Name"
+                      <input required id="username" class="form-control shadow" type="text" placeholder="No First Name"
                        name="firstName">
                     </div>
                     <div class="col-md-6">
                       <label for="lastName" class="form-label">Last Name</label>
-                      <input required id="username" class="form-control shadow" type="text" placeholder="Enter your Last Name"
+                      <input required id="username" class="form-control shadow" type="text" placeholder="No Last Name"
                        name="lastName">
                     </div>
                   </div>
                   <div class="row" style="padding-top: 15px;">
                     <div class="col-md-6">
                       <label class="form-label">Phone Number</label>
-                      <input required id="phoneNumber" class="form-control shadow" type="text" placeholder="Enter your Phone Number"
+                      <input required id="phoneNumber" class="form-control shadow" type="text" placeholder="No Phone Number"
                       name="phoneNumber">
                     </div>
                     <div class="col-md-6">
                       <label class="form-label">Email</label>
-                      <input required id="email" class="form-control shadow" type="text" name="" placeholder="Enter your email"
+                      <input required id="email" class="form-control shadow" type="text" name="" placeholder="No email"
                       name="email">
                     </div>
                     <div class="row" style="padding-top: 15px;">
                       <div class="col-md-6">
                         <label class="form-label">Birthday</label>
-                        <input required id="birthday" class="form-control shadow" type="date" placeholder="Enter your Phone Number"
+                        <input required id="birthday" class="form-control shadow" type="date" placeholder="No Phone Number"
                         [(ngModel)] = 'client.birthday' name="birthday">
                       </div>
                       <div class="col-md-6">
@@ -95,22 +102,22 @@
                     <div class="row" style="padding-top: 15px;">
                       <div class="col-md-6">
                         <label class="form-label">Address</label>
-                        <input required id="address" class="form-control shadow" type="text" placeholder="Enter your address"
+                        <input required id="address" class="form-control shadow" type="text" placeholder="No address"
                         [(ngModel)] = 'client.address' name="address">
                       </div>
                       <div class="col-md-2">
                         <label class="form-label">City</label>
-                        <input required id="city" class="form-control shadow" type="text" placeholder="Enter your city"
+                        <input required id="city" class="form-control shadow" type="text" placeholder="No city"
                         [(ngModel)] = 'client.city' name="city">
                       </div>
                       <div class="col-md-2">
                         <label class="form-label">Zip Code</label>
-                        <input required id="zip_code" class="form-control shadow" type="number" placeholder="Enter your zip code"
+                        <input required id="zip_code" class="form-control shadow" type="number" placeholder="No zip code"
                         [(ngModel)] = 'client.zip_code' name="zip_code">
                       </div>
                       <div class="col-md-2">
                         <label class="form-label">Country</label>
-                        <input required id="country" class="form-control shadow" type="text" placeholder="Enter your country"
+                        <input required id="country" class="form-control shadow" type="text" placeholder="No country"
                         [(ngModel)] = 'client.country' name="country">
                       </div>
                       <div class="col-md-6" style="padding-top: 15px;">
@@ -123,17 +130,259 @@
                     </div>
                     <div class="col-md-6" style="padding-top: 15px;">
                         <label class="form-label">Identity Paper Number</label>
-                        <input required id="Identity_paper_number" class="form-control shadow" type="text" placeholder="Enter your Identity Paper Number"
+                        <input required id="Identity_paper_number" class="form-control shadow" type="text" placeholder="No Identity Paper Number"
                          name="Identity_paper_number" [(ngModel)] = 'client.identity_paper_number' name="Identity_paper_number">
                       </div>
                     </div>
-                
-                  <div style="padding-top: 40px ; padding-bottom: 25px;">
-                  <button type="submit" class="btn btn-warning" >Validate</button>
-                  </div>
               </div>
           </form>
+
+          <form #clientForm="ngForm" *ngIf="payment_type == 2">
+            <span style="font-weight: bold; font-size: 20px; margin: vertical 5px;">Receiver Informations</span> <hr>
+            <div class="row mb-1">
+              <label class="example-margin" style="padding-top: 20px; padding-bottom:20px;">Have a Wallet?</label>
+              <div style="display: flex;  justify-content: space-around; background-color: #fff; padding: 12px; border-radius: 10px;">
+                <div>
+                  <input [disabled]="payment_done" class="form-check-input" type="radio" name="have_wallet" id="yes_radio" style="margin-right: 15px;" (change)="setWallet(1)">
+                  <label class="form-check-label">
+                    Yes
+                  </label>
+                </div>
+                <div>
+                  <input [disabled]="payment_done" class="form-check-input" type="radio" name="have_wallet" id="no_radio" style="margin-right: 15px;" (change)="setWallet(2)">
+                  <label class="form-check-label">
+                    No
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div class="row mb-1" *ngIf="have_wallet == 1">
+              <div style="padding-top: 10px;">
+                <label class="form-label">Wallet Number</label>
+                <input [disabled]="payment_done" required id="walletNumber" class="form-control shadow" type="text" placeholder="Enter the Wallet number"
+                 name="wallet_number">
+              </div>
+              <div style="padding-top: 20px ;padding-bottom: 20px;">
+                <button [disabled]="payment_done" type="submit" class="btn btn-primary" (click)="searchWallet()">Search</button>
+              </div>
+
+
+              <div *ngIf="check_wallet == true">
+                <span style="font-weight: bold; font-size: 20px; margin: vertical 5px;">Wallet Informations</span> <hr>
+                <div class="row">
+                  <div class="col-md-6">
+                    <label for="firstName" class="form-label">First Name</label>
+                    <input disabled id="username" class="form-control shadow" type="text" placeholder="No First Name"
+                     name="firstName">
+                  </div>
+                  <div class="col-md-6">
+                    <label for="lastName" class="form-label">Last Name</label>
+                    <input disabled id="username" class="form-control shadow" type="text" placeholder="No Last Name"
+                     name="lastName">
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-6">
+                    <label class="form-label">Phone Number</label>
+                    <input disabled id="phoneNumber" class="form-control shadow" type="text" placeholder="No Phone Number"
+                    name="phoneNumber">
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label">Email</label>
+                    <input disabled id="email" class="form-control shadow" type="text" name="" placeholder="No email"
+                    name="email">
+                  </div>
+                </div>
+                <div class="row" style="padding-top: 15px;">
+                  <div class="col-md-6">
+                    <label class="form-label">Birthday</label>
+                    <input disabled id="birthday" class="form-control shadow" type="date" placeholder="No Phone Number"
+                    [(ngModel)] = 'client.birthday' name="birthday">
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label">Gender</label>
+                    <select [(ngModel)]='client.gender' name="dropdownOption" id="dropdownOption" class='form-control' disabled>
+                      <option value="1">Male</option>
+                      <option value="2">Female</option>
+                      </select>
+                  </div>
+                </div>
+                <div class="row" style="padding-top: 15px;">
+                  <div class="col-md-6">
+                    <label class="form-label">Address</label>
+                    <input disabled id="address" class="form-control shadow" type="text" placeholder="No address"
+                    [(ngModel)] = 'client.address' name="address">
+                  </div>
+                  <div class="col-md-2">
+                    <label class="form-label">City</label>
+                    <input disabled id="city" class="form-control shadow" type="text" placeholder="No city"
+                    [(ngModel)] = 'client.city' name="city">
+                  </div>
+                  <div class="col-md-2">
+                    <label class="form-label">Zip Code</label>
+                    <input disabled id="zip_code" class="form-control shadow" type="number" placeholder="No zip code"
+                    [(ngModel)] = 'client.zip_code' name="zip_code">
+                  </div>
+                  <div class="col-md-2">
+                    <label class="form-label">Country</label>
+                    <input disabled id="country" class="form-control shadow" type="text" placeholder="No country"
+                    [(ngModel)] = 'client.country' name="country">
+                  </div>
+                  <div class="col-md-6" style="padding-top: 15px;">
+                    <label for="identity_paper_type" class="form-label">Identity Paper Type</label>
+                    <select [(ngModel)]='client.identity_paper_type' name="dropdownOption" id="dropdownOption" class='form-control' disabled>
+                      <option value="1">C.I.N</option>
+                      <option value="2">Passport</option>
+                      <option value="3">Driver License</option>
+                    </select>
+                </div>
+                <div class="col-md-6" style="padding-top: 15px;">
+                    <label class="form-label">Identity Paper Number</label>
+                    <input disabled id="Identity_paper_number" class="form-control shadow" type="text" placeholder="No Identity Paper Number"
+                     name="Identity_paper_number" [(ngModel)] = 'client.identity_paper_number' name="Identity_paper_number">
+                  </div>
+                </div>
+
+                <div class="row" style="padding-top: 15px;">
+                  <div>
+                    <label class="form-label">Account Balance</label>
+                    <input disabled id="balance" class="form-control shadow" type="number" placeholder="0"
+                    [(ngModel)] = 'client.birthday' name="balance">
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row mb-1" *ngIf="have_wallet == 2">
+              <form (ngSubmit)="saveAccount(clientForm)" #clientForm="ngForm" style=" padding-top: 25px;">
+                <span style="font-weight: bold; font-size: 20px; margin: vertical 5px;">Payment account subscription</span> <hr>
+                <div class="row mb-1">
+                  <div class="col-md-6">
+                    <label for="firstName" class="form-label">First Name</label>
+                    <input required id="username" class="form-control shadow" type="text" placeholder="Enter your First Name"
+                    [(ngModel)] = 'client.firstName' name="firstName">
+                  </div>
+                  <div class="col-md-6">
+                    <label for="lastName" class="form-label">Last Name</label>
+                    <input required id="username" class="form-control shadow" type="text" placeholder="Enter your Last Name"
+                    [(ngModel)] = 'client.lastName' name="lastName">
+                  </div>
+                  <div style="padding-top: 15px;">
+                    <label for="username" class="form-label">Username</label>
+                    <input required id="username" class="form-control shadow" type="text" placeholder="Enter username"
+                    [(ngModel)] = 'client.username' name="username">
+                  </div>
+                </div>
+                <div class="row" style="padding-top: 15px;">
+                  <div class="col-md-6">
+                    <label class="form-label">Phone Number</label>
+                    <input required id="phoneNumber" class="form-control shadow" type="text" placeholder="Enter your Phone Number"
+                    [(ngModel)] = 'client.phoneNumber' name="phoneNumber">
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label">Email</label>
+                    <input required id="email" class="form-control shadow" type="text" name="" placeholder="Enter your email"
+                    [(ngModel)] = 'client.email' name="email">
+                  </div>
+                </div>
+                <div class="row" style="padding-top: 15px;">
+                  <div class="col-md-6">
+                    <label class="form-label">Birthday</label>
+                    <input required id="birthday" class="form-control shadow" type="date" placeholder="Enter your Phone Number"
+                    [(ngModel)] = 'client.birthday' name="birthday">
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label">Gender</label>
+                    <select [(ngModel)]='client.gender' name="dropdownOption" id="dropdownOption" class='form-control'>
+                      <option value="1">Male</option>
+                      <option value="2">Female</option>
+                      </select>
+                  </div>
+                </div>
+                <div class="row" style="padding-top: 15px;">
+                  <div class="col-md-6">
+                    <label class="form-label">Address</label>
+                    <input required id="address" class="form-control shadow" type="text" placeholder="Enter your address"
+                    [(ngModel)] = 'client.address' name="address">
+                  </div>
+                  <div class="col-md-2">
+                    <label class="form-label">City</label>
+                    <input required id="city" class="form-control shadow" type="text" placeholder="Enter your city"
+                    [(ngModel)] = 'client.city' name="city">
+                  </div>
+                  <div class="col-md-2">
+                    <label class="form-label">Zip Code</label>
+                    <input required id="zip_code" class="form-control shadow" type="number" placeholder="Enter your zip code"
+                    [(ngModel)] = 'client.zip_code' name="zip_code">
+                  </div>
+                  <div class="col-md-2">
+                    <label class="form-label">Country</label>
+                    <input required id="country" class="form-control shadow" type="text" placeholder="Enter your country"
+                    [(ngModel)] = 'client.country' name="country">
+                  </div>
+                  <div class="col-md-6" style="padding-top: 15px;">
+                    <label for="identity_paper_type" class="form-label">Identity Paper Type</label>
+                    <select [(ngModel)]='client.identity_paper_type' name="dropdownOption" id="dropdownOption" class='form-control'>
+                    <option value="1">C.I.N</option>
+                    <option value="2">Passport</option>
+                    <option value="3">Driver License</option>
+                    </select>
+                  </div>
+                  <div class="col-md-6" style="padding-top: 15px;">
+                    <label class="form-label">Identity Paper Number</label>
+                    <input required id="Identity_paper_number" class="form-control shadow" type="text" placeholder="Enter your Identity Paper Number"
+                    name="Identity_paper_number" [(ngModel)] = 'client.identity_paper_number' name="Identity_paper_number">
+                  </div>
+                </div>
+
+                <form (ngSubmit)="sendOTP()" #clientForm="ngForm" style=" padding-top: 25px;">
+                  <span style="font-weight: bold; font-size: 20px; margin: vertical 5px;">OTP Verification</span> <hr>
+                  <div class="row mb-1">
+                    <div>
+                      <label for="firstName" class="form-label">Enter the OTP code to Send</label>
+                      <input [disabled]="payment_done" required id="otp" class="form-control shadow" type="text" placeholder="Enter the OTP code to send"
+                      [(ngModel)] = 'client.firstName' name="otpSend">
+                    </div>
+                    <div style="margin-top: 20px ;padding-bottom: 20px;">
+                      <button [disabled]="payment_done" type="submit" class="btn btn-primary">Send OTP Code</button>
+                    </div>
+                  </div>
+                </form>
+                <form #clientForm="ngForm" *ngIf="otpSended==true">
+                  <div style="padding-top: 10px;">
+                    <label class="form-label">Verify OTP Code</label>
+                    <input [disabled]="payment_done" required id="phoneNumber" class="form-control shadow" type="text" placeholder="Enter the OTP received by SMS"
+                     name="Identity_paper_number">
+                  </div>
+                  <div style="padding-top: 20px ;padding-bottom: 20px; display: flex; justify-content: space-around;">
+                    <button [disabled]="payment_done" type="submit" class="btn btn-primary" (click)="verifyOTP()">Verify</button>
+                    <button [disabled]="payment_done" type="submit" class="btn btn-danger" *ngIf="otpVerified==false" (click)="goToHome()">Quit</button>
+                  </div>
+                </form>
+
+                <div style="padding-top: 40px ;" *ngIf="otpVerified==true">
+                  <button [disabled]="payment_done" type="submit" class="btn btn-primary" >Create Payment Account</button>
+                </div>
+              
+              </form>
+            </div>
+
+            <div style="padding-top: 40px ; padding-bottom: 60px;" *ngIf="sub_account_created==true || check_wallet == true">
+              <button [disabled]="payment_done" type="submit" class="btn btn-warning" style="color: #fff;" (click)="validatePayment()">Validate Payment</button>
+            </div>
+
+          </form>
+
         </div>
+    </div>
+    <div style="display: flex; justify-content: space-around;" *ngIf="payment_done==true">
+      <div style="padding-top: 40px ; padding-bottom: 50px;">
+        <button type="submit" class="btn btn-success" style="color: #fff;">Download the receipt</button>
+      </div>
+      <div style="padding-top: 40px ; padding-bottom: 50px;">
+        <button type="submit" class="btn btn-info" style="color: #fff;" (click)="goToHome()">Return to Home</button>
+      </div>
     </div>
   </div>
   
