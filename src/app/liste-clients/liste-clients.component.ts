@@ -29,7 +29,8 @@ export class ListeClientsComponent implements OnInit {
       gender : "eqefafa",
       id : 64655959,
       username : "fred001",
-      country : "Morroco"
+      country : "Morroco",
+      balance : 0
     }
   ];
 

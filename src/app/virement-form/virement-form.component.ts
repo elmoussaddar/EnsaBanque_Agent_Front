@@ -53,7 +53,7 @@ import { Client } from '../Models/client';
       verifyOTP(){
         this.OTPVerified = true;
         if(this.OTPVerified == true)
-        Swal.fire('Code Verified', 'OTP Verification', 'success');
+          Swal.fire('Code Verified', 'OTP Verification', 'success');
         else  Swal.fire('Code Not Verified', ':)', 'error');
       }
 

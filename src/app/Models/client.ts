@@ -15,5 +15,6 @@ export class Client {
     public country : String = new String();
     public city : String = new String();
     public gender : String = new String();
+    public balance : number = 0;
     
 }

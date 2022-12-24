@@ -1,41 +1,134 @@
-<div class="container d-flex justify-content-center mt-5">
+<div class="container mt-5" style="text-align: center;">
 
-	<div class="card">
-		
-		<div class="top-container">
-			
-			<img src="./assets/user.png" class="img-fluid profile-image" width="70">
-			
-			<div class="ml-3"  >
-				<h5 class="name" *ngIf="(client.nom !=null && client.prenom !=null)">{{client.nom}} {{client.prenom}}</h5>
-				<p class="mail" *ngIf="client.numTel !=null">{{client.numTel}}</p>
-              
+	<div class="h2 p-3 border" style="background-color: #3286E6;color : #fff; margin-top: 150px; margin-bottom: 50px;">
+		AGENT PROFILE
+	</div>
+	<div class="row">
+		<div class="card" style="display: flex; justify-content: center; border-radius: 50%; height: 250px; width: 250px; margin:auto;">
+			<img src="./assets/profile3.jpg" class="img-fluid profile-image">
+		</div>
+		<form (ngSubmit)="saveAgentData(clientForm)" #clientForm="ngForm">
+			<div class="row mb-1" style="margin-top: 70px;">
+				<div class="col-md-6">
+					<label for="firstName" class="form-label">First Name</label>
+					<input required [disabled]="profile_editable" id="username" class="form-control shadow" type="text" placeholder="Enter your First Name"
+					[(ngModel)] = 'client.firstName' name="firstName">
+				</div>
+				<div class="col-md-6">
+					<label for="lastName" class="form-label">Last Name</label>
+					<input required [disabled]="profile_editable" id="username" class="form-control shadow" type="text" placeholder="Enter your Last Name"
+					[(ngModel)] = 'client.lastName' name="lastName">
+				</div>
+		  	</div>
+			<div class="row" style="padding-top: 15px;">
+				<div class="col-md-6">
+					<label for="username" class="form-label">Username</label>
+					<input required [disabled]="profile_editable" id="username" class="form-control shadow" type="text" placeholder="Enter username"
+					[(ngModel)] = 'client.username' name="username">
+				</div>
+				<div class="col-md-6">
+					<label for="username" class="form-label">Password</label>
+					<input required [disabled]="profile_editable" id="password" class="form-control shadow" type="password" placeholder="Enter password"
+					[(ngModel)] = 'client.password' name="password">
+				</div>
 			</div>
-		</div>
+		  <div class="row" style="padding-top: 15px;">
+			<div class="col-md-6">
+			  <label class="form-label">Phone Number</label>
+			  <input required [disabled]="profile_editable" id="phoneNumber" class="form-control shadow" type="text" placeholder="Enter your Phone Number"
+			  [(ngModel)] = 'client.phoneNumber' name="phoneNumber">
+			</div>
+			<div class="col-md-6">
+			  <label class="form-label">Email</label>
+			  <input required [disabled]="profile_editable" id="email" class="form-control shadow" type="text" name="" placeholder="Enter your email"
+			  [(ngModel)] = 'client.email' name="email">
+			</div>
+		  </div>
+		  <div class="row" style="padding-top: 15px;">
+			<div class="col-md-6">
+			  <label class="form-label">Birthday</label>
+			  <input required [disabled]="profile_editable" id="birthday" class="form-control shadow" type="date" placeholder="Enter your Phone Number"
+			  [(ngModel)] = 'client.birthday' name="birthday">
+			</div>
+			<div class="col-md-6">
+			  <label class="form-label">Gender</label>
+			  <select [disabled]="profile_editable" [(ngModel)]='client.gender' name="dropdownOption" id="dropdownOption" class='form-control'>
+				<option value="1">Male</option>
+				<option value="2">Female</option>
+				</select>
+			</div>
+		  </div>
+		  <div class="row" style="padding-top: 15px;">
+			<div class="col-md-6">
+			  <label class="form-label">Address</label>
+			  <input [disabled]="profile_editable" required id="address" class="form-control shadow" type="text" placeholder="Enter your address"
+			  [(ngModel)] = 'client.address' name="address">
+			</div>
+			<div class="col-md-2">
+			  <label class="form-label">City</label>
+			  <input [disabled]="profile_editable" required id="city" class="form-control shadow" type="text" placeholder="Enter your city"
+			  [(ngModel)] = 'client.city' name="city">
+			</div>
+			<div class="col-md-2">
+			  <label class="form-label">Zip Code</label>
+			  <input [disabled]="profile_editable" required id="zip_code" class="form-control shadow" type="number" placeholder="Enter your zip code"
+			  [(ngModel)] = 'client.zip_code' name="zip_code">
+			</div>
+			<div class="col-md-2">
+			  <label class="form-label">Country</label>
+			  <input [disabled]="profile_editable" required id="country" class="form-control shadow" type="text" placeholder="Enter your country"
+			  [(ngModel)] = 'client.country' name="country">
+			</div>
+			<div class="col-md-6" style="padding-top: 15px;">
+			  <label for="identity_paper_type" class="form-label">Identity Paper Type</label>
+			  <select [disabled]="profile_editable" [(ngModel)]='client.identity_paper_type' name="dropdownOption" id="dropdownOption" class='form-control'>
+			  <option value="1">C.I.N</option>
+			  <option value="2">Passport</option>
+			  <option value="3">Driver License</option>
+			  </select>
+		  </div>
+		  <div class="col-md-6" style="padding-top: 15px;">
+			  <label class="form-label">Identity Paper Number</label>
+			  <input [disabled]="profile_editable" required id="Identity_paper_number" class="form-control shadow" type="text" placeholder="Enter your Identity Paper Number"
+			   name="Identity_paper_number" [(ngModel)] = 'client.identity_paper_number' name="Identity_paper_number">
+			</div>
+		  </div>
+		  <div style="padding-top: 40px ;">
+			<button type="submit" class="{{edit_text_button}}" >{{edit_text}} profile</button>
+		  </div>
+		  
+	  </form>
+	</div>
 
-
-		<div class="middle-container d-flex justify-content-between align-items-center mt-3 p-2">
-				<div class="dollar-div px-3">
-					
-					<div class="round-div"><i class="fa fa-dollar dollar"></i></div>
-
-				</div>
-				<div class="d-flex flex-column text-right mr-2" *ngIf="client.compte.solde!=null" >
-					<span class="current-balance">Current Balance</span>
-					<span class="amount"><span class="dollar-sign">$</span>{{client.compte.solde}}</span>
-				</div>
-
-		</div>
-
-		<div class="recent-border mt-4" *ngIf="client.compte.rib !=null">
-			<span class="recent-orders">RIB : {{client.compte.rib}}</span>
-		</div>
-        <div class="recent-border mt-4" *ngIf="client.compte.comptename !=null">
-			<span class="recent-orders">Account Type : <br/> {{client.compte.comptename}}</span>
-		</div>
-
+	<div class="row" style="margin-top: 50px; margin-bottom: 100px;">
+		<div class="card" style="margin: auto;">
 		
-		
+			<div class="top-container">
+				
+				<img src="./assets/money.jpg" class="img-fluid profile-image" width="100" style="margin: auto;">
+				
+				<div class="ml-3"  >
+					<h5 class="name" *ngIf="(client.lastName!=null && client.firstName!=null)">{{client.lastName}} {{client.firstName}}</h5>
+					<p class="mail" *ngIf="client.phoneNumber !=null">{{client.phoneNumber}}</p>
+				  
+				</div>
+			</div>
+	
+	
+			<div class="middle-container d-flex justify-content-between align-items-center mt-3 p-2">
+					<div class="dollar-div px-3">
+						
+						<div class="round-div"><i class="fa fa-dollar dollar"></i></div>
+	
+					</div>
+					<div class="d-flex flex-column text-right mr-2" *ngIf="client.balance!=null" >
+						<span class="current-balance">Current Balance</span>
+						<span class="amount"><span class="dollar-sign">$</span>{{client.balance}}</span>
+					</div>
+	
+			</div>
+			
+		</div>
 	</div>
 	
 </div>
