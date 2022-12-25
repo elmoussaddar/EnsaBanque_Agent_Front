@@ -35,6 +35,8 @@ import {MatRadioModule} from '@angular/material/radio';
 import { ServeClientComponent } from './serve-client/serve-client.component';
 import { ListTransfertComponent } from './list-transfert/list-transfert.component';
 import { TransfertDetailsComponent } from './transfert-details/transfert-details.component';
+import { AddAgentComponent } from './add-agent/add-agent.component';
+import { ListAgentsComponent } from './list-agents/list-agents.component';
 @NgModule({
   declarations: [
     AppComponent,VirementFormComponent,
@@ -42,7 +44,7 @@ import { TransfertDetailsComponent } from './transfert-details/transfert-details
      HeaderComponent,ClientLoginFormComponent,
       ClientHomeComponent, CreateAccountFormComponent,
        PaymentFactureComponent, ChangePasswordComponent,
-        ListFactureComponent,ProfileComponent, AddClientComponent, HomeComponent, ListeClientsComponent, ServeClientComponent, ListTransfertComponent, TransfertDetailsComponent
+        ListFactureComponent,ProfileComponent, AddClientComponent, HomeComponent, ListeClientsComponent, ServeClientComponent, ListTransfertComponent, TransfertDetailsComponent, AddAgentComponent, ListAgentsComponent
   ],
   imports: [
     BrowserModule,

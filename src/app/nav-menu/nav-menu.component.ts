@@ -12,13 +12,15 @@ import { ClientService } from '../_services/Client.service';
 export class NavMenuComponent implements OnInit {
    
     doesHaveaccount:Boolean=false;
-       
     isLoggedIn:Boolean=false;
+    isAdmin:boolean = false;
+
     constructor(private router: Router, private tokenStorage:TokenStorageService,private clientService :ClientService) {}
 
     numTel= window.sessionStorage.getItem("username");
     ngOnInit(): void {
-        this.isLoggedIn=true; 
+        this.isLoggedIn = true;
+        this.isAdmin = true;
     }
     isExpanded: boolean=false;
     onLogout() {

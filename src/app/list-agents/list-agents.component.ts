@@ -4,11 +4,12 @@ import { Client } from '../Models/client';
 import { ClientServicesService } from '../_services/client-services.service';
 
 @Component({
-  selector: 'app-liste-clients',
-  templateUrl: './liste-clients.component.html',
-  styleUrls: ['./liste-clients.component.css']
+  selector: 'app-list-agents',
+  templateUrl: './list-agents.component.html',
+  styleUrls: ['./list-agents.component.css']
 })
-export class ListeClientsComponent implements OnInit {
+export class ListAgentsComponent implements OnInit {
+
   public updateClient: Client | undefined;
   public deleteClient: Client = new Client();
   public clientChoosed : Client = new Client();
@@ -185,5 +186,3 @@ export class ListeClientsComponent implements OnInit {
   }
 
 }
-
-

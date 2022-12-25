@@ -1,0 +1,108 @@
+<div class="container mt-5" style="padding-top:100px ; text-align: center;">
+    <div class="h2 mb-5 p-3 border" style="background-color: #e64d32;color : #fff ;text-align: center;">
+        Creation of a new agent account
+    </div>
+    <div class="card" style="margin-bottom: 100px;">
+        <div class="card-body" style="background-color: #D4D5D5;">
+            <form (ngSubmit)="saveAgentData(clientForm)" #clientForm="ngForm">
+                  <span style="font-weight: bold; font-size: 20px; margin: vertical 5px;">Agent Informations</span> <hr>
+                <div class="row mb-1">
+                  <div class="col-md-6">
+                    <label for="firstName" class="form-label">First Name</label>
+                    <input required id="username" class="form-control shadow" type="text" placeholder="Enter your First Name"
+                    [(ngModel)] = 'client.firstName' name="firstName">
+                  </div>
+                  <div class="col-md-6">
+                    <label for="lastName" class="form-label">Last Name</label>
+                    <input required id="username" class="form-control shadow" type="text" placeholder="Enter your Last Name"
+                    [(ngModel)] = 'client.lastName' name="lastName">
+                  </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-md-6">
+                        <label for="username" class="form-label">Username</label>
+                        <input required id="username" class="form-control shadow" type="text" placeholder="Enter username"
+                        [(ngModel)] = 'client.username' name="username">
+                      </div>
+                      <div class="col-md-6">
+                        <label for="password" class="form-label">Password</label>
+                        <input required id="password" class="form-control shadow" type="text" placeholder="Enter password"
+                        [(ngModel)] = 'client.password' name="password">
+                      </div>
+                </div>
+                <div class="row" style="padding-top: 15px;">
+                  <div class="col-md-6">
+                    <label class="form-label">Phone Number</label>
+                    <input required id="phoneNumber" class="form-control shadow" type="text" placeholder="Enter your Phone Number"
+                    [(ngModel)] = 'client.phoneNumber' name="phoneNumber">
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label">Email</label>
+                    <input required id="email" class="form-control shadow" type="text" name="" placeholder="Enter your email"
+                    [(ngModel)] = 'client.email' name="email">
+                  </div>
+                </div>
+                <div class="row" style="padding-top: 15px;">
+                  <div class="col-md-6">
+                    <label class="form-label">Birthday</label>
+                    <input required id="birthday" class="form-control shadow" type="date" placeholder="Enter your Phone Number"
+                    [(ngModel)] = 'client.birthday' name="birthday">
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label">Gender</label>
+                    <select [(ngModel)]='client.gender' name="dropdownOption" id="dropdownOption" class='form-control'>
+                      <option value="1">Male</option>
+                      <option value="2">Female</option>
+                      </select>
+                  </div>
+                </div>
+                <div class="row" style="padding-top: 15px;">
+                  <div class="col-md-6">
+                    <label class="form-label">Address</label>
+                    <input required id="address" class="form-control shadow" type="text" placeholder="Enter your address"
+                    [(ngModel)] = 'client.address' name="address">
+                  </div>
+                  <div class="col-md-2">
+                    <label class="form-label">City</label>
+                    <input required id="city" class="form-control shadow" type="text" placeholder="Enter your city"
+                    [(ngModel)] = 'client.city' name="city">
+                  </div>
+                  <div class="col-md-2">
+                    <label class="form-label">Zip Code</label>
+                    <input required id="zip_code" class="form-control shadow" type="number" placeholder="Enter your zip code"
+                    [(ngModel)] = 'client.zip_code' name="zip_code">
+                  </div>
+                  <div class="col-md-2">
+                    <label class="form-label">Country</label>
+                    <input required id="country" class="form-control shadow" type="text" placeholder="Enter your country"
+                    [(ngModel)] = 'client.country' name="country">
+                  </div>
+                  <div class="col-md-6" style="padding-top: 15px;">
+                    <label for="identity_paper_type" class="form-label">Identity Paper Type</label>
+                    <select [(ngModel)]='client.identity_paper_type' name="dropdownOption" id="dropdownOption" class='form-control'>
+                    <option value="1">C.I.N</option>
+                    <option value="2">Passport</option>
+                    <option value="3">Driver License</option>
+                    </select>
+                </div>
+                <div class="col-md-6" style="padding-top: 15px;">
+                    <label class="form-label">Identity Paper Number</label>
+                    <input required id="Identity_paper_number" class="form-control shadow" type="text" placeholder="Enter your Identity Paper Number"
+                     name="Identity_paper_number" [(ngModel)] = 'client.identity_paper_number' name="Identity_paper_number">
+                  </div>
+                </div>
+                <div class="row mb-1">
+                    <div style="padding-top: 15px;">
+                      <label for="balance" class="form-label">Initial Balance</label>
+                      <input required id="balance" class="form-control shadow" type="number" placeholder="Enter balance"
+                      [(ngModel)] = 'client.balance' name="balance">
+                    </div>
+                  </div>
+                <div style="padding-top: 40px;padding-bottom: 15px;">
+                  <button type="submit" class="btn btn-primary" >Create</button>
+                </div>
+                
+            </form>
+        </div>
+    </div>
+  </div>

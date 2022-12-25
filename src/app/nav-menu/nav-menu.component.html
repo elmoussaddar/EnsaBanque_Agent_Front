@@ -12,18 +12,31 @@
       <li class="nav-item" *ngIf="isLoggedIn">
         <a class="nav-link" routerLink="clientHome/profile">Profile</a>
       </li>
-      <li class="nav-item dropdown">
+      <li class="nav-item dropdown" *ngIf="isLoggedIn && isAdmin">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Agents
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <li>
+            <a class="dropdown-item" routerLink="addAgent">Add Agents</a>
+          </li>
+          <li>
+            <a class="dropdown-item" routerLink="allAgents">All Agents</a>
+          </li>
+        </ul>
+      </li>
+      <li class="nav-item dropdown" *ngIf="isLoggedIn">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
           Clients
         </a>
         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <li *ngIf="isLoggedIn">
+          <li>
             <a class="dropdown-item" routerLink="clientHome/addClient">Add Clients</a>
           </li>
-          <li *ngIf="isLoggedIn">
+          <li>
             <a class="dropdown-item" routerLink="clientHome/liste-clients">All Clients</a>
           </li>
-          <li *ngIf="isLoggedIn">
+          <li>
             <a class="dropdown-item" routerLink="serveClient">Serve Client</a>
           </li>
         </ul>
