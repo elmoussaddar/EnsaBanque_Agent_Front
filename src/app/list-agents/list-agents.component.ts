@@ -1,6 +1,9 @@
+import { clientResponseObject } from './../ResponseEntities/clientResponseObject';
+import { AgentServicesService } from './../_services/agent-services.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Client } from '../Models/client';
+import { agentResponseObject } from '../ResponseEntities/agentResponseObject';
 import { ClientServicesService } from '../_services/client-services.service';
 
 @Component({
@@ -10,10 +13,10 @@ import { ClientServicesService } from '../_services/client-services.service';
 })
 export class ListAgentsComponent implements OnInit {
 
-  public updateClient: Client | undefined;
-  public deleteClient: Client = new Client();
-  public clientChoosed : Client = new Client();
-  public clients: Client[] = /* [] */ [
+  public updateClient: clientResponseObject | undefined;
+  public deleteClient: clientResponseObject = new clientResponseObject();
+  public clientChoosed : clientResponseObject = new clientResponseObject();
+  public clients: agentResponseObject[] = /* [] */ [
  
     {
       firstName : "FAYA",
@@ -107,11 +110,11 @@ export class ListAgentsComponent implements OnInit {
     }
   ];
 
-  constructor(private clientService : ClientServicesService) { }
+  constructor(private agentService : AgentServicesService) { }
 
   public getClients() : void{
-    this.clientService.getClients().subscribe(
-      (response : Client[]) => {
+    this.agentService.getAgents().subscribe(
+      (response : agentResponseObject[]) => {
         this.clients = response;
       },
       (error : HttpErrorResponse)=>{
@@ -120,8 +123,8 @@ export class ListAgentsComponent implements OnInit {
     )
   }
 
-  public onUpdateClient(client : Client): void {
-    this.clientService.updateClient(client).subscribe(
+  public onUpdateClient(agent : agentResponseObject): void {
+    this.agentService.updateAgent(agent).subscribe(
       (response: Client) => {
         console.log(response);
         this.getClients();
@@ -132,8 +135,8 @@ export class ListAgentsComponent implements OnInit {
     );
   }
 
-  public onDeleteClient(client: Client): void {
-    this.clientService.deleteClient(client).subscribe(
+  public onDeleteClient(agent: agentResponseObject): void {
+    this.agentService.deleteAgent(agent).subscribe(
       (response: void) => {
         console.log(response);
         this.getClients();
@@ -145,7 +148,7 @@ export class ListAgentsComponent implements OnInit {
   }
 
   public searchClient(key: string): void {
-    const results: Client[] = [];
+    const results: agentResponseObject[] = [];
     for (const client of this.clients) {
       if (client.username.toLowerCase().indexOf(key.toLowerCase()) !== -1
       || client.email.toLowerCase().indexOf(key.toLowerCase()) !== -1
@@ -159,7 +162,7 @@ export class ListAgentsComponent implements OnInit {
     }
   }
 
-  public onOpenModal(client : Client, mode: string): void {
+  public onOpenModal(client : clientResponseObject, mode: string): void {
     const container = document.getElementById("main-container");
     const button = document.createElement('button');
     button.type = 'button';

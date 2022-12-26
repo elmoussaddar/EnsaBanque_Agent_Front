@@ -15,6 +15,8 @@ export class AddClientComponent implements OnInit {
   ngOnInit(): void {
   }
   public saveClientData(clientForm: NgForm){
-    this.router.navigate(['clientHome/liste-clients']);
+   // this.router.navigate(['clientHome/liste-clients']);
+
+   console.log(this.client);
   }
 }

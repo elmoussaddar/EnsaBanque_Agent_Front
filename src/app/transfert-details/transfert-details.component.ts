@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Beneficiare } from '../interfaces/Beneficiare';
 import { Transfert } from '../interfaces/Transfert';
-import { ClientService } from '../_services/Client.service';
 import { TokenStorageService } from '../_services/token-storage.service';
 import { Location } from '@angular/common';
 
@@ -14,7 +13,7 @@ import { Location } from '@angular/common';
 })
 export class TransfertDetailsComponent implements OnInit {
 
-  constructor(private router: Router, private tokenStorage:TokenStorageService,private clientService :ClientService,private location:Location) { }
+  constructor(private router: Router, private tokenStorage:TokenStorageService,private location:Location) { }
 
   payTransferButtonClicked:boolean=false;
    

@@ -1,7 +1,6 @@
 export class Client {
 
-    public id : Number = new Number();
-    public password : String = new String();
+    public password : String = new String("");
     public username : String  = new String();
     public firstName : String  = new String();
     public lastName : String  = new String();

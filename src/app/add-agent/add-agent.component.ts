@@ -1,3 +1,4 @@
+import { Agent } from './../Models/agent';
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -10,7 +11,7 @@ import { Client } from '../Models/client';
 })
 export class AddAgentComponent implements OnInit {
 
-  public client:Client = new Client();
+  public agent:Agent = new Client();
   constructor(private router: Router) { }
 
   ngOnInit(): void {

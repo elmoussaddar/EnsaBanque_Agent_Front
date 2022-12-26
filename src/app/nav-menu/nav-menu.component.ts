@@ -2,7 +2,6 @@ import { TokenStorageService } from './../_services/token-storage.service';
 import { Component, OnInit } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Router } from '@angular/router';
-import { ClientService } from '../_services/Client.service';
 
 @Component({
     selector: 'app-nav-menu',
@@ -15,7 +14,7 @@ export class NavMenuComponent implements OnInit {
     isLoggedIn:Boolean=false;
     isAdmin:boolean = false;
 
-    constructor(private router: Router, private tokenStorage:TokenStorageService,private clientService :ClientService) {}
+    constructor(private router: Router, private tokenStorage:TokenStorageService) {}
 
     numTel= window.sessionStorage.getItem("username");
     ngOnInit(): void {

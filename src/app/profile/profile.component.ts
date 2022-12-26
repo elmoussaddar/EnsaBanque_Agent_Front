@@ -1,4 +1,3 @@
-import { ClientService } from './../_services/Client.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TokenStorageService } from '../_services/token-storage.service';
@@ -42,7 +41,7 @@ export class ProfileComponent implements OnInit {
 
   };*/
 
-  constructor(private router: Router, private tokenStorage:TokenStorageService,private clientService :ClientService) {}
+  constructor(private router: Router, private tokenStorage:TokenStorageService) {}
   ngOnInit(): void {
 
   }

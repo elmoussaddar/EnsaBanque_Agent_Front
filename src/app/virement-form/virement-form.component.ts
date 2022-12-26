@@ -1,8 +1,6 @@
-import { VirementRequest } from './../RequestEntities/VirementRequest';
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { TokenStorageService } from "../_services/token-storage.service";
-import { ClientService } from '../_services/Client.service';
 import Swal from 'sweetalert2';
 import { Client } from '../Models/client';
 
@@ -23,14 +21,9 @@ import { Client } from '../Models/client';
   listData: Client[] = [];
   
   public client:Client = new Client();
-    virementRequest:VirementRequest={
-      montant:0.0,
-      ribDest:"",
-      ribSrc:"demo rib",
-    }
-
+   
     showNotEnoughCredit:boolean = false;
-    constructor(private router: Router, private tokenStorage:TokenStorageService,private clientService :ClientService) {}
+    constructor(private router: Router, private tokenStorage:TokenStorageService) {}
     ngOnInit(): void {
       }
 

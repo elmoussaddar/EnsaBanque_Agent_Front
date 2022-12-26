@@ -2,16 +2,12 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AddAgentComponent } from './add-agent/add-agent.component';
 import { AddClientComponent } from './add-client/add-client.component';
-import { ChangePasswordComponent } from './change-password/change-password.component';
 import { ClientHomeComponent } from './client-home/client-home.component';
 import { ClientLoginFormComponent } from './client-login-form/client-login-form.component';
-import { CreateAccountFormComponent } from './create-account-form/create-account-form.component';
 import { HomeComponent } from './home/home.component';
 import { ListAgentsComponent } from './list-agents/list-agents.component';
-import { ListFactureComponent } from './list-facture/list-facture.component';
 import { ListTransfertComponent } from './list-transfert/list-transfert.component';
 import { ListeClientsComponent } from './liste-clients/liste-clients.component';
-import { PaymentFactureComponent } from './payment-facture/payment-facture.component';
 import { ProfileComponent } from './profile/profile.component';
 import { ServeClientComponent } from './serve-client/serve-client.component';
 import { TransfertDetailsComponent } from './transfert-details/transfert-details.component';
@@ -25,10 +21,6 @@ const routes: Routes = [
       {path:"profile",component: ProfileComponent},
       {path:"bankTransfert",component:VirementFormComponent},
       {path:"bankTransfert/success",component:VirementDoneComponent},
-      {path:"openAccount",component:CreateAccountFormComponent},
-      {path:"payBills",component:PaymentFactureComponent},
-      {path:"changePassword",component:ChangePasswordComponent},
-      {path:"listFacture",component:ListFactureComponent},
       {path:"addClient" , component:AddClientComponent},
       {path:"Home",component:HomeComponent},
       {path:"liste-clients" ,component:ListeClientsComponent},

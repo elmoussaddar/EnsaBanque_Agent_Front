@@ -5,14 +5,10 @@ import { BrowserModule } from '@angular/platform-browser';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ChangePasswordComponent } from './change-password/change-password.component';
 import { ClientHomeComponent } from './client-home/client-home.component';
 import { ClientLoginFormComponent } from './client-login-form/client-login-form.component';
-import { CreateAccountFormComponent } from './create-account-form/create-account-form.component';
 import { HeaderComponent } from './header/header.component';
-import { ListFactureComponent } from './list-facture/list-facture.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
-import { PaymentFactureComponent } from './payment-facture/payment-facture.component';
 import { ProfileComponent } from './profile/profile.component';
 import { VirementDoneComponent } from './virement-done/virement-done.component';
 import { VirementFormComponent } from './virement-form/virement-form.component';
@@ -42,9 +38,8 @@ import { ListAgentsComponent } from './list-agents/list-agents.component';
     AppComponent,VirementFormComponent,
     VirementDoneComponent,NavMenuComponent,
      HeaderComponent,ClientLoginFormComponent,
-      ClientHomeComponent, CreateAccountFormComponent,
-       PaymentFactureComponent, ChangePasswordComponent,
-        ListFactureComponent,ProfileComponent, AddClientComponent, HomeComponent, ListeClientsComponent, ServeClientComponent, ListTransfertComponent, TransfertDetailsComponent, AddAgentComponent, ListAgentsComponent
+      ClientHomeComponent,
+        ProfileComponent, AddClientComponent, HomeComponent, ListeClientsComponent, ServeClientComponent, ListTransfertComponent, TransfertDetailsComponent, AddAgentComponent, ListAgentsComponent
   ],
   imports: [
     BrowserModule,
