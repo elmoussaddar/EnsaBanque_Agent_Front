@@ -24,7 +24,7 @@
                       <form #clientForm="ngForm" (ngSubmit)="onSearch()">
                             <div class="row mb-1">
                               <div>
-                                  <label for="firstName" class="form-label">Transfert Type</label>
+                                  <label for="transfert_type" class="form-label">Transfert Type</label>
                              
                               <select [(ngModel)]='transfert_type' name="dropdownOption" id="dropdownOption" class='form-control'>
                                   <option value="1">DEBIT DE COMPTE</option>
@@ -141,6 +141,13 @@
                               <label class="form-label">Amount</label>
                               <input required id="amount" class="form-control shadow" type="text" name="" placeholder="Enter the Amount"
                               name="amount">
+                            </div>
+                            <div style="padding-top: 20px;" >
+                              <label class="form-label">Transfert Reason</label>
+                              <select [(ngModel)]='transfert_type' name="dropdownOption" id="dropdownOption" class='form-control'>
+                                <option value="Soutien Familial">Soutien Familial</option>
+                                <option value="Epargne/investissement">Epargne/investissement</option>
+                              </select>
                             </div>
                             <div  style="padding-top: 20px;">
                               <label class="form-label">Notification</label>
