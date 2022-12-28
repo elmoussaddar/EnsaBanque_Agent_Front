@@ -137,16 +137,25 @@
                                  name="Identity_paper_number" [(ngModel)] = 'client.identity_paper_number' name="Identity_paper_number">
                               </div>
                             </div>
-                            <div style="padding-top: 20px;" >
-                              <label class="form-label">Amount</label>
-                              <input required id="amount" class="form-control shadow" type="text" name="" placeholder="Enter the Amount"
-                              name="amount">
-                            </div>
+                         
                             <div style="padding-top: 20px;" >
                               <label class="form-label">Transfert Reason</label>
                               <select [(ngModel)]='transfert_type' name="dropdownOption" id="dropdownOption" class='form-control'>
                                 <option value="Soutien Familial">Soutien Familial</option>
                                 <option value="Epargne/investissement">Epargne/investissement</option>
+                                <option value="Paiement de biens et de services">Paiement de biens et de services</option>
+                                <option value="Frais de dépassement ">Frais de dépassement </option>
+                                <option value="Frais éducation">Frais éducation</option>
+                                <option value="Location/Hypothèque">Location/Hypothèque</option>
+                                <option value="Aide de secours/Médicale">Aide de secours/Médicale</option>
+                                <option value="Revenu d un site internet">Revenu d un site internet</option>
+                                <option value="Dépenses salariales">Dépenses salariales</option>
+                                <option value="Frais de loterie ou récompense/taxes">Frais de loterie ou récompense/taxes</option>
+                                <option value="Prêt">Prêt</option>
+                                <option value="Commerce sur internet">Commerce sur internet</option>
+                                <option value="Donation">Donation</option>
+                                <option value="Autres (à préciser)">Autres (à préciser)</option>
+
                               </select>
                             </div>
                             <div  style="padding-top: 20px;">
@@ -203,6 +212,8 @@
                               <th scope="col">First Name</th>
                               <th scope="col">Last Name</th>
                               <th scope="col">Phone Number</th>
+                              <th scope="col">Amount</th>
+                              <th scope="col">Identity_paper_number</th>
                               <th scope="col">Action</th>
                             </tr>
                           </thead>
@@ -214,54 +225,66 @@
                               <th>&nbsp; {{ item.lastName }}</th>
                               <th>&nbsp; {{ item.phoneNumber}}</th-->
                                 <tr>
-                                  <th scope="row"><input type="radio" name="choice" /></th>
+                                  <th scope="row"><input type="checkbox" name="choice1" /></th>
                                   <td>Sara</td>
                                   <td>Chakir</td>
                                   <td>765433</td>
+                                  <td>10000</td>
+                                  <td>PA123456</td>
                                   <td><button class="btn btn-danger">Delete</button></td>
                                 </tr>
                                 <tr>
-                                  <th scope="row"><input type="radio" name="choice" /></th>
+                                  <th scope="row"><input type="checkbox" name="choice2" /></th>
                                   <td>Yassmin</td>
                                   <td>Kardad</td>
                                   <td>948774</td>
+                                  <td>10000</td>
+                                  <td>DA123456</td>
                                   <td><button class="btn btn-danger">Delete</button></td>
                                 </tr>
                                 <tr>
-                                  <th scope="row"><input type="radio" name="choice" /></th>
+                                  <th scope="row"><input type="checkbox" name="choice3" /></th>
                                   <td>Frederec</td>
                                   <td>Faya</td>
                                   <td>765439483</td>
+                                  <td>10000</td>
+                                  <td>FA123456</td>
                                   <td><button class="btn btn-danger">Delete</button></td>
                                 </tr>
                                 <tr>
-                                  <th scope="row"><input type="radio" name="choice" /></th>
+                                  <th scope="row"><input type="checkbox" name="choice4" /></th>
                                   <td>Soukaina</td>
                                   <td>El Abbasy</td>
                                   <td>765439483</td>
+                                  <td>10000</td>
+                                  <td>FA123456</td>
                                   <td><button class="btn btn-danger">Delete</button></td>
                                 </tr>
                                 <tr>
-                                  <th scope="row"><input type="radio" name="choice" /></th>
+                                  <th scope="row"><input type="checkbox" name="choice5" /></th>
                                   <td>Hamza</td>
                                   <td>Nassour</td>
                                   <td>765439483</td>
+                                  <td>10000</td>
+                                  <td>FA123456</td>
                                   <td><button class="btn btn-danger">Delete</button></td>
                                 </tr>
                                 <tr>
-                                  <th scope="row"><input type="radio" name="choice" /></th>
+                                  <th scope="row"><input type="checkbox" name="choice6" /></th>
                                   <td>AbdelMounaim</td>
                                   <td>El Moussaddar</td>
                                   <td>765439483</td>
+                                  <td>15000</td>
+                                  <td>FA123456</td>
                                   <td><button class="btn btn-danger">Delete</button></td>
                                 </tr>
-
                               <!--th>&nbsp; <button class="btn btn-danger">Delete</button></th-->
                           </tbody>
                         </table>
-                          
+                        <div style="padding-top: 20px ;padding-bottom: 20px;" *ngIf="Search==true">
+                          <button type="submit" class="btn btn-primary">Finish</button>
+                      </div>
                       </form>
-
                   </div>
               </div>
             </div>
@@ -320,6 +343,11 @@
             <div class="form-group">
               <label for="phoneNumber">Phone</label>
               <input type="text" ngModel name="phoneNumber" class="form-control" id="phoneNumber" placeholder="phoneNumber" required>
+            </div>
+            <div style="padding-top: 20px;" >
+              <label class="form-label">Amount</label>
+              <input required id="amount" class="form-control shadow" type="text" name="" placeholder="Enter the Amount"
+              name="amount">
             </div>
           </form>
           <div class="modal-footer">

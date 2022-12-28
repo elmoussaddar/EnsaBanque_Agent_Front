@@ -73,7 +73,7 @@ export class TransfertDetailsComponent implements OnInit {
   /*
   public SavePDF():void{  
     let content=this.content.nativeElement;  
-    let doc = new jsPDF(Option); 
+    let doc = new jsPDF(); 
     let _elementHandlers =  
     {  
       '#editor':function(element:any,renderer:any){  
