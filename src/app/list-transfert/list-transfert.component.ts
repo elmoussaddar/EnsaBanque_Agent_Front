@@ -20,7 +20,8 @@ export class ListTransfertComponent implements OnInit {
     prenomBeneficiere:"el moussaddar",
     nomSender:"abdelmounim",
     prenomSender:"el moussaddar",
-    refTransfert:"HG349865935"
+    refTransfert:"HG349865935",
+    motifRestitution:""
   }
   constructor(private router: Router, private tokenStorage:TokenStorageService) {}
   ngOnInit(): void {

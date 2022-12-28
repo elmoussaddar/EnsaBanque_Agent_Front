@@ -185,8 +185,8 @@
                         </div>
                         <div style="padding-top: 20px ;padding-bottom: 20px;">
                           <button type="submit" class="btn btn-primary">Search</button>
+                          <a (click) = "onOpenModal(client,'add')" class="btn btn-success m-1">Add Reciever Client</a>
                         </div>
-                        
                          <!-- Add Reciever Client Modal -->
 
                         <table class="table table-striped">
@@ -196,37 +196,63 @@
                               <th scope="col">First Name</th>
                               <th scope="col">Last Name</th>
                               <th scope="col">Phone Number</th>
+                              <th scope="col">Action</th>
                             </tr>
                           </thead>
                           <tbody id="excel-table">
-                            <tr
+                           <!--tr
                               *ngFor="let item of listData">
                               <input type="radio" name="choice" />
                               <th>&nbsp; {{ item.firstName }} &nbsp;&nbsp;</th>
                               <th>&nbsp; {{ item.lastName }}</th>
-                              <th>&nbsp; {{ item.phoneNumber}}</th>
+                              <th>&nbsp; {{ item.phoneNumber}}</th-->
+                                <tr>
+                                  <th scope="row"><input type="radio" name="choice" /></th>
+                                  <td>Sara</td>
+                                  <td>Chakir</td>
+                                  <td>765433</td>
+                                  <td><button class="btn btn-danger">Delete</button></td>
+                                </tr>
+                                <tr>
+                                  <th scope="row"><input type="radio" name="choice" /></th>
+                                  <td>Yassmin</td>
+                                  <td>Kardad</td>
+                                  <td>948774</td>
+                                  <td><button class="btn btn-danger">Delete</button></td>
+                                </tr>
+                                <tr>
+                                  <th scope="row"><input type="radio" name="choice" /></th>
+                                  <td>Frederec</td>
+                                  <td>Faya</td>
+                                  <td>765439483</td>
+                                  <td><button class="btn btn-danger">Delete</button></td>
+                                </tr>
+                                <tr>
+                                  <th scope="row"><input type="radio" name="choice" /></th>
+                                  <td>Soukaina</td>
+                                  <td>El Abbasy</td>
+                                  <td>765439483</td>
+                                  <td><button class="btn btn-danger">Delete</button></td>
+                                </tr>
+                                <tr>
+                                  <th scope="row"><input type="radio" name="choice" /></th>
+                                  <td>Hamza</td>
+                                  <td>Nassour</td>
+                                  <td>765439483</td>
+                                  <td><button class="btn btn-danger">Delete</button></td>
+                                </tr>
+                                <tr>
+                                  <th scope="row"><input type="radio" name="choice" /></th>
+                                  <td>AbdelMounaim</td>
+                                  <td>El Moussaddar</td>
+                                  <td>765439483</td>
+                                  <td><button class="btn btn-danger">Delete</button></td>
+                                </tr>
+
+                              <!--th>&nbsp; <button class="btn btn-danger">Delete</button></th-->
                           </tbody>
                         </table>
-                          <div *ngIf="SearchReceiver==true" class="row mb-1" style="padding-top: 15px;">
-                              <div class="col-md-6">
-                                <label for="firstName" class="form-label">First Name</label>
-                                <input required id="username" class="form-control shadow" type="text" placeholder="Enter your First Name"
-                                 name="firstName">
-                              </div>
-                              <div class="col-md-6">
-                                <label for="lastName" class="form-label">Last Name</label>
-                                <input required id="username" class="form-control shadow" type="text" placeholder="Enter your Last Name"
-                                 name="lastName">
-                              </div>
-                            <div style="padding-top: 15px;">
-                              <label class="form-label">Phone Number</label>
-                              <input required id="phoneNumber" class="form-control shadow" type="text" placeholder="Enter your Phone Number"
-                               name="phoneNumber">
-                            </div>
-                          </div>
-                          <div style="padding-top: 20px ;padding-bottom: 20px;">
-                            <a (click) = "onOpenModal(client,'add')" class="btn btn-primary m-1">Add Client</a>
-                          </div>
+                          
                       </form>
 
                   </div>

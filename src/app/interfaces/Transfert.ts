@@ -1,4 +1,5 @@
 export interface Transfert{
+[x: string]: any;
     idTransfert:number,
     refTransfert:string,
     etatTransfert:string,
@@ -9,8 +10,7 @@ export interface Transfert{
     montantTransfert:number,
     nomBeneficiere:string,
     prenomBeneficiere:string,
-
-
+    motifRestitution:string
 }
 
 export interface Transferts{

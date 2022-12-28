@@ -9,4 +9,6 @@ export class Transfert {
   public  montantTransfert:Number = new Number();
   public  nomBeneficiere:String = new String();
   public  prenomBeneficiere:String = new String();
+  public fraisdeTransfert:Number=new Number();
+  public  motifRestitution:String = new String();
 }

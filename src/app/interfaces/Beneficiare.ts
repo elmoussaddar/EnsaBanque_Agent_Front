@@ -14,4 +14,5 @@ export interface Beneficiare{
     Ville:string;
     GSM:string;
     Email:string;
+    saisirlemotif:string;
 }
