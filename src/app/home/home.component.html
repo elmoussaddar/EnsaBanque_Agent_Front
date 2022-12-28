@@ -6,32 +6,29 @@
         </div>
         
         <div class="col-md-6 contents text-center align-items-center m-auto">
-            <span class="fw-bolder font-monospace fs-1" style="font-size: 1000px;"> Welcome  </span><br>
+            <span class="fw-bolder font-monospace fs-1" style="font-size: 1000px;"> Welcome <br>{{user.firstName}} {{user.lastName}}</span><br>
         </div>
         </div>
-    </div>
-    <div class="row" style="height: 90px;">
-
     </div>
     <div class="row row-cols-1 row-cols-md-2 g-4 mt-5">
-        <div class="col-md-4">
-        <div class="card">
-            <img src="../../../assets/images/undraw_book_lover_re_rwjy.svg" class="card-img-top" alt="...">
-            <div class="card-body">
-                <div class="d-grid gap-2">
-                    <form (ngSubmit)="goToProfile()" style="margin: auto;">
-                        <button type="submit" class="btn btn-primary mt-5 mb-5 btn-lg">
-                        Consult agent profile
-                    </button>
-                    </form>
-                    
+        <div class="col-md-4 shadow">
+            <div class="card">
+                <img src="../../../assets/images/undraw_book_lover_re_rwjy.svg" class="card-img-top" alt="..." height="277px" width="277px">
+                <div class="card-body">
+                    <div class="d-grid gap-2">
+                        <form (ngSubmit)="goToProfile()" style="margin: auto;">
+                            <button type="submit" class="btn btn-primary mt-5 mb-5 btn-lg">
+                            Consult Profile
+                        </button>
+                        </form>
+                        
+                    </div>
                 </div>
             </div>
         </div>
-        </div>
-        <div class="col-md-4">
+        <div class="col-md-4 shadow">
         <div class="card">
-            <img src="../../../assets/images/undraw_group_hangout_re_4t8r.svg" class="card-img-top" alt="...">
+            <img src="../../../assets/images/undraw_group_hangout_re_4t8r.svg" class="card-img-top" alt="..." height="300px" width="300px">
             <div class="card-body">
                 <div class="d-grid gap-2">
                     <form (ngSubmit)="goToAddClient()" style="margin: auto;">
@@ -44,9 +41,9 @@
             </div>
         </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-4 shadow">
         <div class="card">
-            <img src="../../../assets/images/undraw_people_re_8spw.svg" class="card-img-top" alt="...">
+            <img src="../../../assets/images/undraw_people_re_8spw.svg" class="card-img-top" alt="..." height="277px" width="277px">
             <div class="card-body">
                 <div class="d-grid gap-2">
                     <form (ngSubmit)="goToGetClients()" style="margin: auto;">
@@ -57,6 +54,67 @@
                 </div>
             </div>
         </div>
+        </div>
+
+        <div class="col-md-4 shadow">
+            <div class="card">
+                <img src="../../../assets/images/undraw_team_goals_re_4a3t.svg" class="card-img-top" alt="..." height="277px" width="277px">
+                <div class="card-body">
+                    <div class="d-grid gap-2">
+                        <form (ngSubmit)="goToServeClients()" style="margin: auto;">
+                            <button type="submit" class="btn btn-primary mt-5 mb-5 btn-lg">
+                            Serve Client
+                        </button>
+                        </form>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 shadow">
+            <div class="card">
+                <img src="../../../assets/images/undraw_invite_re_rrcp.svg" class="card-img-top" alt="..." height="277px" width="277px">
+                <div class="card-body">
+                    <div class="d-grid gap-2">
+                        <form (ngSubmit)="goToTransfertList()" style="margin: auto;">
+                            <button type="submit" class="btn btn-primary mt-5 mb-5 btn-lg">
+                            Consult Transfert List
+                        </button>
+                        </form>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 shadow" *ngIf="isAdmin==true">
+            <div class="card">
+                <img src="../../../assets/images/undraw_connecting_teams_re_hno7.svg" class="card-img-top" alt="..." height="277px" width="277px">
+                <div class="card-body">
+                    <div class="d-grid gap-2">
+                        <form (ngSubmit)="goToAddAgent()" style="margin: auto;">
+                            <button type="submit" class="btn btn-primary mt-5 mb-5 btn-lg">
+                                Add Agent
+                            </button>
+                        </form>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 shadow" *ngIf="isAdmin==true">
+            <div class="card">
+                <img src="../../../assets/images/undraw_meet_the_team_re_4h08.svg" class="card-img-top" alt="..." height="277px" width="277px">
+                <div class="card-body">
+                    <div class="d-grid gap-2">
+                        <form (ngSubmit)="goToGetAgents()" style="margin: auto;">
+                            <button type="submit" class="btn btn-primary mt-5 mb-5 btn-lg">
+                            Consult Agents List
+                        </button>
+                        </form>
+                        
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
