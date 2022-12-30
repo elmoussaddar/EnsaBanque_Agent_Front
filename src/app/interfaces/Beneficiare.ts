@@ -1,18 +1,9 @@
-export interface Beneficiare{
-    titre: string;
-    prenom: string;
-    nom:string;
-    typePieceIdentity:string;
-    payeEmissionPieceIdentity:string; 
-    numPieceIdentity:string;
-    dateExpirationPieceIdentity:Date | null;
-    DateNaissance:Date | null;
-    Profession:string;
-    payeNationality:string;
-    payeAdresse:string;
-    adresseLegal:string;
-    Ville:string;
-    GSM:string;
-    Email:string;
-    saisirlemotif:string;
-}
+export class Beneficiare{
+   public  firstName: String =new String();
+
+   public lastName: String =new String();
+    public phoneNumber: String =new String();
+
+    public cin: String =new String();
+    
+}   

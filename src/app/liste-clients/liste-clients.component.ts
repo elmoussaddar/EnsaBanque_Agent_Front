@@ -32,6 +32,8 @@ export class ListeClientsComponent implements OnInit {
       username : "fred001",
       country : "Morroco",
       accounts :[],
+      beneficiaries:null,
+      maxTransferAmountPerYear:20000
     },
     {
       firstName : "faya",
@@ -50,6 +52,8 @@ export class ListeClientsComponent implements OnInit {
       username : "fred001",
       country : "Morroco",
       accounts:[],
+      beneficiaries:null,
+      maxTransferAmountPerYear:20000
     },
     {
       firstName : "faya",
@@ -68,8 +72,9 @@ export class ListeClientsComponent implements OnInit {
       username : "fred001",
       country : "Morroco",
       accounts:[],
+      beneficiaries:null,
+      maxTransferAmountPerYear:20000
 
-
     },
     {
       firstName : "faya",
@@ -88,6 +93,8 @@ export class ListeClientsComponent implements OnInit {
       username : "fred001",
       country : "Morroco",
       accounts:[],
+      beneficiaries:null,
+      maxTransferAmountPerYear:20000
 
     },
  
@@ -118,17 +125,7 @@ export class ListeClientsComponent implements OnInit {
     );
   }
 
-  public onDeleteClient(client: clientResponseObject): void {
-    this.clientService.deleteClient(client).subscribe(
-      (response: void) => {
-        console.log(response);
-        this.getClients();
-      },
-      (error: HttpErrorResponse) => {
-        alert(error.message);
-      }
-    );
-  }
+ 
 
   public searchClient(key: string): void {
     const results: clientResponseObject[] = [];

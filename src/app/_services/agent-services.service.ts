@@ -1,4 +1,4 @@
-import { Transfert } from './../interfaces/Transfert';
+import { MTransfer } from './../Models/MTransfer';
 import { agentResponseObject } from './../ResponseEntities/agentResponseObject';
 import { Agent } from './../Models/agent';
 import { Observable } from 'rxjs';
@@ -38,16 +38,12 @@ export class AgentServicesService {
     return this.http.put<agentResponseObject>(`${this.apiServerURL}/client/${agent.id}`,agent);
   }
   
-  public deleteAgent(agent : agentResponseObject) : Observable<void> {
-    return this.http.delete<void>(`${this.apiServerURL}/client/${agent.id}`);
-  }
-  public saveAccount(id:number, balence: number):Observable<Client>{
-    return this.http.post<Client>(`http://localhost:8090/account/${id}`,balence);
-  }
+ 
+ 
 
-  public getListTransferts():Observable<Transfert[]>{
+  public getListTransferts():Observable<MTransfer[]>{
 
-    return this.http.get<Transfert[]>("jsjmskmss");
+    return this.http.get<MTransfer[]>("jsjmskmss");
 
   }
 }

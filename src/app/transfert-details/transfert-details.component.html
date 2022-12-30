@@ -7,7 +7,7 @@
                 <div class="col-6 text-center">
                   
                     <div class="card" id="content" #content>
-                        <h5 class="text-center mb-4">Transfer Ref : {{transfert.refTransfert}}</h5>
+                        <h5 class="text-center mb-4">Transfer Ref : {{transfert.transfers[0].transferReference}}</h5>
         
                         <form class="form-card" #TransfertDetailsForm="ngForm" (ngSubmit)="createAccountClicked()">
                             
@@ -20,7 +20,7 @@
                                        </label>
         
                                          <input type="text"
-                                         [(ngModel)]="transfert.idAgent"
+                                         [(ngModel)]="transfert.sentByAgentWithId"
                                       
                                           id="IdAgent" 
                                           name="IdAgent"
@@ -35,7 +35,7 @@
                                       </label> 
                                         
                                         <input type="datetime" 
-                                        [(ngModel)]="transfert.dateEmissionTransfert"
+                                        [(ngModel)]="transfert.createdAt"
                                         id="dateEmissionTransfert"
                                         name="dateEmissionTransfert" 
                                         [disabled]="true"                                       
@@ -55,7 +55,7 @@
                                        </label> 
                                          
                                          <input type="text"
-                                         [(ngModel)]="transfert.nomSender"
+                                         [(ngModel)]="transfert.senderFirstName"
                                          id="NomSender" 
                                          name="NomSender" 
                                          [disabled]="true"
@@ -70,7 +70,7 @@
                                        </label> 
                                         
                                         <input type="text"
-                                        [(ngModel)]="transfert.prenomSender"
+                                        [(ngModel)]="transfert.senderFirstName"
 
                                         id="PrenomSender" 
                                         name="PrenomSender" 
@@ -92,7 +92,7 @@
                                        </label> 
                                          
                                          <input type="text"
-                                         [(ngModel)]="transfert.nomBeneficiere"
+                                         [(ngModel)]="transfert.transfers[0].receiverFirstName"
                                          id="NomBeneficiere" 
                                          name="NomBeneficiere" 
                                          [disabled]="true"
@@ -107,7 +107,7 @@
                                        </label> 
                                         
                                         <input type="text"
-                                        [(ngModel)]="transfert.prenomBeneficiere"
+                                        [(ngModel)]="transfert.transfers[0].receiverLastName"
 
                                         id="PrenomBeneficiaire" 
                                         name="PrenomBeneficiaire" 
@@ -129,7 +129,7 @@
                                        </label> 
                                          
                                          <input type="text"
-                                         [(ngModel)]="transfert.montantTransfert"
+                                         [(ngModel)]="transfert.transfers[0].Amount"
 
                                          id="MontantTransfert" 
                                          name="MontantTransfert" 
@@ -146,7 +146,7 @@
                                        </label> 
                                         
                                         <input type="text"
-                                        [(ngModel)]="transfert.etatTransfert"
+                                        [(ngModel)]="transfert.transfers[0].status"
                                         id="EtatTransfert" 
                                         name="EtatTransfert" 
                                         [disabled]="true"
@@ -162,7 +162,7 @@
 
                            
                                 <form class="form-card" #TransfertDetailsForm="ngForm" (ngSubmit)="createAccountClicked()">
-                                  <div class="row justify-content-between text-left" *ngIf="((transfert.etatTransfert === 'a servir') && payTransferButtonClicked )">
+                                  <div class="row justify-content-between text-left" *ngIf="((transfert.transfers[0].status === TransferStatus.ASERVIR  ) && payTransferButtonClicked )">
 
                         
                                   <div class="form-group col-sm flex-column d-flex">
@@ -171,7 +171,7 @@
                                       </label> 
                                         
                                         <input type="text"
-                                        [(ngModel)]="transfert.fraisdeTransfert"
+                                        [(ngModel)]="transfert.transfers[0].ransferCost"
   
                                         id="fraisdeTransfert" 
                                         name="fraisdeTransfert" 
@@ -181,7 +181,7 @@
                                       >
                                 </div>
                                   </div>
-                            <div class="row text-left" *ngIf="((transfert.etatTransfert === 'a servir') && payTransferButtonClicked )" >
+                            <div class="row text-left" *ngIf="((transfert.transfers[0].status === TransferStatus.ASERVIR  ) && payTransferButtonClicked )" >
         
                                 <div class="form-group col-sm flex-column d-flex">
         
@@ -190,7 +190,7 @@
                                         
                                      
                                             <select id="motifRestituion" 
-                                           [(ngModel)]="transfert.motifRestitution"
+                                           [(ngModel)]="transfert.transfers[0].motifRestitution"
                                             #TypePieceIdentity="ngModel"
                                             name="motifRestituion"
                                             required
@@ -200,13 +200,13 @@
                                             </select>
                                  </div>
                             </div>
-                                 <div class="form-group col-sm flex-column d-flex"  *ngIf="transfert.motifRestitution==='Autre' && payTransferButtonClicked">
+                                 <div class="form-group col-sm flex-column d-flex"  *ngIf="transfert.transfers[0].motifRestitution ==='Autre' && payTransferButtonClicked">
         
                                     <label class="form-control-label px-3">saisir Motif
                                        </label> 
                                         
                                         <input type="text"
-                                        [(ngModel)]="beneficiaire.saisirlemotif"
+                                        [(ngModel)]="transfert.transfers[0].motifRestitution"
                                         id="saisirlemotif" 
                                         name="saisirlemotif" 
                                         [disabled]="false"
@@ -218,7 +218,7 @@
                             </form>
                             <form class="form-card" #TransfertDetailsForm="ngForm" (ngSubmit)="createAccountClicked()">
                          
-                        <div class="row text-left" *ngIf="((transfert.etatTransfert === 'a servir') && restituerClicked )" >
+                        <div class="row text-left" *ngIf="((transfert.transfers[0].status === TransferStatus.ASERVIR  ) && restituerClicked )" >
     
                             <div class="form-group col-sm flex-column d-flex">
     
@@ -227,7 +227,7 @@
                                     
                                  
                                         <select id="motifRestituion" 
-                                       [(ngModel)]="transfert.motifRestitution"
+                                       [(ngModel)]="transfert.transfers[0].motifRestitution"
                                         #TypePieceIdentity="ngModel"
                                         name="motifRestituion"
                                         required
@@ -237,13 +237,13 @@
                                         </select>
                              </div>
                         </div>
-                             <div class="form-group col-sm flex-column d-flex"  *ngIf="transfert.motifRestitution==='Autre' && restituerClicked">
+                             <div class="form-group col-sm flex-column d-flex"  *ngIf="transfert.transfers[0].motifRestitution==='Autre' && restituerClicked">
     
                                 <label class="form-control-label px-3">saisir Motif
                                    </label> 
                                     
                                     <input type="text"
-                                    [(ngModel)]="beneficiaire.saisirlemotif"
+                                    [(ngModel)]="transfert.transfers[0].motifRestitution"
                                     id="saisirlemotif" 
                                     name="saisirlemotif" 
                                     [disabled]="false"
@@ -258,9 +258,9 @@
                                 <div class="form-group col-sm">
                                     
                                    <button type="submit" class="btn btn-success btn-success text-white"
-                                    [disabled]=" restituerClicked" (click)="payTransfertClicked()">{{((transfert.etatTransfert === 'a servir') && payTransferButtonClicked) ? "Confirme Extourne": "Extourne"}}</button> 
+                                    [disabled]=" restituerClicked" (click)="payTransfertClicked()">{{((transfert.transfers[0].status === TransferStatus.ASERVIR  ) && payTransferButtonClicked) ? "Confirme Extourne": "Extourne"}}</button> 
                                     <button type="submit" class="btn btn-success btn-success text-white"
-                                    [disabled]="payTransferButtonClicked" (click)="RestituerClicked()">{{((transfert.etatTransfert === 'a servir') && restituerClicked) ? "Confirme Restituer": "Restituer"}}</button> 
+                                    [disabled]="payTransferButtonClicked" (click)="RestituerClicked()">{{((transfert.transfers[0].status === TransferStatus.ASERVIR  ) && restituerClicked) ? "Confirme Restituer": "Restituer"}}</button> 
                                   <button type="submit" class="btn btn-primary" (click)="changeTansfertState()">{{servirButton}}</button>
                                     <button type="submit" class="btn btn-danger"
                                     [disabled]="false" (click)="goBack()">Cancel</button>

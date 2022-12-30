@@ -1,7 +1,7 @@
+import { MTransfer } from './../Models/MTransfer';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { Beneficiare } from '../interfaces/Beneficiare';
-import { Transfert } from '../interfaces/Transfert';
 import { TokenStorageService } from '../_services/token-storage.service';
 import { Location } from '@angular/common';
 import  {  PdfViewerModule  }  from  'ng2-pdf-viewer';
@@ -9,6 +9,8 @@ import { FormsModule } from '@angular/forms';
 //import  jsPDF from 'jspdf'; 
 import jspdf from 'jspdf'; 
 import * as jsPDF from 'jspdf';
+import { Transfert } from '../Models/transfert';
+import { TransferStatus } from '../enum/TransferStatus';
 
 
 @Component({
@@ -17,59 +19,65 @@ import * as jsPDF from 'jspdf';
   styleUrls: ['./transfert-details.component.css']
 })
 export class TransfertDetailsComponent implements OnInit {
+
+  TransferStatus = TransferStatus;
+  status: TransferStatus;
   @ViewChild('content') content:ElementRef;  
-  constructor(private router: Router, private tokenStorage:TokenStorageService,private location:Location ) { }
+  constructor(private router: Router, private tokenStorage:TokenStorageService,private location:Location, ) { }
   payTransferButtonClicked:boolean=false;
   restituerClicked:boolean=false;
   finishRestitution:number=0;
   finishExtourne:number=0;
   Search=false;
-   servirButton:String = "Block";
+  servirButton:String = "Block";
   titres=["M","Mme"];
-  motifdeRestitution=["Reciever Erreur","Mauvais Montant","Autre"]
-  transfert:Transfert={
-    idAgent:4,
-    etatTransfert:"a servir",
-    idTransfert:23,
-    montantTransfert:800.0,
-    dateEmissionTransfert:new Date(),
-    nomBeneficiere:"ahmed",
-    prenomBeneficiere:"el moussaddar",
-    nomSender:"abdelmounim",
-    prenomSender:"el moussaddar",
-    refTransfert:"HG349865935",
-    fraisdeTransfert: 30.0 ,
-    motifRestitution:""
-  }
+  motifdeRestitution=["Reciever Erreur","Mauvais Montant","Autre"];
+ public  transfert:MTransfer= new MTransfer();
+
+  
   onSearch(){
     this.Search=true;
+    
   }
-  beneficiaire : Beneficiare ={
-    Email:"",
-    adresseLegal:"",
-    dateExpirationPieceIdentity:null,
-    DateNaissance:null,
-    GSM:"",
-    nom:"",
-    numPieceIdentity:"",
-    payeAdresse:"",
-    payeEmissionPieceIdentity:"",
-    payeNationality:"",
-    prenom:"",
-    Profession:"",
-    titre:"",
-    typePieceIdentity:"",
-    Ville:"",
-    saisirlemotif:"", 
-
-  }
-
-
-
+  
   ngOnInit(): void {
   
    
   }
+  goBack(){
+    this.location.back();
+
+      
+    }
+  payTransfertClicked(){
+    this.payTransferButtonClicked=true;
+    this.finishExtourne ++;
+    
+    if(this.transfert.transfers[0].status == TransferStatus.ASERVIR && this.payTransferButtonClicked && this.finishExtourne > 1){
+
+      this.transfert.transfers[0].status  = TransferStatus.EXTOURNE
+
+    }
+;      }
+RestituerClicked(){
+  this.restituerClicked=true;
+  this.finishRestitution ++;
+  if(this.transfert.transfers[0].status  == TransferStatus.ASERVIR  && this.restituerClicked && this.finishRestitution > 1){
+    this.transfert.transfers[0].status  = TransferStatus.RESTITUE
+  }
+}
+createAccountClicked(){
+
+}
+
+changeTansfertState(){
+if(this.transfert.transfers[0].status  == TransferStatus.ASERVIR){
+  this.servirButton = "Deblock"
+  this.transfert.transfers[0].status  = TransferStatus.BLOCKED
+}else if(this.transfert.transfers[0].status  == TransferStatus.BLOCKED){
+  this.servirButton = "Block"
+  this.transfert.transfers[0].status  = TransferStatus.ASERVIR
+}
   /*
   public SavePDF():void{  
     let content=this.content.nativeElement;  
@@ -89,57 +97,5 @@ export class TransfertDetailsComponent implements OnInit {
     doc.save('test.pdf');  
   }  
    */
-  goBack(){
-
-    this.beneficiaire ={
-      Email:"",
-      adresseLegal:"",
-      dateExpirationPieceIdentity:null,
-      DateNaissance:null,
-      GSM:"",
-      nom:"",
-      numPieceIdentity:"",
-      payeAdresse:"",
-      payeEmissionPieceIdentity:"",
-      payeNationality:"",
-      prenom:"",
-      Profession:"",
-      titre:"",
-      typePieceIdentity:"",
-      Ville:"",
-      saisirlemotif:"",
-      
-    }
-    this.location.back();
-
-      }
-
-
-      payTransfertClicked(){
-        this.payTransferButtonClicked=true;
-        this.finishExtourne ++;
-        if(this.transfert.etatTransfert == "a servir" && this.payTransferButtonClicked && this.finishExtourne > 1){
-          this.transfert.etatTransfert = "extourned"
-        }
-;      }
-RestituerClicked(){
-      this.restituerClicked=true;
-      this.finishRestitution ++;
-      if(this.transfert.etatTransfert == "a servir" && this.restituerClicked && this.finishRestitution > 1){
-        this.transfert.etatTransfert = "restitued"
-      }
-    }
-  createAccountClicked(){
- 
   }
-
-  changeTansfertState(){
-    if(this.transfert.etatTransfert == "a servir"){
-      this.servirButton = "Deblock"
-      this.transfert.etatTransfert = "Bloque"
-    }else if(this.transfert.etatTransfert == "Bloque"){
-      this.servirButton = "Block"
-      this.transfert.etatTransfert = "a servir"
-  }
-
-  }}
+}

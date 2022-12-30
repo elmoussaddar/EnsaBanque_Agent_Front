@@ -162,17 +162,6 @@ id:12,}
     );
   }
 
-  public onDeleteClient(agent: agentResponseObject): void {
-    this.agentService.deleteAgent(agent).subscribe(
-      (response: void) => {
-        console.log(response);
-        this.getClients();
-      },
-      (error: HttpErrorResponse) => {
-        alert(error.message);
-      }
-    );
-  }
 
   public searchClient(key: string): void {
     const results: agentResponseObject[] = [];

@@ -29,17 +29,17 @@
                                   </a>
                                 </h4>
                                 <p class="">
-                                 <span class="labelText">Ref :</span> <span class="text-primary fw-bold"> {{transfert.refTransfert}}</span>
+                                 <span class="labelText">Ref :</span> <span class="text-primary fw-bold"> {{transfert.transfers[0].transferReference}}</span>
                                 </p>
                                 <p class="">
-                                    <span class="labelText">  Etat : </span> <span class="text-primary fw-bold"> {{transfert.etatTransfert}}</span>
+                                    <span class="labelText">  Etat : </span> <span class="text-primary fw-bold"> {{transfert.transfers[0].status}}</span>
                                   </p>
                                   <p class="">
-                                    <span class="labelText">  Beneficiere : </span> <span class="text-primary fw-bold">{{transfert.prenomSender}} {{transfert.nomSender}} </span>
+                                    <span class="labelText">  Beneficiere : </span> <span class="text-primary fw-bold">{{transfert.transfers[0].receiverFirstName}} {{transfert.transfers[0].receiverLastName}} </span>
                                   </p>
                             </div>
                             <div class="card-read-more">
-                                <a  class="btn btn-link btn-block" (click)="ViewDetailsClicked(transfert.idTransfert)">
+                                <a  class="btn btn-link btn-block" (click)="ViewDetailsClicked(transfert.transfers[0].id)">
                                     View Transfert Details
                                 </a>
                             </div>

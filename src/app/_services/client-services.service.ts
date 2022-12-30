@@ -36,9 +36,7 @@ public updateClient(client : clientResponseObject) : Observable<clientResponseOb
   return this.http.put<clientResponseObject>(`${this.apiServerURL}/client/${client.id}`,client);
 }
 
-public deleteClient(client : clientResponseObject) : Observable<void> {
-  return this.http.delete<void>(`${this.apiServerURL}/client/${client.id}`);
-}
+
 public saveAccount(id:number, balence: number):Observable<Client>{
   return this.http.post<Client>(`http://localhost:8090/account/${id}`,balence);
 }
@@ -48,8 +46,8 @@ public getTransfertInfo(transfertRef : string):Observable<transfertResponseObjec
   return this.http.get<transfertResponseObject>("shdjjjdjd");
 }
 
-public addBeneficiaire(lead :prospectBeneficiare ) : Observable<string>{
+public addBeneficiaire(lead :prospectBeneficiare, clientCIN:String ) : Observable<string>{
 
-  return this.http.post<string>("",{lead});
+  return this.http.post<string>(`/////${clientCIN}`,{lead});
 }
 }
