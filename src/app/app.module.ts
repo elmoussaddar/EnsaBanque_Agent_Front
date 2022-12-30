@@ -33,6 +33,7 @@ import { ListTransfertComponent } from './list-transfert/list-transfert.componen
 import { TransfertDetailsComponent } from './transfert-details/transfert-details.component';
 import { AddAgentComponent } from './add-agent/add-agent.component';
 import { ListAgentsComponent } from './list-agents/list-agents.component';
+import { KeycloakAngularModule, KeycloakService } from 'keycloak-angular';
 @NgModule({
   declarations: [
     AppComponent,VirementFormComponent,
@@ -60,9 +61,32 @@ import { ListAgentsComponent } from './list-agents/list-agents.component';
     MatTreeModule,
     MatTabsModule,
     MatCheckboxModule,
-    MatRadioModule
+    MatRadioModule,
+    KeycloakAngularModule
   ],
-  providers: [],
+  providers: [KeycloakService],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule { 
+
+  constructor(
+    private keycloakAngular: KeycloakService,
+ 
+    ) {
+      this.keycloakAngular.init({
+        config: {
+         url: 'http://ec2-3-95-135-217.compute-1.amazonaws.com:8080/auth',
+         realm: 'test',
+         clientId: 'transfert_front',
+       },
+       initOptions: {
+         onLoad: 'login-required',
+         checkLoginIframe: false,
+        },
+        enableBearerInterceptor: true,
+       bearerExcludedUrls: ['/assets', '/clients/public'],
+     }).then(() => {
+       // keycloak initialized
+     }).catch((error: any) => console.error(error));
+    }
+  }
