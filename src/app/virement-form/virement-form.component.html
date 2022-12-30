@@ -213,8 +213,8 @@
                               <th scope="col">Last Name</th>
                               <th scope="col">Phone Number</th>
                               <th scope="col">Amount</th>
+
                               <th scope="col">Identity_paper_number</th>
-                              <th scope="col">Action</th>
                             </tr>
                           </thead>
                           <tbody id="excel-table">
@@ -229,54 +229,55 @@
                                   <td>Sara</td>
                                   <td>Chakir</td>
                                   <td>765433</td>
-                                  <td>10000</td>
+                                  <td>              <input type="text" ngModel name="amount" class="form-control" id="firstName" placeholder="enter Amount" required disabled="true">
+                                  </td>
+
                                   <td>PA123456</td>
-                                  <td><button class="btn btn-danger">Delete</button></td>
                                 </tr>
                                 <tr>
                                   <th scope="row"><input type="checkbox" name="choice2" /></th>
                                   <td>Yassmin</td>
                                   <td>Kardad</td>
                                   <td>948774</td>
-                                  <td>10000</td>
+                                  <td>              <input type="text" ngModel name="amount" class="form-control" id="firstName" placeholder="enter Amount" required disabled="true">
+                                  </td>
                                   <td>DA123456</td>
-                                  <td><button class="btn btn-danger">Delete</button></td>
                                 </tr>
                                 <tr>
                                   <th scope="row"><input type="checkbox" name="choice3" /></th>
                                   <td>Frederec</td>
                                   <td>Faya</td>
                                   <td>765439483</td>
-                                  <td>10000</td>
+                                  <td>              <input type="text" ngModel name="amount" class="form-control" id="firstName" placeholder="enter Amount" required disabled="true">
+                                  </td>
                                   <td>FA123456</td>
-                                  <td><button class="btn btn-danger">Delete</button></td>
                                 </tr>
                                 <tr>
                                   <th scope="row"><input type="checkbox" name="choice4" /></th>
                                   <td>Soukaina</td>
                                   <td>El Abbasy</td>
                                   <td>765439483</td>
-                                  <td>10000</td>
+                                  <td>              <input type="text" ngModel name="amount" class="form-control" id="firstName" placeholder="enter Amount" required disabled="true">
+                                  </td>
                                   <td>FA123456</td>
-                                  <td><button class="btn btn-danger">Delete</button></td>
                                 </tr>
                                 <tr>
                                   <th scope="row"><input type="checkbox" name="choice5" /></th>
                                   <td>Hamza</td>
                                   <td>Nassour</td>
                                   <td>765439483</td>
-                                  <td>10000</td>
+                                  <td>              <input type="text" ngModel name="amount" class="form-control" id="firstName" placeholder="enter Amount" required disabled="true">
+                                  </td>
                                   <td>FA123456</td>
-                                  <td><button class="btn btn-danger">Delete</button></td>
                                 </tr>
                                 <tr>
                                   <th scope="row"><input type="checkbox" name="choice6" /></th>
                                   <td>AbdelMounaim</td>
                                   <td>El Moussaddar</td>
                                   <td>765439483</td>
-                                  <td>15000</td>
+                                  <td>              <input type="text" ngModel name="amount" class="form-control" id="firstName" placeholder="enter Amount" required disabled="true">
+                                  </td>
                                   <td>FA123456</td>
-                                  <td><button class="btn btn-danger">Delete</button></td>
                                 </tr>
                               <!--th>&nbsp; <button class="btn btn-danger">Delete</button></th-->
                           </tbody>
@@ -344,11 +345,7 @@
               <label for="phoneNumber">Phone</label>
               <input type="text" ngModel name="phoneNumber" class="form-control" id="phoneNumber" placeholder="phoneNumber" required>
             </div>
-            <div style="padding-top: 20px;" >
-              <label class="form-label">Amount</label>
-              <input required id="amount" class="form-control shadow" type="text" name="" placeholder="Enter the Amount"
-              name="amount">
-            </div>
+            
           </form>
           <div class="modal-footer">
             <button type="button" id="add-employee-form" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

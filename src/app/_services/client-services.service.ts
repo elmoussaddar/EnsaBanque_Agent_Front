@@ -1,3 +1,6 @@
+import { MTransfer } from './../Models/MTransfer';
+import { Beneficiare } from './../interfaces/Beneficiare';
+import { beneficiaryResponseObject } from './../ResponseEntities/beneficiaryResponseObject';
 import { prospectBeneficiare } from './../Models/prospectBeneficiare';
 import { clientResponseObject } from './../ResponseEntities/clientResponseObject';
 import { Injectable } from '@angular/core';
@@ -23,7 +26,11 @@ public getClients() : Observable<clientResponseObject[]>{
 }
 
 public getClientByPhoneNumber(phone : String) : Observable<clientResponseObject>{
-  return this.http.get<clientResponseObject>(`${this.apiServerURL}/client/${phone}`);
+  return this.http.get<clientResponseObject>(`asnsnnd/${phone}`);
+}
+
+public getClientByCIN(CIN : String) : Observable<clientResponseObject>{
+  return this.http.get<clientResponseObject>(`hshss/${CIN}`);
 }
 
 
@@ -50,4 +57,34 @@ public addBeneficiaire(lead :prospectBeneficiare, clientCIN:String ) : Observabl
 
   return this.http.post<string>(`/////${clientCIN}`,{lead});
 }
+
+public getBeneficiairiesPerClient(clientCIN : String) : Observable<Array<beneficiaryResponseObject>>{
+
+  return this.http.get<Array<beneficiaryResponseObject>>(`shdjjjdjd///${clientCIN}`);
+
+}
+
+public addBeneficiairieToClient(beneficiairieObject :Beneficiare, clientCIN : String ):Observable<any>{
+
+  return this.http.post(`jdd/sss/${clientCIN}`,{beneficiairieObject});
+}
+
+public getConfirmationOfFondAvailability(clientPhoneNumber :string, amount:Number):Observable<String>{
+
+  return this.http.get<String>(`sjjss/sjsj/${clientPhoneNumber}/${amount}`);
+}
+
+public registerTransfert(transfertObject:MTransfer):Observable<Number>{
+  return this.http.post<Number>("jdjdj",{transfertObject})
+
+}
+
+public sendOTP(clientPhoneNumber : String) :Observable<any>{
+  return this.http.post("hshss",{clientPhoneNumber});
+}
+
+public verifyOTP(clientPhoneNumber : String,codeOTP:Number) :Observable<Boolean>{
+  return this.http.post<Boolean>("hshss",{clientPhoneNumber});
+}
+
 }
