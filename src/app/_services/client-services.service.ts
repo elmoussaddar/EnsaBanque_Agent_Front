@@ -22,9 +22,11 @@ public getClients() : Observable<clientResponseObject[]>{
   return this.http.get<clientResponseObject[]>(`${this.apiServerURL}/client/getAll`);
 }
 
-public getClientById(clientID : String) : Observable<Client>{
-  return this.http.get<Client>(`${this.apiServerURL}/client/${clientID}`);
+public getClientByPhoneNumber(phone : String) : Observable<clientResponseObject>{
+  return this.http.get<clientResponseObject>(`${this.apiServerURL}/client/${phone}`);
 }
+
+
 
 public addClient(client : Client,idAgent: number) : Observable<Client>{
   return this.http.post<Client>(`${this.apiServerURL}/client/create/${idAgent}`,client);

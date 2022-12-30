@@ -9,11 +9,10 @@ export class Client {
     public phoneNumber : String = new String();
     public address : String = new String();
     public identity_paper_type : String = new String();
-    public identity_paper_number : String = new String();
+    public cinNumber : String = new String();
     public zip_code : Number = new Number();
     public country : String = new String();
     public city : String = new String();
     public gender : String = new String();
-    public balance : number = 0;
     
 }

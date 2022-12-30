@@ -1,6 +1,8 @@
+import { Account } from './../Models/Account';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Agent } from '../Models/agent';
+import { AccountStatus } from '../enum/AccountStatus';
 
 
 @Component({
@@ -19,12 +21,17 @@ export class HomeComponent implements OnInit {
     address : "some where some where",
     city : "Marrakech",
     zip_code : 40000,
-    identity_paper_number : "EB2912??",
+    cinNumber : "EB2912??",
     identity_paper_type : "Passeport",
     gender : "Male",
     username : "fred001",
     country : "Morroco",
-    balance : 1000000000
+    accounts :[
+      {accountNumber:"24838434",
+    balance:1000,
+  id:2,
+status: AccountStatus.ACTIVATED}
+    ] as Array<Account>
   };
 
   isAdmin:boolean;

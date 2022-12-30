@@ -88,14 +88,14 @@
                 <div class="col-md-6" style="padding-top: 15px;">
                     <label class="form-label">Identity Paper Number</label>
                     <input required id="Identity_paper_number" class="form-control shadow" type="text" placeholder="Enter your Identity Paper Number"
-                     name="Identity_paper_number" [(ngModel)] = 'agent.identity_paper_number' name="Identity_paper_number">
+                     name="Identity_paper_number" [(ngModel)] = 'agent.cinNumber' name="Identity_paper_number">
                   </div>
                 </div>
                 <div class="row mb-1">
                     <div style="padding-top: 15px;">
                       <label for="balance" class="form-label">Initial Balance</label>
                       <input required id="balance" class="form-control shadow" type="number" placeholder="Enter balance"
-                      [(ngModel)] = 'agent.balance' name="balance">
+                      [(ngModel)] = 'agent.accounts[0].balance' name="balance">
                     </div>
                   </div>
                 <div style="padding-top: 40px;padding-bottom: 15px;">

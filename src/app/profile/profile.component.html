@@ -90,7 +90,7 @@
 		  <div class="col-md-6" style="padding-top: 15px;">
 			  <label class="form-label">Identity Paper Number</label>
 			  <input [disabled]="profile_editable" required id="Identity_paper_number" class="form-control shadow" type="text" placeholder="Enter your Identity Paper Number"
-			   name="Identity_paper_number" [(ngModel)] = 'client.identity_paper_number' name="Identity_paper_number">
+			   name="Identity_paper_number" [(ngModel)] = 'client.cinNumber' name="Identity_paper_number">
 			</div>
 		  </div>
 		  <div style="padding-top: 40px ;">
@@ -121,9 +121,9 @@
 						<div class="round-div"><i class="fa fa-dollar dollar"></i></div>
 	
 					</div>
-					<div class="d-flex flex-column text-right mr-2" *ngIf="client.balance!=null" >
+					<div class="d-flex flex-column text-right mr-2" *ngIf="true" >
 						<span class="current-balance">Current Balance</span>
-						<span class="amount"><span class="dollar-sign">$</span>{{client.balance}}</span>
+						<span class="amount"><span class="dollar-sign">$</span>balance</span>
 					</div>
 	
 			</div>

@@ -25,13 +25,13 @@ export class ListeClientsComponent implements OnInit {
       address : "some where some where",
       city : "Marrakech",
       zip_code : 40000,
-      identity_paper_number : "EB2912??",
+      cinNumber : "EB2912??",
       identity_paper_type : "Passeport",
       gender : "Male",
       id : 0,
       username : "fred001",
       country : "Morroco",
-      balance : 1000000000
+      accounts :[],
     },
     {
       firstName : "faya",
@@ -43,13 +43,13 @@ export class ListeClientsComponent implements OnInit {
       address : "some where some where",
       city : "Marrakech",
       zip_code : 40000,
-      identity_paper_number : "EB2912??",
+      cinNumber : "EB2912??",
       identity_paper_type : "Passeport",
       gender : "Male",
       id : 0,
       username : "fred001",
       country : "Morroco",
-      balance : 1000000000
+      accounts:[],
     },
     {
       firstName : "faya",
@@ -61,13 +61,15 @@ export class ListeClientsComponent implements OnInit {
       address : "some where some where",
       city : "Marrakech",
       zip_code : 40000,
-      identity_paper_number : "EB2912??",
+      cinNumber : "EB2912??",
       identity_paper_type : "Passeport",
       gender : "Male",
       id : 0,
       username : "fred001",
       country : "Morroco",
-      balance : 1000000000
+      accounts:[],
+
+
     },
     {
       firstName : "faya",
@@ -79,13 +81,14 @@ export class ListeClientsComponent implements OnInit {
       address : "some where some where",
       city : "Marrakech",
       zip_code : 40000,
-      identity_paper_number : "EB2912??",
+      cinNumber : "EB2912??",
       identity_paper_type : "Passeport",
       gender : "Male",
       id : 0,
       username : "fred001",
       country : "Morroco",
-      balance : 1000000000
+      accounts:[],
+
     },
  
   ];

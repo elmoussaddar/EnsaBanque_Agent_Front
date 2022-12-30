@@ -11,7 +11,7 @@ import { Client } from '../Models/client';
 })
 export class AddAgentComponent implements OnInit {
 
-  public agent:Agent = new Client();
+  public agent:Agent = new Agent();
   constructor(private router: Router) { }
 
   ngOnInit(): void {

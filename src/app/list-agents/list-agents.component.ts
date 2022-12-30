@@ -5,6 +5,8 @@ import { Component, OnInit } from '@angular/core';
 import { Client } from '../Models/client';
 import { agentResponseObject } from '../ResponseEntities/agentResponseObject';
 import { ClientServicesService } from '../_services/client-services.service';
+import { Account } from '../Models/Account';
+import { AccountStatus } from '../enum/AccountStatus';
 
 @Component({
   selector: 'app-list-agents',
@@ -13,9 +15,9 @@ import { ClientServicesService } from '../_services/client-services.service';
 })
 export class ListAgentsComponent implements OnInit {
 
-  public updateClient: clientResponseObject | undefined;
-  public deleteClient: clientResponseObject = new clientResponseObject();
-  public clientChoosed : clientResponseObject = new clientResponseObject();
+  public updateClient: agentResponseObject | undefined;
+  public deleteClient: agentResponseObject = new agentResponseObject();
+  public clientChoosed : agentResponseObject = new agentResponseObject();
   public clients: agentResponseObject[] = /* [] */ [
  
     {
@@ -28,13 +30,19 @@ export class ListAgentsComponent implements OnInit {
       address : "some where some where",
       city : "Marrakech",
       zip_code : 40000,
-      identity_paper_number : "EB2912??",
+      cinNumber : "EB2912??",
       identity_paper_type : "Passeport",
       gender : "Male",
       id : 0,
       username : "fred001",
       country : "Morroco",
-      balance : 1000000000
+      accounts :[
+{accountNumber:"27232424",
+balance:10000,
+status: AccountStatus.ACTIVATED,
+id:12,}
+      ] as Array<Account>,
+
     },
     {
       firstName : "faya",
@@ -46,13 +54,18 @@ export class ListAgentsComponent implements OnInit {
       address : "some where some where",
       city : "Marrakech",
       zip_code : 40000,
-      identity_paper_number : "EB2912??",
+      cinNumber : "EB2912??",
       identity_paper_type : "Passeport",
       gender : "Male",
       id : 0,
       username : "fred001",
       country : "Morroco",
-      balance : 1000000000
+      accounts :[
+        {accountNumber:"27232424",
+        balance:10000,
+        status: AccountStatus.ACTIVATED,
+        id:12,}
+              ] as Array<Account>,
     },
     {
       firstName : "faya",
@@ -64,13 +77,18 @@ export class ListAgentsComponent implements OnInit {
       address : "some where some where",
       city : "Marrakech",
       zip_code : 40000,
-      identity_paper_number : "EB2912??",
+      cinNumber : "EB2912??",
       identity_paper_type : "Passeport",
       gender : "Male",
       id : 0,
       username : "fred001",
       country : "Morroco",
-      balance : 1000000000
+      accounts :[
+        {accountNumber:"27232424",
+        balance:10000,
+        status: AccountStatus.ACTIVATED,
+        id:12,}
+              ] as Array<Account>,
     },
     {
       firstName : "faya",
@@ -82,14 +100,18 @@ export class ListAgentsComponent implements OnInit {
       address : "some where some where",
       city : "Marrakech",
       zip_code : 40000,
-      identity_paper_number : "EB2912??",
+      cinNumber : "EB2912??",
       identity_paper_type : "Passeport",
       gender : "Male",
       id : 0,
       username : "fred001",
       country : "Morroco",
-      balance : 1000000000
-    },
+      accounts :[
+        {accountNumber:"27232424",
+        balance:10000,
+        status: AccountStatus.ACTIVATED,
+        id:12,}
+              ] as Array<Account>,    },
     {
       firstName : "faya",
       lastName : "fred",
@@ -100,13 +122,18 @@ export class ListAgentsComponent implements OnInit {
       address : "some where some where",
       city : "Marrakech",
       zip_code : 40000,
-      identity_paper_number : "EB2912??",
+      cinNumber : "EB2912??",
       identity_paper_type : "Passeport",
       gender : "Male",
       id : 0,
       username : "fred001",
       country : "Morroco",
-      balance : 1000000000
+      accounts :[
+        {accountNumber:"27232424",
+        balance:10000,
+        status: AccountStatus.ACTIVATED,
+        id:12,}
+              ] as Array<Account>,
     }
   ];
 
@@ -162,7 +189,7 @@ export class ListAgentsComponent implements OnInit {
     }
   }
 
-  public onOpenModal(client : clientResponseObject, mode: string): void {
+  public onOpenModal(client : agentResponseObject, mode: string): void {
     const container = document.getElementById("main-container");
     const button = document.createElement('button');
     button.type = 'button';
