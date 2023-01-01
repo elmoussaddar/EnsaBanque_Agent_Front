@@ -1,3 +1,4 @@
+import { KeycloakService } from 'keycloak-angular';
 import { Account } from './../Models/Account';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
@@ -11,6 +12,8 @@ import { AccountStatus } from '../enum/AccountStatus';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
+
+  userProfile : any;
   user:Agent = {
     firstName : "FAYA",
     lastName : "Frederic",
@@ -36,10 +39,11 @@ status: AccountStatus.ACTIVATED}
 
   isAdmin:boolean;
  
-  constructor(private router: Router) { }
+  constructor(private router: Router, private keycloakAngular: KeycloakService) { }
 
   ngOnInit(): void {
     this.isAdmin = true;
+
   }
 
   goToProfile(){

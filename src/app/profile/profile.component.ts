@@ -1,3 +1,4 @@
+import { KeycloakService } from 'keycloak-angular';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TokenStorageService } from '../_services/token-storage.service';
@@ -41,8 +42,11 @@ export class ProfileComponent implements OnInit {
 
   };*/
 
-  constructor(private router: Router, private tokenStorage:TokenStorageService) {}
+  constructor(private router: Router, private tokenStorage:TokenStorageService,) {}
   ngOnInit(): void {
+    console.log("profile : ", sessionStorage.getItem("keycloakReponse"));
+    console.log("token : ", sessionStorage.getItem("keycloakToken"));
+
 
   }
 

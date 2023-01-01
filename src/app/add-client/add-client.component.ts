@@ -1,3 +1,4 @@
+import { ClientServicesService } from './../_services/client-services.service';
 import { Component, OnInit } from '@angular/core';
 import { Client } from '../Models/client';
 import { Router } from '@angular/router';
@@ -10,12 +11,17 @@ import { NgForm } from '@angular/forms';
 })
 export class AddClientComponent implements OnInit {
   public client:Client = new Client();
-  constructor(private router: Router) { }
+  constructor(private router: Router,private clientServices : ClientServicesService) { }
 
   ngOnInit(): void {
   }
   public saveClientData(clientForm: NgForm){
    // this.router.navigate(['clientHome/liste-clients']);
+
+   this.clientServices.addClient(this.client).subscribe(data =>{
+    console.log(data);
+    console.log("user registred !!!!!");
+   })
 
    console.log(this.client);
   }

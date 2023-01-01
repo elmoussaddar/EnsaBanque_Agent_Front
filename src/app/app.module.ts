@@ -1,4 +1,4 @@
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
@@ -34,6 +34,8 @@ import { TransfertDetailsComponent } from './transfert-details/transfert-details
 import { AddAgentComponent } from './add-agent/add-agent.component';
 import { ListAgentsComponent } from './list-agents/list-agents.component';
 import { KeycloakAngularModule, KeycloakService } from 'keycloak-angular';
+import { KeycloakProfile } from 'keycloak-js';
+import { AuthInterceptor } from './_helpers/auth.interceptor';
 @NgModule({
   declarations: [
     AppComponent,VirementFormComponent,
@@ -69,24 +71,50 @@ import { KeycloakAngularModule, KeycloakService } from 'keycloak-angular';
 })
 export class AppModule { 
 
+  public keycloakReponse: Promise<KeycloakProfile> ;
+  public keycloakToken: Promise<string>;
+
+  public UserRoles : Array<String>;
+
   constructor(
     private keycloakAngular: KeycloakService,
  
     ) {
       this.keycloakAngular.init({
         config: {
-         url: 'http://ec2-3-95-135-217.compute-1.amazonaws.com:8080/auth',
+         url: 'http://ec2-3-82-120-180.compute-1.amazonaws.com:8080/auth/',
          realm: 'test',
          clientId: 'transfert_front',
+         
+         
        },
        initOptions: {
          onLoad: 'login-required',
          checkLoginIframe: false,
+         
         },
+        
         enableBearerInterceptor: true,
        bearerExcludedUrls: ['/assets', '/clients/public'],
      }).then(() => {
+     this.keycloakReponse = this.keycloakAngular.loadUserProfile();
+     this.UserRoles = this.keycloakAngular.getUserRoles();
+
+
+     this.keycloakToken=  this.keycloakAngular.getToken()
+      console.log(this.keycloakToken);
+
+
+      sessionStorage.setItem("userRoles", this.UserRoles.join(","));
+
+      sessionStorage.setItem("keycloakReponse",JSON.stringify(this.keycloakReponse));
+      sessionStorage.setItem("keycloakToken", JSON.stringify(this.keycloakToken));
+
+
        // keycloak initialized
      }).catch((error: any) => console.error(error));
+
     }
+
   }
+

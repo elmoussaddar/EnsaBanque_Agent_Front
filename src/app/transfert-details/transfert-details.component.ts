@@ -1,16 +1,12 @@
-import { MTransfer } from './../Models/MTransfer';
+import { MTransferResponseObject } from './../ResponseEntities/MTransferResponseObject';
+
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
-import { Beneficiare } from '../interfaces/Beneficiare';
-import { TokenStorageService } from '../_services/token-storage.service';
+import { ActivatedRoute, Router } from '@angular/router';
+
 import { Location } from '@angular/common';
-import  {  PdfViewerModule  }  from  'ng2-pdf-viewer';
-import { FormsModule } from '@angular/forms';
-//import  jsPDF from 'jspdf'; 
-import jspdf from 'jspdf'; 
-import * as jsPDF from 'jspdf';
-import { Transfert } from '../Models/transfert';
 import { TransferStatus } from '../enum/TransferStatus';
+import { ClientServicesService } from '../_services/client-services.service';
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -22,8 +18,13 @@ export class TransfertDetailsComponent implements OnInit {
 
   TransferStatus = TransferStatus;
   status: TransferStatus;
+  isAdmin:Boolean | undefined = false;
+  userRoles : String | null;
+  isAgent : Boolean | undefined = false;
+
+
   @ViewChild('content') content:ElementRef;  
-  constructor(private router: Router, private tokenStorage:TokenStorageService,private location:Location, ) { }
+  constructor(private router: Router, private services : ClientServicesService,private location:Location,private route: ActivatedRoute ) { }
   payTransferButtonClicked:boolean=false;
   restituerClicked:boolean=false;
   finishRestitution:number=0;
@@ -32,7 +33,7 @@ export class TransfertDetailsComponent implements OnInit {
   servirButton:String = "Block";
   titres=["M","Mme"];
   motifdeRestitution=["Reciever Erreur","Mauvais Montant","Autre"];
- public  transfert:MTransfer= new MTransfer();
+ public  transfer:MTransferResponseObject= new MTransferResponseObject();
 
   
   onSearch(){
@@ -41,7 +42,16 @@ export class TransfertDetailsComponent implements OnInit {
   }
   
   ngOnInit(): void {
-  
+    this.isAdmin = true;
+
+    this.userRoles = window.sessionStorage.getItem("userRoles");
+
+    this.isAdmin = this.userRoles?.includes("ADMIN");
+    this.isAgent = this.userRoles?.includes("AGENT");
+
+    this.route.queryParams.subscribe(params => {
+      this.transfer = JSON.parse(params['object']);
+    });
    
   }
   goBack(){
@@ -53,17 +63,28 @@ export class TransfertDetailsComponent implements OnInit {
     this.payTransferButtonClicked=true;
     this.finishExtourne ++;
     
-    if(this.transfert.transfers[0].status == TransferStatus.ASERVIR && this.payTransferButtonClicked && this.finishExtourne > 1){
+    if(this.transfer.transfers[0].status == TransferStatus.ASERVIR && this.payTransferButtonClicked && this.finishExtourne > 1){
 
-      this.transfert.transfers[0].status  = TransferStatus.EXTOURNE
+      this.transfer.transfers[0].status  = TransferStatus.EXTOURNE
 
+    }
+
+    if (window.confirm('Are you sure you want to pay this transefer?')) {
+      this.services.updateTransfert(this.transfer).subscribe(data => {
+        this.showSweetAlertMessage('Transfer Payed !','Well Done');
+      });
     }
 ;      }
 RestituerClicked(){
   this.restituerClicked=true;
   this.finishRestitution ++;
-  if(this.transfert.transfers[0].status  == TransferStatus.ASERVIR  && this.restituerClicked && this.finishRestitution > 1){
-    this.transfert.transfers[0].status  = TransferStatus.RESTITUE
+  if(this.transfer.transfers[0].status  == TransferStatus.ASERVIR  && this.restituerClicked && this.finishRestitution > 1){
+    this.transfer.transfers[0].status  = TransferStatus.RESTITUE
+  }
+  if (window.confirm('Are you sure you want to take this action ?')) {
+    this.services.updateTransfert(this.transfer).subscribe(data => {
+      this.showSweetAlertMessage('Transfer State Changed !','Restitution was successful');
+    });
   }
 }
 createAccountClicked(){
@@ -71,12 +92,17 @@ createAccountClicked(){
 }
 
 changeTansfertState(){
-if(this.transfert.transfers[0].status  == TransferStatus.ASERVIR){
+if(this.transfer.transfers[0].status  == TransferStatus.ASERVIR){
   this.servirButton = "Deblock"
-  this.transfert.transfers[0].status  = TransferStatus.BLOCKED
-}else if(this.transfert.transfers[0].status  == TransferStatus.BLOCKED){
+  this.transfer.transfers[0].status  = TransferStatus.BLOCKED
+}else if(this.transfer.transfers[0].status  == TransferStatus.BLOCKED){
   this.servirButton = "Block"
-  this.transfert.transfers[0].status  = TransferStatus.ASERVIR
+  this.transfer.transfers[0].status  = TransferStatus.ASERVIR
+}
+if (window.confirm('Are you sure you want to take this action ?')) {
+  this.services.updateTransfert(this.transfer).subscribe(data => {
+    this.showSweetAlertMessage('Transfer State Changed !','request was successful');
+  });
 }
   /*
   public SavePDF():void{  
@@ -98,4 +124,13 @@ if(this.transfert.transfers[0].status  == TransferStatus.ASERVIR){
   }  
    */
   }
+
+  showSweetAlertMessage(title : string, html:string) {
+    console.log('showSweetAlertMessage triggered');
+    Swal.fire(title, html, 'success');
+    
+    }
+   
 }
+
+

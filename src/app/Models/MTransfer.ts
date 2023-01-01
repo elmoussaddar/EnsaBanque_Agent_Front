@@ -2,7 +2,6 @@ import { Transfert } from "./transfert";
 
 export class MTransfer {
 
-    public id : Number = new Number();
     public createdAt : Date| null = new Date();
     public endedAt : Date| null = new Date();
     public id_client : Number = new Number();

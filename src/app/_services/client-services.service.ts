@@ -9,6 +9,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { Client } from 'src/app/Models/client';
 import { environment } from 'src/environments/environment';
 import { transfertResponseObject } from '../ResponseEntities/transfertResponseObject';
+import { MTransferResponseObject } from '../ResponseEntities/MTransferResponseObject';
 
 @Injectable({
   providedIn: 'root'
@@ -19,28 +20,34 @@ private apiServerURL = environment.apiBaseURL;
   requestHeader = new HttpHeaders({ 'No-Auth': 'True' });
   auth_token=localStorage.getItem('token');
 
+   httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json'
+    })
+  };
+
 constructor(private http : HttpClient) { }
 
 public getClients() : Observable<clientResponseObject[]>{
-  return this.http.get<clientResponseObject[]>(`${this.apiServerURL}/client/getAll`);
+  return this.http.get<clientResponseObject[]>(`https://client-service-01.herokuapp.com/api/v0/client_service_api/clients`,this.httpOptions);
 }
 
 public getClientByPhoneNumber(phone : String) : Observable<clientResponseObject>{
-  return this.http.get<clientResponseObject>(`asnsnnd/${phone}`);
+  return this.http.get<clientResponseObject>(`https://client-service-01.herokuapp.com/api/v0/client_service_api/clients/${phone}`);
 }
 
 public getClientByCIN(CIN : String) : Observable<clientResponseObject>{
-  return this.http.get<clientResponseObject>(`hshss/${CIN}`);
+  return this.http.get<clientResponseObject>(`https://client-service-01.herokuapp.com/api/v0/client_service_api/clients/${CIN}?cin`,this.httpOptions);
 }
 
 
 
-public addClient(client : Client,idAgent: number) : Observable<Client>{
-  return this.http.post<Client>(`${this.apiServerURL}/client/create/${idAgent}`,client);
+public addClient(client : Client) : Observable<Client>{
+  return this.http.post<Client>("https://client-service-01.herokuapp.com/api/v0/client_service_api/clients",client);
 }
 
 public updateClient(client : clientResponseObject) : Observable<clientResponseObject>{
-  return this.http.put<clientResponseObject>(`${this.apiServerURL}/client/${client.id}`,client);
+  return this.http.put<clientResponseObject>(`https://client-service-01.herokuapp.com/api/v0/client_service_api/client/update`,client);
 }
 
 
@@ -50,32 +57,39 @@ public saveAccount(id:number, balence: number):Observable<Client>{
 
 public getTransfertInfo(transfertRef : string):Observable<transfertResponseObject>{
 
-  return this.http.get<transfertResponseObject>("shdjjjdjd");
+  return this.http.get<transfertResponseObject>(`https://transfert-service-1.herokuapp.com/api/v0/transfer_service_api/UTransfer/${transfertRef}`,this.httpOptions);
 }
 
-public addBeneficiaire(lead :prospectBeneficiare, clientCIN:String ) : Observable<string>{
-
-  return this.http.post<string>(`/////${clientCIN}`,{lead});
-}
 
 public getBeneficiairiesPerClient(clientCIN : String) : Observable<Array<beneficiaryResponseObject>>{
 
-  return this.http.get<Array<beneficiaryResponseObject>>(`shdjjjdjd///${clientCIN}`);
+  return this.http.get<Array<beneficiaryResponseObject>>(`http://clientservice-env.eba-dak2nkgp.us-east-1.elasticbeanstalk.com/api/v0/client_service_api/clients/${clientCIN}/benificiares`,this.httpOptions);
 
 }
 
-public addBeneficiairieToClient(beneficiairieObject :Beneficiare, clientCIN : String ):Observable<any>{
+public addBeneficiairieToClient(beneficiairieObject :prospectBeneficiare, clientCIN : String ):Observable<any>{
 
-  return this.http.post(`jdd/sss/${clientCIN}`,{beneficiairieObject});
+  return this.http.post(`https://client-service-01.herokuapp.com/api/v0/client_service_api/clients/${clientCIN}/addNewBenif`,beneficiairieObject,this.httpOptions);
 }
 
-public getConfirmationOfFondAvailability(clientPhoneNumber :string, amount:Number):Observable<String>{
+public getConfirmationOfFondAvailability(clientCIN :string, amount:Number):Observable<String>{
 
-  return this.http.get<String>(`sjjss/sjsj/${clientPhoneNumber}/${amount}`);
+  return this.http.get<String>(`https://client-service-01.herokuapp.com/api/v0/client_service_api/clients/${clientCIN}/${amount}?verify`,this.httpOptions);
 }
 
 public registerTransfert(transfertObject:MTransfer):Observable<Number>{
-  return this.http.post<Number>("jdjdj",{transfertObject})
+  return this.http.post<Number>("https://transfert-service-1.herokuapp.com/api/v0/transfer_service/mTransfer/createTransfer/agent",transfertObject,this.httpOptions)
+
+}
+
+public updateTransfert(transfertObject:MTransferResponseObject):Observable<MTransferResponseObject>{
+  return this.http.post<MTransferResponseObject>("jssmsms",transfertObject,this.httpOptions);
+
+}
+
+public getListTransferts():Observable<MTransferResponseObject[]>{
+
+  return this.http.get<MTransferResponseObject[]>("jsjmskmss");
 
 }
 

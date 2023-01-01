@@ -35,7 +35,7 @@
                           <div *ngIf="transfert_type==1" class="row mb-1">
                               <div style="padding-top: 10px;">
                                   <label class="form-label">Phone Number</label>
-                                  <input required id="phoneNumber" class="form-control shadow" type="text" placeholder="Enter your Phone Number"
+                                  <input required id="phoneNumber" [(ngModel)]="phoneNumber" class="form-control shadow" type="text" placeholder="Enter your Phone Number"
                                    name="phoneNumber">
                                 </div>
                               <div style="padding-top: 20px ;">
@@ -52,7 +52,7 @@
                               </div>
                               <div style="padding-top: 10px;">
                                   <label class="form-label">Identity Paper Number</label>
-                                  <input required id="phoneNumber" class="form-control shadow" type="text" placeholder="Enter your Identity Paper Number"
+                                  <input required id="phoneNumber"  [(ngModel)]='cinNumber' class="form-control shadow" type="text" placeholder="Enter your Identity Paper Number"
                                    name="Identity_paper_number">
                                 </div>
                               <div style="padding-top: 20px ;">
@@ -68,37 +68,37 @@
                           <div class="row mb-1">
                             <div class="col-md-6">
                               <label for="firstName" class="form-label">First Name</label>
-                              <input required id="username" class="form-control shadow" type="text" placeholder="Enter your First Name"
-                               name="firstName">
+                              <input required id="username" [(ngModel)]='client.firstName' class="form-control shadow" type="text" placeholder="Enter your First Name"
+                               name="firstName" [disabled]="clientDataAvailbale">
                             </div>
                             <div class="col-md-6">
                               <label for="lastName" class="form-label">Last Name</label>
-                              <input required id="username" class="form-control shadow" type="text" placeholder="Enter your Last Name"
-                               name="lastName">
+                              <input required id="username" [(ngModel)]='client.lastName' class="form-control shadow" type="text" placeholder="Enter your Last Name"
+                               name="lastName" [disabled]="clientDataAvailbale">
                             </div>
                           </div>
                           <div class="row" style="padding-top: 15px;">
                             <div class="col-md-6">
                               <label class="form-label">Phone Number</label>
-                              <input required id="phoneNumber" class="form-control shadow" type="text" placeholder="Enter your Phone Number"
-                              name="phoneNumber">
+                              <input required id="phoneNumber" [(ngModel)]='client.phoneNumber' class="form-control shadow" type="text" placeholder="Enter your Phone Number"
+                              name="phoneNumber" [disabled]="clientDataAvailbale">
                             </div>
                             <div class="col-md-6">
                               <label class="form-label">Email</label>
-                              <input required id="email" class="form-control shadow" type="text" name="" placeholder="Enter your email"
-                              name="email">
+                              <input required id="email" [(ngModel)]='client.email' class="form-control shadow" type="text" name="" placeholder="Enter your email"
+                              name="email" [disabled]="clientDataAvailbale">
                             </div>
                             <div class="row" style="padding-top: 15px;">
                               <div class="col-md-6">
                                 <label class="form-label">Birthday</label>
-                                <input required id="birthday" class="form-control shadow" type="date" placeholder="Enter your Phone Number"
-                                [(ngModel)] = 'client.birthday' name="birthday">
+                                <input required id="birthday" [(ngModel)]='client.birthday' class="form-control shadow" type="datetime" placeholder="Enter your Phone Number"
+                                 name="birthday" [disabled]="clientDataAvailbale">
                               </div>
                               <div class="col-md-6">
                                 <label class="form-label">Gender</label>
-                                <select [(ngModel)]='client.gender' name="dropdownOption" id="dropdownOption" class='form-control'>
-                                  <option value="1">Male</option>
-                                  <option value="2">Female</option>
+                                <select [(ngModel)]='client.gender' name="dropdownOption" id="dropdownOption" class='form-control' [disabled]="clientDataAvailbale">
+                                  <option value="Male">Male</option>
+                                  <option value="Female">Female</option>
                                   </select>
                               </div>
                             </div>
@@ -106,41 +106,44 @@
                               <div class="col-md-6">
                                 <label class="form-label">Address</label>
                                 <input required id="address" class="form-control shadow" type="text" placeholder="Enter your address"
-                                [(ngModel)] = 'client.address' name="address">
+                                [(ngModel)]='client.address' name="address" [disabled]="clientDataAvailbale">
                               </div>
                               <div class="col-md-2">
                                 <label class="form-label">City</label>
                                 <input required id="city" class="form-control shadow" type="text" placeholder="Enter your city"
-                                [(ngModel)] = 'client.city' name="city">
+                                [(ngModel)]='client.city' name="city" [disabled]="clientDataAvailbale">
                               </div>
                               <div class="col-md-2">
                                 <label class="form-label">Zip Code</label>
                                 <input required id="zip_code" class="form-control shadow" type="number" placeholder="Enter your zip code"
-                                [(ngModel)] = 'client.zip_code' name="zip_code">
+                                [(ngModel)]='client.zip_code' name="zip_code" [disabled]="clientDataAvailbale">
                               </div>
                               <div class="col-md-2">
                                 <label class="form-label">Country</label>
                                 <input required id="country" class="form-control shadow" type="text" placeholder="Enter your country"
-                                [(ngModel)] = 'client.country' name="country">
+                                [(ngModel)]='client.country' name="country" [disabled]="clientDataAvailbale">
                               </div>
                               <div class="col-md-6" style="padding-top: 15px;">
                                 <label for="identity_paper_type" class="form-label">Identity Paper Type</label>
-                                <select [(ngModel)]='client.identity_paper_type' name="dropdownOption" id="dropdownOption" class='form-control'>
-                                <option value="1">C.I.N</option>
-                                <option value="2">Passport</option>
-                                <option value="3">Driver License</option>
+                                <select [(ngModel)]='client.identity_paper_type' name="dropdownOption" id="dropdownOption" class='form-control' [disabled]="clientDataAvailbale">
+                                <option value="CIN">C.I.N</option>
+                                <option value="PAssport">Passport</option>
+                                <option value="Driver License">Driver License</option>
                                 </select>
                             </div>
                             <div class="col-md-6" style="padding-top: 15px;">
                                 <label class="form-label">Identity Paper Number</label>
                                 <input required id="Identity_paper_number" class="form-control shadow" type="text" placeholder="Enter your Identity Paper Number"
-                                 name="Identity_paper_number" [(ngModel)] = 'client.cinNumber' name="Identity_paper_number">
+                                 name="Identity_paper_number" [(ngModel)]='client.cinNumber' name="Identity_paper_number" [disabled]="clientDataAvailbale">
                               </div>
+                            </div>
+                            <div style="padding-top: 20px ;" *ngIf="!clientDataAvailbale">
+                              <button type="submit" class="btn btn-primary" (click)="addProspectClientClicked()">Add Prospect Client</button>
                             </div>
                          
                             <div style="padding-top: 20px;" >
                               <label class="form-label">Transfert Reason</label>
-                              <select [(ngModel)]='transfert_type' name="dropdownOption" id="dropdownOption" class='form-control'>
+                              <select [(ngModel)]='transfert_type' name="dropdownOption" id="dropdownOption" class='form-control' disabled="false">
                                 <option value="Soutien Familial">Soutien Familial</option>
                                 <option value="Epargne/investissement">Epargne/investissement</option>
                                 <option value="Paiement de biens et de services">Paiement de biens et de services</option>
@@ -163,7 +166,7 @@
                                 <mat-card class="form-control shadow" >
                                   <mat-card-content>
                                 <section class="example-section">
-                                  <mat-checkbox  >Checked</mat-checkbox>
+                                  <mat-checkbox value="senDnotification" >Checked</mat-checkbox>
                                 </section>
                               </mat-card-content>
                           </mat-card></div>
@@ -172,31 +175,29 @@
                               <mat-card>
                                   <mat-card-content>
                                 <section class="example-section">
-                                  <mat-radio-group>
-                                    <mat-radio-button class="example-margin" value="1"  style="margin-right:70px; "> Costs to be paid by the ordering customer</mat-radio-button>
-                                    <mat-radio-button class="example-margin" value="2" style="margin-right:70px; "> Fees to be paid by the beneficiary client</mat-radio-button>
-                                    <mat-radio-button class="example-margin" value="3"> Shared costs between clients (Principal and beneficiary)</mat-radio-button>
+                                  <mat-radio-group ngModel="typeFrais" value="typeFrais">
+                                    <mat-radio-button class="example-margin" value="CHARGE_CLIENT_DONNEUR_ORDER"  style="margin-right:70px; "> Costs to be paid by the ordering customer</mat-radio-button>
+                                    <mat-radio-button class="example-margin" value="CHARGE_BENIFICIAIRE" style="margin-right:70px; "> Fees to be paid by the beneficiary client</mat-radio-button>
+                                    <mat-radio-button class="example-margin" value="CHARGE_BOTH"> Shared costs between clients (Principal and beneficiary)</mat-radio-button>
                                   </mat-radio-group>
                           
                                 </section>
                                 </mat-card-content>
                               </mat-card>
                                 </div>
-                                <div style="padding-top: 20px ;">
-                                  <button type="submit" class="btn btn-primary">Add Prospect Client</button>
-                                </div>
+                               
                           </div>
                       </form>
                   </div>
               </div>
               <div class="card" style="margin-top:20px" *ngIf="Search==true">
                   <div class="card-body" style="background-color: #D4D5D5;">
-                    <span style="font-weight: bold; font-size: 20px; margin: vertical 5px;">Receiver Client Informations </span> <hr>
+                    <span style="font-weight: bold; font-size: 20px; margin: vertical 5px;">Receiver Informations </span> <hr>
                           <div class="row mb-1">
                       <form #clientForm="ngForm" (ngSubmit)="onSearchReceiver()">
                         <div style="padding-top: 10px;">
                           <label class="form-label">Identity Paper Number</label>
-                          <input required id="phoneNumber" class="form-control shadow" type="text" placeholder="Enter your Identity Paper Number"
+                          <input required id="cin" [(ngModel)]="cinNumber" class="form-control shadow" type="text" placeholder="Enter your Identity Paper Number"
                            name="Identity_paper_number">
                         </div>
                         <div style="padding-top: 20px ;padding-bottom: 20px;">
@@ -217,68 +218,28 @@
                               <th scope="col">Identity_paper_number</th>
                             </tr>
                           </thead>
-                          <tbody id="excel-table">
+                          <tbody id="excel-table" *ngIf="beneficiaries != null">
                            <!--tr
                               *ngFor="let item of listData">
                               <input type="radio" name="choice" />
                               <th>&nbsp; {{ item.firstName }} &nbsp;&nbsp;</th>
                               <th>&nbsp; {{ item.lastName }}</th>
                               <th>&nbsp; {{ item.phoneNumber}}</th-->
-                                <tr>
+                                <tr *ngFor="let beneficiary in beneficiaries">
                                   <th scope="row"><input type="checkbox" name="choice1" /></th>
-                                  <td>Sara</td>
-                                  <td>Chakir</td>
-                                  <td>765433</td>
+                                  <td>{{beneficiary.firstName}}</td>
+                                  <td>{{beneficiary.lastName}}</td>
+                                  <td>{{beneficiary.phoneNumber}}</td>
                                   <td>              <input type="text" ngModel name="amount" class="form-control" id="firstName" placeholder="enter Amount" required disabled="true">
                                   </td>
 
-                                  <td>PA123456</td>
+                                  <td>{{beneficiary.cin}}</td>
                                 </tr>
-                                <tr>
-                                  <th scope="row"><input type="checkbox" name="choice2" /></th>
-                                  <td>Yassmin</td>
-                                  <td>Kardad</td>
-                                  <td>948774</td>
-                                  <td>              <input type="text" ngModel name="amount" class="form-control" id="firstName" placeholder="enter Amount" required disabled="true">
-                                  </td>
-                                  <td>DA123456</td>
-                                </tr>
-                                <tr>
-                                  <th scope="row"><input type="checkbox" name="choice3" /></th>
-                                  <td>Frederec</td>
-                                  <td>Faya</td>
-                                  <td>765439483</td>
-                                  <td>              <input type="text" ngModel name="amount" class="form-control" id="firstName" placeholder="enter Amount" required disabled="true">
-                                  </td>
-                                  <td>FA123456</td>
-                                </tr>
-                                <tr>
-                                  <th scope="row"><input type="checkbox" name="choice4" /></th>
-                                  <td>Soukaina</td>
-                                  <td>El Abbasy</td>
-                                  <td>765439483</td>
-                                  <td>              <input type="text" ngModel name="amount" class="form-control" id="firstName" placeholder="enter Amount" required disabled="true">
-                                  </td>
-                                  <td>FA123456</td>
-                                </tr>
-                                <tr>
-                                  <th scope="row"><input type="checkbox" name="choice5" /></th>
-                                  <td>Hamza</td>
-                                  <td>Nassour</td>
-                                  <td>765439483</td>
-                                  <td>              <input type="text" ngModel name="amount" class="form-control" id="firstName" placeholder="enter Amount" required disabled="true">
-                                  </td>
-                                  <td>FA123456</td>
-                                </tr>
-                                <tr>
-                                  <th scope="row"><input type="checkbox" name="choice6" /></th>
-                                  <td>AbdelMounaim</td>
-                                  <td>El Moussaddar</td>
-                                  <td>765439483</td>
-                                  <td>              <input type="text" ngModel name="amount" class="form-control" id="firstName" placeholder="enter Amount" required disabled="true">
-                                  </td>
-                                  <td>FA123456</td>
-                                </tr>
+                               
+                               
+                               
+                                
+                               
                               <!--th>&nbsp; <button class="btn btn-danger">Delete</button></th-->
                           </tbody>
                         </table>
@@ -335,15 +296,15 @@
           <form #addForm="ngForm" (ngSubmit)="onAddClient()">
             <div class="form-group">
               <label for="firstName">First Name</label>
-              <input type="text" ngModel name="firstName" class="form-control" id="firstName" placeholder="firstName" required>
+              <input type="text" [(ngModel)]="newBeneficiairy.firstName" name="firstName" value="newBeneficiairy.firstName" class="form-control" id="firstName" placeholder="firstName" required>
             </div>
             <div class="form-group">
               <label for="lastName">Last Name</label>
-              <input type="text" ngModel name="lastName" class="form-control" id="lastName" placeholder="lastName" required>
+              <input type="text" [(ngModel)]="newBeneficiairy.lastName" name="lastName" class="form-control" id="lastName" placeholder="lastName" required>
             </div>
             <div class="form-group">
               <label for="phoneNumber">Phone</label>
-              <input type="text" ngModel name="phoneNumber" class="form-control" id="phoneNumber" placeholder="phoneNumber" required>
+              <input type="text"  [(ngModel)]="newBeneficiairy.phoneNumber" name="phoneNumber" class="form-control" id="phoneNumber" placeholder="phoneNumber" required>
             </div>
             
           </form>

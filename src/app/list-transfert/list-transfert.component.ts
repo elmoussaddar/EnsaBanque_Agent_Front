@@ -1,7 +1,7 @@
-import { MTransfer } from './../Models/MTransfer';
+import { ClientServicesService } from './../_services/client-services.service';
+import { MTransferResponseObject } from './../ResponseEntities/MTransferResponseObject';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { TokenStorageService } from '../_services/token-storage.service';
 
 @Component({
   selector: 'app-list-transfert',
@@ -10,16 +10,29 @@ import { TokenStorageService } from '../_services/token-storage.service';
 })
 export class ListTransfertComponent implements OnInit {
 
-  transfert:MTransfer= new MTransfer();
-  constructor(private router: Router, private tokenStorage:TokenStorageService) {}
+  transferts:MTransferResponseObject[]=[] ;
+  constructor(private router: Router, private services : ClientServicesService) {}
   ngOnInit(): void {
+
+    this.services.getListTransferts().subscribe(response=>{
+      this.transferts = response;
+    })
 
      
     }
 
-    ViewDetailsClicked(idTransfert:Number){
+    ViewDetailsClicked(transfertId:Number){
 
-      this.router.navigate(['clientHome/transfertDetails']);
+      let transfertObject : MTransferResponseObject | undefined = this.transferts.find(transfert=>transfert.transfers[0].id == transfertId );
+
+      if( transfertObject != null && transfertObject != undefined){
+        this.router.navigate(['clientHome/transfertDetails'],{
+          queryParams:{
+            object: JSON.stringify(transfertObject),
+          }
+        });
+      }
+      
       console.log("clicked");
     }
 

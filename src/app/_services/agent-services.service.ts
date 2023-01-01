@@ -39,11 +39,4 @@ export class AgentServicesService {
   }
   
  
- 
-
-  public getListTransferts():Observable<MTransfer[]>{
-
-    return this.http.get<MTransfer[]>("jsjmskmss");
-
-  }
 }

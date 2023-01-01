@@ -21,7 +21,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-xs-12 col-sm-4">
-                        <div class="card">
+                        <div class="card" *ngFor="let transfer in transferts; index as i">
                          
                             <div class="card-content">
                                 <h4 class="card-title">
@@ -29,17 +29,17 @@
                                   </a>
                                 </h4>
                                 <p class="">
-                                 <span class="labelText">Ref :</span> <span class="text-primary fw-bold"> {{transfert.transfers[0]?.transferReference}}</span>
+                                 <span class="labelText">Ref :</span> <span class="text-primary fw-bold"> {{transfer.transfers[0]?.transferReference}}</span>
                                 </p>
                                 <p class="">
-                                    <span class="labelText">  Etat : </span> <span class="text-primary fw-bold"> {{transfert.transfers[0]?.status}}</span>
+                                    <span class="labelText">  Etat : </span> <span class="text-primary fw-bold"> {{transfer.transfers[0]?.status}}</span>
                                   </p>
                                   <p class="">
-                                    <span class="labelText">  Beneficiere : </span> <span class="text-primary fw-bold">{{transfert.transfers[0]?.receiverFirstName}} {{transfert.transfers[0].receiverLastName}} </span>
+                                    <span class="labelText">  Beneficiere : </span> <span class="text-primary fw-bold">{{transfer.transfers[0]?.receiverFirstName}} {{transfer.transfers[0].receiverLastName}} </span>
                                   </p>
                             </div>
                             <div class="card-read-more">
-                                <a  class="btn btn-link btn-block" (click)="ViewDetailsClicked(transfert.transfers[0].id)">
+                                <a  class="btn btn-link btn-block" (click)="ViewDetailsClicked(transfer.transfers[0].id)">
                                     View Transfert Details
                                 </a>
                             </div>
