@@ -1,9 +1,9 @@
+import { agentResponseObject } from './../ResponseEntities/agentResponseObject';
 import { clientResponseObject } from './../ResponseEntities/clientResponseObject';
 import { AgentServicesService } from './../_services/agent-services.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Client } from '../Models/client';
-import { agentResponseObject } from '../ResponseEntities/agentResponseObject';
 import { ClientServicesService } from '../_services/client-services.service';
 import { Account } from '../Models/Account';
 import { AccountStatus } from '../enum/AccountStatus';
@@ -15,134 +15,20 @@ import { AccountStatus } from '../enum/AccountStatus';
 })
 export class ListAgentsComponent implements OnInit {
 
-  public updateClient: agentResponseObject | undefined;
+  public updateClient: agentResponseObject = new agentResponseObject();
   public deleteClient: agentResponseObject = new agentResponseObject();
   public clientChoosed : agentResponseObject = new agentResponseObject();
-  public clients: agentResponseObject[] = /* [] */ [
- 
-    {
-      firstName : "FAYA",
-      lastName : "Frederic",
-      password : "dqfberbreqg",
-      birthday : new Date("27-06-2001"),
-      email : "fredericfaya@gmail.com",
-      phoneNumber : "0638743853",
-      address : "some where some where",
-      city : "Marrakech",
-      zip_code : 40000,
-      cinNumber : "EB2912??",
-      identity_paper_type : "Passeport",
-      gender : "Male",
-      id : 0,
-      username : "fred001",
-      country : "Morroco",
-      accounts :[
-{accountNumber:"27232424",
-balance:10000,
-status: AccountStatus.ACTIVATED,
-id:12,}
-      ] as Array<Account>,
-
-    },
-    {
-      firstName : "faya",
-      lastName : "fred",
-      password : "dqfberbreqg",
-      birthday : new Date("27-06-2001"),
-      email : "fredericfaya@gmail.com",
-      phoneNumber : "0638743853",
-      address : "some where some where",
-      city : "Marrakech",
-      zip_code : 40000,
-      cinNumber : "EB2912??",
-      identity_paper_type : "Passeport",
-      gender : "Male",
-      id : 0,
-      username : "fred001",
-      country : "Morroco",
-      accounts :[
-        {accountNumber:"27232424",
-        balance:10000,
-        status: AccountStatus.ACTIVATED,
-        id:12,}
-              ] as Array<Account>,
-    },
-    {
-      firstName : "faya",
-      lastName : "fred",
-      password : "dqfberbreqg",
-      birthday : new Date("27-06-2001"),
-      email : "fredericfaya@gmail.com",
-      phoneNumber : "0638743853",
-      address : "some where some where",
-      city : "Marrakech",
-      zip_code : 40000,
-      cinNumber : "EB2912??",
-      identity_paper_type : "Passeport",
-      gender : "Male",
-      id : 0,
-      username : "fred001",
-      country : "Morroco",
-      accounts :[
-        {accountNumber:"27232424",
-        balance:10000,
-        status: AccountStatus.ACTIVATED,
-        id:12,}
-              ] as Array<Account>,
-    },
-    {
-      firstName : "faya",
-      lastName : "fred",
-      password : "dqfberbreqg",
-      birthday : new Date("27-06-2001"),
-      email : "fredericfaya@gmail.com",
-      phoneNumber : "0638743853",
-      address : "some where some where",
-      city : "Marrakech",
-      zip_code : 40000,
-      cinNumber : "EB2912??",
-      identity_paper_type : "Passeport",
-      gender : "Male",
-      id : 0,
-      username : "fred001",
-      country : "Morroco",
-      accounts :[
-        {accountNumber:"27232424",
-        balance:10000,
-        status: AccountStatus.ACTIVATED,
-        id:12,}
-              ] as Array<Account>,    },
-    {
-      firstName : "faya",
-      lastName : "fred",
-      password : "dqfberbreqg",
-      birthday : new Date("27-06-2001"),
-      email : "fredericfaya@gmail.com",
-      phoneNumber : "0638743853",
-      address : "some where some where",
-      city : "Marrakech",
-      zip_code : 40000,
-      cinNumber : "EB2912??",
-      identity_paper_type : "Passeport",
-      gender : "Male",
-      id : 0,
-      username : "fred001",
-      country : "Morroco",
-      accounts :[
-        {accountNumber:"27232424",
-        balance:10000,
-        status: AccountStatus.ACTIVATED,
-        id:12,}
-              ] as Array<Account>,
-    }
-  ];
+  public agents: agentResponseObject[] ;
+    
+  
 
   constructor(private agentService : AgentServicesService) { }
 
-  public getClients() : void{
+  public getAgents() : void{
     this.agentService.getAgents().subscribe(
       (response : agentResponseObject[]) => {
-        this.clients = response;
+        this.agents = response;
+        console.log(response);
       },
       (error : HttpErrorResponse)=>{
         alert(error.message);
@@ -150,31 +36,57 @@ id:12,}
     )
   }
 
-  public onUpdateClient(agent : agentResponseObject): void {
-    this.agentService.updateAgent(agent).subscribe(
-      (response: Client) => {
+  public onUpdateAgent(agent : agentResponseObject): void {
+
+    console.log(agent);
+
+    this.updateClient = {
+      address:agent.address,
+      agentAccounts: this.updateClient.agentAccounts,
+      birthday:agent.birthday,
+      cinNumber:agent.cinNumber,
+      city:agent.city,
+      country:agent.country,
+      firstName:agent.firstName,
+      lastName:agent.lastName,
+      email:agent.email,
+      gender:agent.gender,
+      identity_paper_type:agent.identity_paper_type,
+      id:this.updateClient.id,
+      zip_code:agent.zip_code,
+      phoneNumber:agent.phoneNumber,
+      userName:agent.userName,
+      password: this.updateClient.password
+
+    }
+
+    console.log(this.updateClient);
+    this.agentService.updateAgent(this.updateClient).subscribe(
+      (response) => {
         console.log(response);
-        this.getClients();
+        this.getAgents();
       },
       (error: HttpErrorResponse) => {
         alert(error.message);
       }
     );
+
+    
   }
 
 
-  public searchClient(key: string): void {
+  public searchAgent(key: string): void {
     const results: agentResponseObject[] = [];
-    for (const client of this.clients) {
-      if (client.username.toLowerCase().indexOf(key.toLowerCase()) !== -1
-      || client.email.toLowerCase().indexOf(key.toLowerCase()) !== -1
-      || client.phoneNumber.toLowerCase().indexOf(key.toLowerCase()) !== -1) {
-        results.push(client);
+    for (const agent of this.agents) {
+      if (agent.userName.toLowerCase().indexOf(key.toLowerCase()) !== -1
+      || agent.email.toLowerCase().indexOf(key.toLowerCase()) !== -1
+      || agent.phoneNumber.toLowerCase().indexOf(key.toLowerCase()) !== -1) {
+        results.push(agent);
       }
     }
-    this.clients = results;
+    this.agents = results;
     if (results.length === 0 || !key) {
-      this.getClients();
+      this.getAgents();
     }
   }
 
@@ -201,7 +113,7 @@ id:12,}
   }
 
   ngOnInit(): void {
-    this.getClients();
+    this.getAgents();
   }
 
 }

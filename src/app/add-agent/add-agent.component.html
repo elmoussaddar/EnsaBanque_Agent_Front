@@ -22,7 +22,7 @@
                     <div class="col-md-6">
                         <label for="username" class="form-label">Username</label>
                         <input required id="username" class="form-control shadow" type="text" placeholder="Enter username"
-                        [(ngModel)] = 'agent.username' name="username">
+                        [(ngModel)] = 'agent.userName' name="username">
                       </div>
                       <div class="col-md-6">
                         <label for="password" class="form-label">Password</label>
@@ -51,8 +51,8 @@
                   <div class="col-md-6">
                     <label class="form-label">Gender</label>
                     <select [(ngModel)]='agent.gender' name="dropdownOption" id="dropdownOption" class='form-control'>
-                      <option value="1">Male</option>
-                      <option value="2">Female</option>
+                      <option value="Male">Male</option>
+                      <option value="Female">Female</option>
                       </select>
                   </div>
                 </div>
@@ -80,9 +80,9 @@
                   <div class="col-md-6" style="padding-top: 15px;">
                     <label for="identity_paper_type" class="form-label">Identity Paper Type</label>
                     <select [(ngModel)]='agent.identity_paper_type' name="dropdownOption" id="dropdownOption" class='form-control'>
-                    <option value="1">C.I.N</option>
-                    <option value="2">Passport</option>
-                    <option value="3">Driver License</option>
+                    <option value="CIN">C.I.N</option>
+                    <option value="Passport">Passport</option>
+                    <option value="Driver_License">Driver License</option>
                     </select>
                 </div>
                 <div class="col-md-6" style="padding-top: 15px;">
@@ -91,13 +91,7 @@
                      name="Identity_paper_number" [(ngModel)] = 'agent.cinNumber' name="Identity_paper_number">
                   </div>
                 </div>
-                <div class="row mb-1">
-                    <div style="padding-top: 15px;">
-                      <label for="balance" class="form-label">Initial Balance</label>
-                      <input required id="balance" class="form-control shadow" type="number" placeholder="Enter balance"
-                      [(ngModel)] = 'agent.accounts[0].balance' name="balance">
-                    </div>
-                  </div>
+    
                 <div style="padding-top: 40px;padding-bottom: 15px;">
                   <button type="submit" class="btn btn-primary" >Create</button>
                 </div>

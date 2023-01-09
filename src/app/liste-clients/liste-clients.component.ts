@@ -1,5 +1,7 @@
+import { Observable, Subscription } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import Swal from 'sweetalert2';
 import { Client } from '../Models/client';
 import { clientResponseObject } from '../ResponseEntities/clientResponseObject';
 import { ClientServicesService } from '../_services/client-services.service';
@@ -10,119 +12,67 @@ import { ClientServicesService } from '../_services/client-services.service';
   styleUrls: ['./liste-clients.component.css']
 })
 export class ListeClientsComponent implements OnInit {
-  public updateClient: clientResponseObject | undefined;
+  public updateClient: clientResponseObject = new clientResponseObject();
   public deleteClient: clientResponseObject = new clientResponseObject();
   public clientChoosed : clientResponseObject = new clientResponseObject();
-  public clients: clientResponseObject[] = /* [] */ [
- 
-    {
-      firstName : "FAYA",
-      lastName : "Frederic",
-      password : "dqfberbreqg",
-      birthday : new Date("27-06-2001"),
-      email : "fredericfaya@gmail.com",
-      phoneNumber : "0638743853",
-      address : "some where some where",
-      city : "Marrakech",
-      zip_code : 40000,
-      cinNumber : "EB2912??",
-      identity_paper_type : "Passeport",
-      gender : "Male",
-      id : 0,
-      username : "fred001",
-      country : "Morroco",
-      accounts :[],
-      beneficiaries:null,
-      maxTransferAmountPerYear:20000
-    },
-    {
-      firstName : "faya",
-      lastName : "fred",
-      password : "dqfberbreqg",
-      birthday : new Date("27-06-2001"),
-      email : "fredericfaya@gmail.com",
-      phoneNumber : "0638743853",
-      address : "some where some where",
-      city : "Marrakech",
-      zip_code : 40000,
-      cinNumber : "EB2912??",
-      identity_paper_type : "Passeport",
-      gender : "Male",
-      id : 0,
-      username : "fred001",
-      country : "Morroco",
-      accounts:[],
-      beneficiaries:null,
-      maxTransferAmountPerYear:20000
-    },
-    {
-      firstName : "faya",
-      lastName : "fred",
-      password : "dqfberbreqg",
-      birthday : new Date("27-06-2001"),
-      email : "fredericfaya@gmail.com",
-      phoneNumber : "0638743853",
-      address : "some where some where",
-      city : "Marrakech",
-      zip_code : 40000,
-      cinNumber : "EB2912??",
-      identity_paper_type : "Passeport",
-      gender : "Male",
-      id : 0,
-      username : "fred001",
-      country : "Morroco",
-      accounts:[],
-      beneficiaries:null,
-      maxTransferAmountPerYear:20000
-
-    },
-    {
-      firstName : "faya",
-      lastName : "fred",
-      password : "dqfberbreqg",
-      birthday : new Date("27-06-2001"),
-      email : "fredericfaya@gmail.com",
-      phoneNumber : "0638743853",
-      address : "some where some where",
-      city : "Marrakech",
-      zip_code : 40000,
-      cinNumber : "EB2912??",
-      identity_paper_type : "Passeport",
-      gender : "Male",
-      id : 0,
-      username : "fred001",
-      country : "Morroco",
-      accounts:[],
-      beneficiaries:null,
-      maxTransferAmountPerYear:20000
-
-    },
- 
-  ];
+  public clients: clientResponseObject[];
 
   constructor(private clientService : ClientServicesService) { }
 
-  public getClients() : void{
-    this.clientService.getClients().subscribe(
-      (response : clientResponseObject[]) => {
-        this.clients = response;
-      },
-      (error : HttpErrorResponse)=>{
-        alert(error.message);
-      }
-    )
+  public  getClients(){
+   return  this.clientService.getClients().subscribe(
+     (response: clientResponseObject[]) => {
+       this.clients = response;
+     },
+     (error: HttpErrorResponse) => {
+       alert(error.message);
+     }
+   )
   }
 
-  public onUpdateClient(client : clientResponseObject): void {
-    this.clientService.updateClient(client).subscribe(
-      (response: Client) => {
+  public onUpdateClient(client : any): void {
+
+    console.log(client);
+
+    this.updateClient = {
+      address:client.address,
+      beneficiaries : this.updateClient.beneficiaries,
+      accounts: this.updateClient.accounts,
+      birthday:client.birthday,
+      cinNumber:client.cinNumber,
+      city:client.city,
+      country:client.country,
+      firstName:client.firstName,
+      lastName:client.lastName,
+      email:client.email,
+      gender:client.gender,
+      identity_paper_type:client.identity_paper_type,
+      id:this.updateClient.id,
+      zip_code:client.zip_code,
+      phoneNumber:client.phoneNumber,
+      password:this.updateClient.password,
+      maxTransferAmountPerYear:this.updateClient.maxTransferAmountPerYear,
+      userName:client.userName,
+
+
+    }
+
+    console.log(this.updateClient);
+    this.clientService.updateClient( this.updateClient).subscribe(
+      (response: clientResponseObject) => {
         console.log(response);
-        this.getClients();
+        Swal.fire(" Client information has been updated", "operation is successful",'success' ).then(() =>{
+          this.getClients();
+
+          location.reload();
+        });
       },
       (error: HttpErrorResponse) => {
-        alert(error.message);
+        Swal.fire(" the registration process encountred an error ", error.message,'error' ).then(()=>{
+        });      
       }
     );
+    
   }
 
  
@@ -130,7 +80,7 @@ export class ListeClientsComponent implements OnInit {
   public searchClient(key: string): void {
     const results: clientResponseObject[] = [];
     for (const client of this.clients) {
-      if (client.username.toLowerCase().indexOf(key.toLowerCase()) !== -1
+      if (client.userName.toLowerCase().indexOf(key.toLowerCase()) !== -1
       || client.email.toLowerCase().indexOf(key.toLowerCase()) !== -1
       || client.phoneNumber.toLowerCase().indexOf(key.toLowerCase()) !== -1) {
         results.push(client);
@@ -150,16 +100,14 @@ export class ListeClientsComponent implements OnInit {
     button.setAttribute('data-bs-toggle', 'modal');
     if (mode === 'infos') {
       this.clientChoosed = client;
+      console.log(this.clientChoosed);
       button.setAttribute('data-bs-target', '#infosClientModal');
     }
     if (mode === 'update') {
       this.updateClient = client;
       button.setAttribute('data-bs-target', '#updateClientModal');
     }
-    if (mode === 'delete') {
-      this.deleteClient = client;
-      button.setAttribute('data-bs-target', '#deleteClientModal');
-    }
+   
     container?.appendChild(button);
     button.click();
   }

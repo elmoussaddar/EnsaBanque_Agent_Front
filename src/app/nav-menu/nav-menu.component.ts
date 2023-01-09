@@ -36,5 +36,6 @@ export class NavMenuComponent implements OnInit {
     onLogout() {
 
          this.keycloakAngular.logout();  
+
     }
 }

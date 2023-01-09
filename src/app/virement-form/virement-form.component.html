@@ -136,6 +136,13 @@
                                 <input required id="Identity_paper_number" class="form-control shadow" type="text" placeholder="Enter your Identity Paper Number"
                                  name="Identity_paper_number" [(ngModel)]='client.cinNumber' name="Identity_paper_number" [disabled]="clientDataAvailbale">
                               </div>
+
+                              <div class="col-md-6" style="padding-top: 15px;">
+                                <label class="form-label">Montant de Transfert</label>
+                                <input required id="MontantTransfert" class="form-control shadow" type="text" placeholder="Enter the amount for the the transfert"
+                                 name="MontantTransfert" [(ngModel)]='montantTransfert' >
+                              </div>
+
                             </div>
                             <div style="padding-top: 20px ;" *ngIf="!clientDataAvailbale">
                               <button type="submit" class="btn btn-primary" (click)="addProspectClientClicked()">Add Prospect Client</button>
@@ -230,8 +237,7 @@
                                   <td>{{beneficiary.firstName}}</td>
                                   <td>{{beneficiary.lastName}}</td>
                                   <td>{{beneficiary.phoneNumber}}</td>
-                                  <td>              <input type="text" ngModel name="amount" class="form-control" id="firstName" placeholder="enter Amount" required disabled="true">
-                                  </td>
+                                 
 
                                   <td>{{beneficiary.cin}}</td>
                                 </tr>

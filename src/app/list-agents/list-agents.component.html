@@ -3,13 +3,13 @@
         All Agents list
         <div class="float-end">
             <div class="input-group">
-                <input type="search" class="form-control" (ngModelChange) = "searchClient(key.value)" #key="ngModel" ngModel
+                <input type="search" class="form-control" (ngModelChange) = "searchAgent(key.value)" #key="ngModel" ngModel
                 name="key" placeholder="rechercher">
             </div>
         </div>
     </div>
     <div class="row row-cols-1 row-cols-md-3 g-4 d-flex justify-content-around">
-        <div class="col-md-3 card text-center border shadow mx-2" *ngFor="let client of clients">
+        <div class="col-md-3 card text-center border shadow mx-2" *ngFor="let client of agents">
             <div class="card-header">
                 <img src="./assets/user.png" class="img-fluid profile-image" width="100" style="margin: auto; border-radius: 50%;">
 
@@ -18,7 +18,7 @@
             <div class="card-title">
                 <div class="d-flex justify-content-between">
                     <div class=" mb-3 p-2 rounded-pill float-start" style = "background-color: #1FD1FD; color : #fff;">username</div>
-                    <span class="fw-bold ms-5">{{client.username}}</span>
+                    <span class="fw-bold ms-5">{{client.userName}}</span>
                 </div>
                 <div class="d-flex justify-content-between">
                     <div class=" mb-3 p-2 rounded-pill float-start" style = "background-color: #1FD1FD; color : #fff;">First Name</div>
@@ -44,7 +44,7 @@
         <div class="modal-dialog" role="document">
              <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="infosClientModalLabel">Informations on Client  {{clientChoosed.username}}</h5>
+                    <h5 class="modal-title" id="infosClientModalLabel">Informations on Client  {{clientChoosed.userName}}</h5>
                     <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -107,7 +107,7 @@
                                 </div><hr>
                                 <div class="d-flex justify-content-between">
                                     <div class=" mb-3 p-2 rounded-pill" style = "width : 40%;background-color: #1FD1FD; color : #fff;">Username</div>
-                                    <span class="fw-bold ms-5">{{clientChoosed.username}}</span>
+                                    <span class="fw-bold ms-5">{{clientChoosed.userName}}</span>
                                 </div><hr>
                                 <div class="d-flex justify-content-between">
                                     <div class=" mb-3 p-2 rounded-pill" style = "width : 40%;background-color: #1FD1FD; color : #fff;">Password</div>
@@ -115,7 +115,7 @@
                                 </div><hr>
                                 <div class="d-flex justify-content-between">
                                     <div class=" mb-3 p-2 rounded-pill" style = "width : 40%;background-color: #1FD1FD; color : #fff;">Wallet Balance</div>
-                                    <span class="fw-bold ms-5">{{clientChoosed.accounts[0].balance}}</span>
+                                    <span class="fw-bold ms-5">{{clientChoosed.agentAccounts[0]?.balance}}</span>
                                 </div><hr>
                                 <div class="modal-footer">
                                     <button type="button" id="" data-bs-dismiss="modal" class="btn btn-secondary">Fermer</button>
@@ -132,7 +132,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                <div class="modal-header">
-                  <h5 class="modal-title" id="updateClientModalLabel">Modifier Client {{updateClient?.username}}</h5>
+                  <h5 class="modal-title" id="updateClientModalLabel">Modifier Client {{updateClient?.userName}}</h5>
                   <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                   </button>
@@ -145,18 +145,18 @@
                      </div>
                      <div class="form-group">
                         <label for="name">Gender</label>
-                        <select ngModel="{{updateClient?.firstName}}" name="gender" id="dropdownOption" class='form-control'>
-                            <option value="1">Male</option>
-                            <option value="2">Female</option>
+                        <select ngModel="{{updateClient?.gender}}" name="gender" id="dropdownOption" class='form-control'>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
                         </select>
                     </div>
                      <div class="form-group">
                         <label for="name">First Name</label>
-                        <input type="text" ngModel="{{updateClient?.firstName}}" name="username" class="form-control" id="name" aria-describedby="emailHelp" placeholder="username">
+                        <input type="text" ngModel="{{updateClient?.firstName}}" name="firstName" class="form-control" id="name" aria-describedby="emailHelp" placeholder="First Name">
                      </div>
                      <div class="form-group">
                         <label for="name">Last Name</label>
-                        <input type="text" ngModel="{{updateClient?.lastName}}" name="first_name" class="form-control" id="name" aria-describedby="emailHelp" placeholder="first_name">
+                        <input type="text" ngModel="{{updateClient?.lastName}}" name="lastName" class="form-control" id="name" aria-describedby="emailHelp" placeholder="Last Name">
                      </div>
                      <div class="form-group">
                         <label for="name">Birthday</label>
@@ -176,51 +176,48 @@
                      </div>
                      <div class="form-group">
                         <label for="name">Zip Code</label>
-                        <input type="text" ngModel="{{updateClient?.zip_code}}" name="zipCode" class="form-control" id="name" aria-describedby="emailHelp" placeholder="address">
+                        <input type="text" ngModel="{{updateClient?.zip_code}}" name="zipCode" class="form-control" id="name" aria-describedby="emailHelp" placeholder="zipCode">
                      </div>
                      <div class="form-group">
                         <label for="name">City</label>
-                        <input type="text" ngModel="{{updateClient?.city}}" name="city" class="form-control" id="name" aria-describedby="emailHelp" placeholder="address">
+                        <input type="text" ngModel="{{updateClient?.city}}" name="city" class="form-control" id="name" aria-describedby="emailHelp" placeholder="city">
                      </div>
                      <div class="form-group">
                         <label for="name">Country</label>
-                        <input type="text" ngModel="{{updateClient?.country}}" name="country" class="form-control" id="name" aria-describedby="emailHelp" placeholder="address">
+                        <input type="text" ngModel="{{updateClient?.country}}" name="country" class="form-control" id="name" aria-describedby="emailHelp" placeholder="country">
                      </div>
                      <div class="form-group">
                         <label for="name">Identity Paper Type</label>
                         <select ngModel="{{updateClient?.identity_paper_type}}" name="identity_paper_type" id="dropdownOption" class='form-control'>
-                            <option value="1">C.I.N</option>
-                            <option value="2">Passport</option>
-                            <option value="3">Driver License</option>
+                            <option value="CIN">C.I.N</option>
+                            <option value="Passport">Passport</option>
+                            <option value="Driver_License">Driver License</option>
                             </select>
                     </div>
                      <div class="form-group">
                         <label for="name">Identity Paper Number</label>
-                        <input type="text" ngModel="{{updateClient?.cinNumber}}" name="identity_paper_number" class="form-control" id="name" aria-describedby="emailHelp" placeholder="numero carte bancaire">
+                        <input type="text" ngModel="{{updateClient?.cinNumber}}" name="cinNumber" class="form-control" id="name" aria-describedby="emailHelp" placeholder="CIN Number">
                      </div>
                      <div class="form-group">
                         <label for="name">Username</label>
-                        <input type="text" ngModel="{{updateClient?.username}}" name="password" class="form-control" id="name" aria-describedby="emailHelp" placeholder="password">
+                        <input type="text" ngModel="{{updateClient?.userName}}" name="userName" class="form-control" id="name" aria-describedby="emailHelp" placeholder="username">
                      </div>
-                     <div class="form-group">
-                        <label for="name">Password</label>
-                        <input type="text" ngModel="{{updateClient?.password}}" name="password" class="form-control" id="name" aria-describedby="emailHelp" placeholder="password">
-                     </div>
+                    
                      <div class="form-group">
                         <label for="name">Account Balance</label>
-                        <input type="number" ngModel="" name="balance" class="form-control" id="name" aria-describedby="emailHelp" placeholder="password">
+                        <input type="number" ngModel={{updateClient.agentAccounts[0]?.balance}} name="balance" class="form-control" id="name" aria-describedby="emailHelp" placeholder="balance">
                      </div>
                      
                      <div class="modal-footer">
                         <button type="button" id="" data-bs-dismiss="modal" class="btn btn-secondary">Fermer</button>
-                        <button (click)="onUpdateClient(editForm.value)" data-bs-dismiss="modal" class="btn btn-primary" >Enregistrer</button>
+                        <button (click)="onUpdateAgent(editForm.value)" data-bs-dismiss="modal" class="btn btn-primary" >Enregistrer</button>
                      </div>
                   </form>
                </div>
             </div>
          </div>
     </div>
-    <div *ngIf="clients?.length == 0" class="col-lg-12 col-md-12 col-xl-12 mt-5">
+    <div *ngIf="agents?.length == 0" class="col-lg-12 col-md-12 col-xl-12 mt-5">
         <div class="alert alert-info text-center" role="alert">
             <h4 class="alert-heading">AUCUN CLIENTS!</h4>
             <p>Aucun Client n'a été trouvé</p>
@@ -238,7 +235,7 @@
               </button>
            </div>
            <div class="modal-body">
-              <p>Etes vous sûr de vouloir supprier le client  {{deleteClient.username}} ?</p>
+              <p>Etes vous sûr de vouloir supprier le client  {{deleteClient.userName}} ?</p>
               <div class="modal-footer">
                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
                  <button   class="btn btn-danger" data-bs-dismiss="modal">Yes</button>

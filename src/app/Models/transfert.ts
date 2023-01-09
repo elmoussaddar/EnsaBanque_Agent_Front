@@ -31,7 +31,6 @@ export class Transfert {
 
   public   JDeblocage : Date | null ;
 
-  public Amount: Number = new Number() ; // transfer amount
   public transferCost : Number=50;
 
   public finalAmountOperation : Number = new Number();

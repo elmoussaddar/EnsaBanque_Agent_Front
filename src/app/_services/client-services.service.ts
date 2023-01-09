@@ -22,7 +22,9 @@ private apiServerURL = environment.apiBaseURL;
 
    httpOptions = {
     headers: new HttpHeaders({
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      'No-Auth': 'True'
+
     })
   };
 
@@ -40,10 +42,20 @@ public getClientByCIN(CIN : String) : Observable<clientResponseObject>{
   return this.http.get<clientResponseObject>(`https://client-service-01.herokuapp.com/api/v0/client_service_api/clients/${CIN}?cin`,this.httpOptions);
 }
 
+public getClientByEmail(email : string | null) : Observable<clientResponseObject>{
+  return this.http.get<clientResponseObject>(`https://client-service-01.herokuapp.com/api/v0/client_service_api/clients/${email}?cin`,this.httpOptions);
+}
+
+ public getClientByAccountNumber(accountNumber: string): Observable<clientResponseObject>{
+  return this.http.get<clientResponseObject>(`https://client-`);
+
+}
 
 
-public addClient(client : Client) : Observable<Client>{
-  return this.http.post<Client>("https://client-service-01.herokuapp.com/api/v0/client_service_api/clients",client);
+
+public addClient(client : Client) : Observable<clientResponseObject>{
+  client.birthday = client.birthday?.toString();
+  return this.http.post<clientResponseObject>("https://client-service-01.herokuapp.com/api/v0/client_service_api/clients",client,this.httpOptions);
 }
 
 public updateClient(client : clientResponseObject) : Observable<clientResponseObject>{
@@ -55,9 +67,9 @@ public saveAccount(id:number, balence: number):Observable<Client>{
   return this.http.post<Client>(`http://localhost:8090/account/${id}`,balence);
 }
 
-public getTransfertInfo(transfertRef : string):Observable<transfertResponseObject>{
+public getTransfertInfo(transfertRef : string):Observable<MTransferResponseObject>{
 
-  return this.http.get<transfertResponseObject>(`https://transfert-service-1.herokuapp.com/api/v0/transfer_service_api/UTransfer/${transfertRef}`,this.httpOptions);
+  return this.http.get<MTransferResponseObject>(`https://transfert-service-01.herokuapp.com/api/v0/transfer_service_api/UTransfer/${transfertRef}`);
 }
 
 
@@ -87,18 +99,23 @@ public updateTransfert(transfertObject:MTransferResponseObject):Observable<MTran
 
 }
 
-public getListTransferts():Observable<MTransferResponseObject[]>{
+public getListTransferts(): Observable<MTransferResponseObject[]>{
 
-  return this.http.get<MTransferResponseObject[]>("jsjmskmss");
+  return this.http.get<MTransferResponseObject[]>("https://transfert-service-01.herokuapp.com/api/v0/transfer_service/mTransfer/all");
 
 }
 
 public sendOTP(clientPhoneNumber : String) :Observable<any>{
-  return this.http.post("hshss",{clientPhoneNumber});
+  return this.http.post(`https://agent-service-01.herokuapp.com/api/v0/agent_service/agent/sendOTP?phone=${clientPhoneNumber}`,this.httpOptions);
 }
 
 public verifyOTP(clientPhoneNumber : String,codeOTP:Number) :Observable<Boolean>{
-  return this.http.post<Boolean>("hshss",{clientPhoneNumber});
+  return this.http.post<Boolean>(`https://agent-service-01.herokuapp.com/api/v0/agent_service/agent/verifyOTP?phone=${clientPhoneNumber}&otp=${codeOTP}`,this.httpOptions);
+}
+
+public serveTransfert(){
+  console.log("transfert served");
+
 }
 
 }

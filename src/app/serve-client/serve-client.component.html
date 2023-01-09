@@ -19,7 +19,7 @@
                   <div>
                     <label for="firstName" class="form-label">Transfer reference</label>
                     <input [disabled]="payment_done" required id="username" class="form-control shadow" type="text" placeholder="Enter the Transfer reference"
-                    [(ngModel)] = 'client.firstName' name="firstName">
+                    [(ngModel)] = 'transfertRef' name="firstName">
                   </div>
                   
                     <div style="padding-top: 40px ; padding-bottom: 25px;">
@@ -32,27 +32,27 @@
                 <div class="row mb-1" style="display: flex; justify-content: center;">
                     <div style="display: flex; justify-content: space-around;">
                         <label for="firstName" class="form-label" style="font-weight: bold;">Agent ID</label>
-                        <span style="color: #3286E6; font-size: 20px;">Agent ID</span>
+                        <span style="color: #3286E6; font-size: 20px;">{{transfertObject.sentByAgentWithId}}</span>
                     </div>
                     <div style="height: 1px;width: 60%; background-color: #3286E6; margin-top: 7px; margin-bottom: 12px;"></div>
                     <div style="display: flex; justify-content: space-around;">
                         <label for="firstName" class="form-label" style="font-weight: bold;">Full Name</label>
-                        <span style="color: #3286E6; font-size: 20px;"> nom + prenom</span>
+                        <span style="color: #3286E6; font-size: 20px;"> {{transfertObject.senderFirstName}} {{transfertObject.senderLastName}}</span>
                     </div>
                     <div style="height: 1px;width: 60%; background-color: #3286E6; margin-top: 7px; margin-bottom: 12px;"></div>
                     <div style="display: flex; justify-content: space-around;">
                         <label for="firstName" class="form-label" style="font-weight: bold;">Date of issue</label>
-                        <span style="color: #3286E6; font-size: 20px;"> xx/xx/xxxx</span>
+                        <span style="color: #3286E6; font-size: 20px;"> {{transfertObject.createdAt}}</span>
                     </div>
                     <div style="height: 1px;width: 60%; background-color: #3286E6; margin-top: 7px; margin-bottom: 12px;"></div>
                     <div style="display: flex; justify-content: space-around;">
                         <label for="firstName" class="form-label" style="font-weight: bold;">Amount</label>
-                        <span style="color: #3286E6; font-size: 20px;"> montant</span>
+                        <span style="color: #3286E6; font-size: 20px;"> {{transfertObject.transfers[0].finalAmountTransfer}}</span>
                     </div>
                     <div style="height: 1px;width: 60%; background-color: #3286E6; margin-top: 7px; margin-bottom: 12px;"></div>
                     <div style="display: flex; justify-content: space-around; padding-bottom: 20px;">
                         <label for="firstName" class="form-label" style="font-weight: bold;">Receiver Full Name</label>
-                        <span style="color: #3286E6; font-size: 20px;"> nom + prenom</span>
+                        <span style="color: #3286E6; font-size: 20px;"> {{transfertObject.transfers[0].receiverFirstName}} {{transfertObject.transfers[0].receiverLastName}}</span>
                     </div>
                 </div>
             </div>
@@ -65,72 +65,72 @@
                 <div class="row mb-1">
                     <div class="col-md-6">
                       <label for="firstName" class="form-label">First Name</label>
-                      <input required id="username" class="form-control shadow" type="text" placeholder="No First Name"
+                      <input required id="username" [(ngModel)]="client.firstName" class="form-control shadow" type="text" placeholder="No First Name" [disabled]="receiverInfoIsAvailable"
                        name="firstName">
                     </div>
                     <div class="col-md-6">
                       <label for="lastName" class="form-label">Last Name</label>
-                      <input required id="username" class="form-control shadow" type="text" placeholder="No Last Name"
-                       name="lastName">
+                      <input required id="username" [(ngModel)]="client.lastName" class="form-control shadow" type="text" placeholder="No Last Name"
+                       name="lastName" [disabled]="receiverInfoIsAvailable">
                     </div>
                   </div>
                   <div class="row" style="padding-top: 15px;">
                     <div class="col-md-6">
                       <label class="form-label">Phone Number</label>
-                      <input required id="phoneNumber" class="form-control shadow" type="text" placeholder="No Phone Number"
-                      name="phoneNumber">
+                      <input required id="phoneNumber" [(ngModel)]="client.phoneNumber" class="form-control shadow" type="text" placeholder="Phone Number"
+                      name="phoneNumber" [disabled]="receiverInfoIsAvailable">
                     </div>
                     <div class="col-md-6">
                       <label class="form-label">Email</label>
-                      <input required id="email" class="form-control shadow" type="text" name="" placeholder="No email"
-                      name="email">
+                      <input required id="email" [(ngModel)]="client.email" class="form-control shadow" type="text" name="" placeholder="email"
+                      name="email" [disabled]="receiverInfoIsAvailable">
                     </div>
                     <div class="row" style="padding-top: 15px;">
                       <div class="col-md-6">
                         <label class="form-label">Birthday</label>
-                        <input required id="birthday" class="form-control shadow" type="date" placeholder="No Phone Number"
-                        [(ngModel)] = 'client.birthday' name="birthday">
+                        <input required id="birthday" class="form-control shadow" type="datetime" [(ngModel)]="client.birthday" placeholder="Phone Number"
+                         name="birthday" [disabled]="receiverInfoIsAvailable">
                       </div>
                       <div class="col-md-6">
                         <label class="form-label">Gender</label>
-                        <select [(ngModel)]='client.gender' name="dropdownOption" id="dropdownOption" class='form-control'>
-                          <option value="1">Male</option>
-                          <option value="2">Female</option>
+                        <select [(ngModel)]='client.gender' name="dropdownOption" id="dropdownOption"  class='form-control' [disabled]="receiverInfoIsAvailable">
+                          <option value="Male">Male</option>
+                          <option value="Female">Female</option>
                           </select>
                       </div>
                     </div>
                     <div class="row" style="padding-top: 15px;">
                       <div class="col-md-6">
                         <label class="form-label">Address</label>
-                        <input required id="address" class="form-control shadow" type="text" placeholder="No address"
-                        [(ngModel)] = 'client.address' name="address">
+                        <input required id="address" class="form-control shadow" type="text" placeholder="address"
+                        [(ngModel)] = 'client.address' name="address" [disabled]="receiverInfoIsAvailable">
                       </div>
                       <div class="col-md-2">
                         <label class="form-label">City</label>
-                        <input required id="city" class="form-control shadow" type="text" placeholder="No city"
-                        [(ngModel)] = 'client.city' name="city">
+                        <input required id="city" class="form-control shadow" type="text" placeholder="city"
+                        [(ngModel)] = 'client.city' name="city" [disabled]="receiverInfoIsAvailable">
                       </div>
                       <div class="col-md-2">
                         <label class="form-label">Zip Code</label>
-                        <input required id="zip_code" class="form-control shadow" type="number" placeholder="No zip code"
-                        [(ngModel)] = 'client.zip_code' name="zip_code">
+                        <input required id="zip_code" class="form-control shadow" type="number" placeholder="zip code"
+                        [(ngModel)] = 'client.zip_code' name="zip_code" [disabled]="receiverInfoIsAvailable">
                       </div>
                       <div class="col-md-2">
                         <label class="form-label">Country</label>
-                        <input required id="country" class="form-control shadow" type="text" placeholder="No country"
-                        [(ngModel)] = 'client.country' name="country">
+                        <input required id="country" class="form-control shadow" type="text" placeholder="country"
+                        [(ngModel)] = 'client.country' name="country" [disabled]="receiverInfoIsAvailable">
                       </div>
                       <div class="col-md-6" style="padding-top: 15px;">
                         <label for="identity_paper_type" class="form-label">Identity Paper Type</label>
-                        <select [(ngModel)]='client.identity_paper_type' name="dropdownOption" id="dropdownOption" class='form-control'>
-                        <option value="1">C.I.N</option>
-                        <option value="2">Passport</option>
-                        <option value="3">Driver License</option>
+                        <select [(ngModel)]='client.identity_paper_type' name="dropdownOption" id="dropdownOption" class='form-control' [disabled]="receiverInfoIsAvailable">
+                        <option value="CIN">C.I.N</option>
+                        <option value="Passport">Passport</option>
+                        <option value="Driver_License">Driver License</option>
                         </select>
                       </div>
                       <div class="col-md-6" style="padding-top: 15px;">
                         <label class="form-label">Identity Paper Number</label>
-                        <input required id="Identity_paper_number" class="form-control shadow" type="text" placeholder="No Identity Paper Number"
+                        <input required id="Identity_paper_number" class="form-control shadow" type="text" placeholder="Identity Paper Number" [disabled]="receiverInfoIsAvailable"
                          name="Identity_paper_number" [(ngModel)] = 'client.cinNumber' name="Identity_paper_number">
                       </div>
                       <div style="padding-top: 40px ; padding-bottom: 60px;">
@@ -162,7 +162,7 @@
             <div class="row mb-1" *ngIf="have_wallet == 1">
               <div style="padding-top: 10px;">
                 <label class="form-label">Wallet Number</label>
-                <input [disabled]="payment_done" required id="walletNumber" class="form-control shadow" type="text" placeholder="Enter the Wallet number"
+                <input [(ngModel)]="walletNumber" required id="walletNumber" class="form-control shadow" type="text" placeholder="Enter the Wallet number"
                  name="wallet_number">
               </div>
               <div style="padding-top: 20px ;padding-bottom: 20px;">
@@ -175,13 +175,13 @@
                 <div class="row">
                   <div class="col-md-6">
                     <label for="firstName" class="form-label">First Name</label>
-                    <input disabled id="username" class="form-control shadow" type="text" placeholder="No First Name"
-                     name="firstName">
+                    <input disabled id="username" class="form-control shadow" type="text"  placeholder="No First Name"
+                     name="firstName"   [(ngModel)] = 'client.firstName'>
                   </div>
                   <div class="col-md-6">
                     <label for="lastName" class="form-label">Last Name</label>
                     <input disabled id="username" class="form-control shadow" type="text" placeholder="No Last Name"
-                     name="lastName">
+                     name="lastName"   [(ngModel)] = 'client.lastName'>
                   </div>
                 </div>
 
@@ -189,12 +189,12 @@
                   <div class="col-md-6">
                     <label class="form-label">Phone Number</label>
                     <input disabled id="phoneNumber" class="form-control shadow" type="text" placeholder="No Phone Number"
-                    name="phoneNumber">
+                    name="phoneNumber"   [(ngModel)] = 'client.phoneNumber'>
                   </div>
                   <div class="col-md-6">
                     <label class="form-label">Email</label>
                     <input disabled id="email" class="form-control shadow" type="text" name="" placeholder="No email"
-                    name="email">
+                    name="email"   [(ngModel)] = 'client.email'>
                   </div>
                 </div>
                 <div class="row" style="padding-top: 15px;">
@@ -206,8 +206,8 @@
                   <div class="col-md-6">
                     <label class="form-label">Gender</label>
                     <select [(ngModel)]='client.gender' name="dropdownOption" id="dropdownOption" class='form-control' disabled>
-                      <option value="1">Male</option>
-                      <option value="2">Female</option>
+                      <option value="Male">Male</option>
+                      <option value="Female">Female</option>
                       </select>
                   </div>
                 </div>
@@ -235,9 +235,9 @@
                   <div class="col-md-6" style="padding-top: 15px;">
                     <label for="identity_paper_type" class="form-label">Identity Paper Type</label>
                     <select [(ngModel)]='client.identity_paper_type' name="dropdownOption" id="dropdownOption" class='form-control' disabled>
-                      <option value="1">C.I.N</option>
-                      <option value="2">Passport</option>
-                      <option value="3">Driver License</option>
+                      <option value="CIN">C.I.N</option>
+                      <option value="Passport">Passport</option>
+                      <option value="Driver_License">Driver License</option>
                     </select>
                 </div>
                 <div class="col-md-6" style="padding-top: 15px;">
@@ -251,7 +251,7 @@
                   <div>
                     <label class="form-label">Account Balance</label>
                     <input disabled id="balance" class="form-control shadow" type="number" placeholder="0"
-                    [(ngModel)] = 'client.birthday' name="balance">
+                    [(ngModel)] = 'client.accounts[0].balance' name="balance">
                   </div>
                 </div>
               </div>
@@ -263,43 +263,43 @@
                 <div class="row mb-1">
                   <div class="col-md-6">
                     <label for="firstName" class="form-label">First Name</label>
-                    <input required id="username" class="form-control shadow" type="text" placeholder="Enter your First Name"
+                    <input required id="username" class="form-control shadow" type="text" placeholder="Enter your First Name" [disabled]="walletIsAvailable"
                     [(ngModel)] = 'client.firstName' name="firstName">
                   </div>
                   <div class="col-md-6">
                     <label for="lastName" class="form-label">Last Name</label>
                     <input required id="username" class="form-control shadow" type="text" placeholder="Enter your Last Name"
-                    [(ngModel)] = 'client.lastName' name="lastName">
+                    [(ngModel)] = 'client.lastName' name="lastName" [disabled]="walletIsAvailable">
                   </div>
                   <div style="padding-top: 15px;">
                     <label for="username" class="form-label">Username</label>
                     <input required id="username" class="form-control shadow" type="text" placeholder="Enter username"
-                    [(ngModel)] = 'client.username' name="username">
+                    [(ngModel)] = 'client.userName' name="username" [disabled]="walletIsAvailable">
                   </div>
                 </div>
                 <div class="row" style="padding-top: 15px;">
                   <div class="col-md-6">
                     <label class="form-label">Phone Number</label>
                     <input required id="phoneNumber" class="form-control shadow" type="text" placeholder="Enter your Phone Number"
-                    [(ngModel)] = 'client.phoneNumber' name="phoneNumber">
+                    [(ngModel)] = 'client.phoneNumber' name="phoneNumber" [disabled]="walletIsAvailable">
                   </div>
                   <div class="col-md-6">
                     <label class="form-label">Email</label>
                     <input required id="email" class="form-control shadow" type="text" name="" placeholder="Enter your email"
-                    [(ngModel)] = 'client.email' name="email">
+                    [(ngModel)] = 'client.email' name="email" [disabled]="walletIsAvailable">
                   </div>
                 </div>
                 <div class="row" style="padding-top: 15px;">
                   <div class="col-md-6">
                     <label class="form-label">Birthday</label>
-                    <input required id="birthday" class="form-control shadow" type="date" placeholder="Enter your Phone Number"
-                    [(ngModel)] = 'client.birthday' name="birthday">
+                    <input required id="birthday" class="form-control shadow" type="datetime" placeholder="Enter your Phone Number"
+                    [(ngModel)] = 'client.birthday' name="birthday" [disabled]="walletIsAvailable">
                   </div>
                   <div class="col-md-6">
                     <label class="form-label">Gender</label>
-                    <select [(ngModel)]='client.gender' name="dropdownOption" id="dropdownOption" class='form-control'>
-                      <option value="1">Male</option>
-                      <option value="2">Female</option>
+                    <select [(ngModel)]='client.gender' name="dropdownOption" id="dropdownOption" class='form-control' [disabled]="walletIsAvailable">
+                      <option value="Male">Male</option>
+                      <option value="Female">Female</option>
                       </select>
                   </div>
                 </div>
@@ -307,35 +307,39 @@
                   <div class="col-md-6">
                     <label class="form-label">Address</label>
                     <input required id="address" class="form-control shadow" type="text" placeholder="Enter your address"
-                    [(ngModel)] = 'client.address' name="address">
+                    [(ngModel)] = 'client.address' name="address" [disabled]="walletIsAvailable">
                   </div>
                   <div class="col-md-2">
                     <label class="form-label">City</label>
                     <input required id="city" class="form-control shadow" type="text" placeholder="Enter your city"
-                    [(ngModel)] = 'client.city' name="city">
+                    [(ngModel)] = 'client.city' name="city" [disabled]="walletIsAvailable">
                   </div>
                   <div class="col-md-2">
                     <label class="form-label">Zip Code</label>
                     <input required id="zip_code" class="form-control shadow" type="number" placeholder="Enter your zip code"
-                    [(ngModel)] = 'client.zip_code' name="zip_code">
+                    [(ngModel)] = 'client.zip_code' name="zip_code" [disabled]="walletIsAvailable">
                   </div>
                   <div class="col-md-2">
                     <label class="form-label">Country</label>
                     <input required id="country" class="form-control shadow" type="text" placeholder="Enter your country"
-                    [(ngModel)] = 'client.country' name="country">
+                    [(ngModel)] = 'client.country' name="country" [disabled]="walletIsAvailable">
                   </div>
                   <div class="col-md-6" style="padding-top: 15px;">
                     <label for="identity_paper_type" class="form-label">Identity Paper Type</label>
-                    <select [(ngModel)]='client.identity_paper_type' name="dropdownOption" id="dropdownOption" class='form-control'>
-                    <option value="1">C.I.N</option>
-                    <option value="2">Passport</option>
-                    <option value="3">Driver License</option>
+                    <select [(ngModel)]='client.identity_paper_type' [disabled]="walletIsAvailable" name="dropdownOption" id="dropdownOption" class='form-control'>
+                    <option value="CIN">C.I.N</option>
+                    <option value="Passport">Passport</option>
+                    <option value="Driver_License">Driver License</option>
                     </select>
                   </div>
                   <div class="col-md-6" style="padding-top: 15px;">
                     <label class="form-label">Identity Paper Number</label>
                     <input required id="Identity_paper_number" class="form-control shadow" type="text" placeholder="Enter your Identity Paper Number"
-                    name="Identity_paper_number" [(ngModel)] = 'client.cinNumber' name="Identity_paper_number">
+                    name="Identity_paper_number" [(ngModel)] = 'client.cinNumber' [disabled]="walletIsAvailable" name="Identity_paper_number">
+                  </div>
+
+                  <div style="padding-top: 40px ; padding-bottom: 60px;">
+                    <button type="submit" class="btn btn-warning" style="color: #fff;">Create Account For Client</button>
                   </div>
                 </div>
 
@@ -355,23 +359,19 @@
                 <form #clientForm="ngForm" *ngIf="otpSended==true">
                   <div style="padding-top: 10px;">
                     <label class="form-label">Verify OTP Code</label>
-                    <input [disabled]="payment_done" required id="phoneNumber" class="form-control shadow" type="text" placeholder="Enter the OTP received by SMS"
-                     name="Identity_paper_number">
+                    <input [disabled]="payment_done" required id="otpCode" class="form-control shadow" type="text" placeholder="Enter the OTP received by SMS"
+                     name="Identity_paper_number"   [(ngModel)] = 'otpCode'>
                   </div>
                   <div style="padding-top: 20px ;padding-bottom: 20px; display: flex; justify-content: space-around;">
                     <button [disabled]="payment_done" type="submit" class="btn btn-primary" (click)="verifyOTP()">Verify</button>
                     <button [disabled]="payment_done" type="submit" class="btn btn-danger" *ngIf="otpVerified==false" (click)="goToHome()">Quit</button>
                   </div>
                 </form>
-
-                <div style="padding-top: 40px ;" *ngIf="otpVerified==true">
-                  <button [disabled]="payment_done" type="submit" class="btn btn-primary" >Create Payment Account</button>
-                </div>
               
               </form>
             </div>
 
-            <div style="padding-top: 40px ; padding-bottom: 60px;" *ngIf="sub_account_created==true || check_wallet == true">
+            <div style="padding-top: 40px ; padding-bottom: 60px;" *ngIf="otpVerified && walletIsAvailable">
               <button [disabled]="payment_done" type="submit" class="btn btn-warning" style="color: #fff;" (click)="validatePayment()">Validate Payment</button>
             </div>
 

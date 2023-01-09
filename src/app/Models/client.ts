@@ -1,10 +1,10 @@
 export class Client {
 
     public password : String = new String("");
-    public username : String  = new String();
+    public userName : String  = new String();
     public firstName : String  = new String();
     public lastName : String  = new String();
-    public birthday : Date | undefined;
+    public birthday : Date | undefined | String;
     public email : String = new String();
     public phoneNumber : String = new String();
     public address : String = new String();

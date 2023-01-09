@@ -27,22 +27,23 @@ export class HomeComponent implements OnInit {
     cinNumber : "EB2912??",
     identity_paper_type : "Passeport",
     gender : "Male",
-    username : "fred001",
+    userName : "fred001",
     country : "Morroco",
-    accounts :[
-      {accountNumber:"24838434",
-    balance:1000,
-  id:2,
-status: AccountStatus.ACTIVATED}
-    ] as Array<Account>
+   
   };
+  userRoles: string | null;
+  isAdmin: any;
+  isAgent: any;
 
-  isAdmin:boolean;
  
   constructor(private router: Router, private keycloakAngular: KeycloakService) { }
 
   ngOnInit(): void {
-    this.isAdmin = true;
+
+    this.userRoles = window.sessionStorage.getItem("userRoles");
+
+    this.isAdmin = this.userRoles?.includes("ADMIN");
+    this.isAgent = this.userRoles?.includes("AGENT");
 
   }
 

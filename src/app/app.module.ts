@@ -1,5 +1,5 @@
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { NgModule } from '@angular/core';
+import { NgModule, OnInit } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import {MatSidenavModule} from '@angular/material/sidenav';
@@ -71,7 +71,7 @@ import { AuthInterceptor } from './_helpers/auth.interceptor';
 })
 export class AppModule { 
 
-  public keycloakReponse: Promise<KeycloakProfile> ;
+  public keycloakReponse: Promise<KeycloakProfile | void> ;
   public keycloakToken: Promise<string>;
 
   public UserRoles : Array<String>;
@@ -82,7 +82,7 @@ export class AppModule {
     ) {
       this.keycloakAngular.init({
         config: {
-         url: 'http://ec2-3-82-120-180.compute-1.amazonaws.com:8080/auth/',
+         url: 'http://ec2-54-84-8-63.compute-1.amazonaws.com:8080/auth/',
          realm: 'test',
          clientId: 'transfert_front',
          
@@ -97,9 +97,17 @@ export class AppModule {
         enableBearerInterceptor: true,
        bearerExcludedUrls: ['/assets', '/clients/public'],
      }).then(() => {
-     this.keycloakReponse = this.keycloakAngular.loadUserProfile();
-     this.UserRoles = this.keycloakAngular.getUserRoles();
+     this.keycloakReponse = this.keycloakAngular.loadUserProfile().then(user => {
+       console.log(user.email);
+       sessionStorage.setItem("userEmail",JSON.stringify(user.email));
 
+
+     });
+
+     this.UserRoles = this.keycloakAngular.getUserRoles();
+     console.log("User Roles : "+this.UserRoles);
+
+      
 
      this.keycloakToken=  this.keycloakAngular.getToken()
       console.log(this.keycloakToken);
@@ -107,7 +115,6 @@ export class AppModule {
 
       sessionStorage.setItem("userRoles", this.UserRoles.join(","));
 
-      sessionStorage.setItem("keycloakReponse",JSON.stringify(this.keycloakReponse));
       sessionStorage.setItem("keycloakToken", JSON.stringify(this.keycloakToken));
 
 
@@ -115,6 +122,7 @@ export class AppModule {
      }).catch((error: any) => console.error(error));
 
     }
+
 
   }
 

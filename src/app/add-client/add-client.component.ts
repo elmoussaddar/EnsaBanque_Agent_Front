@@ -1,3 +1,4 @@
+import Swal from 'sweetalert2';
 import { ClientServicesService } from './../_services/client-services.service';
 import { Component, OnInit } from '@angular/core';
 import { Client } from '../Models/client';
@@ -16,12 +17,28 @@ export class AddClientComponent implements OnInit {
   ngOnInit(): void {
   }
   public saveClientData(clientForm: NgForm){
-   // this.router.navigate(['clientHome/liste-clients']);
 
-   this.clientServices.addClient(this.client).subscribe(data =>{
+  this.clientServices.addClient(this.client).subscribe(data =>{
     console.log(data);
     console.log("user registred !!!!!");
-   })
+
+    Swal.fire(" this client has been registered", "operation is successful",'success' ).then(() =>{
+      location.reload();
+    });
+   },
+   error => {
+    console.log(error);
+    // handle the error here
+    Swal.fire(" the registration process encountred an error ", error.message,'error' ).then(()=>{
+      location.reload();
+
+    });
+
+  })
+
+
+
+  
 
    console.log(this.client);
   }

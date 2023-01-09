@@ -18,7 +18,7 @@
             <div class="card-title">
                 <div class="d-flex justify-content-between">
                     <div class=" mb-3 p-2 rounded-pill float-start" style = "background-color: #1FD1FD; color : #fff;">username</div>
-                    <span class="fw-bold ms-5">{{client.username}}</span>
+                    <span class="fw-bold ms-5">{{client.userName}}</span>
                 </div>
                 <div class="d-flex justify-content-between">
                     <div class=" mb-3 p-2 rounded-pill float-start" style = "background-color: #1FD1FD; color : #fff;">First Name</div>
@@ -29,10 +29,9 @@
                     <span class="fw-bold ms-5">{{client.lastName}}</span>
                 </div>
             </div>
-                <div class="d-flex justify-content-around">
+                <div class="d-flex justify-content-center">
                     <a (click) = "onOpenModal(client,'infos')" class="btn btn-primary m-1">Details</a>
                     <a (click) = "onOpenModal(client,'update')" class="btn btn-success m-1">Modifier</a>
-                    <a (click) = "onOpenModal(client,'delete')" class="btn btn-danger m-1">Supprimer</a>
                 </div>
             
             </div>
@@ -44,7 +43,7 @@
         <div class="modal-dialog" role="document">
              <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="infosClientModalLabel">Informations on Client  {{clientChoosed.username}}</h5>
+                    <h5 class="modal-title" id="infosClientModalLabel">Informations on Client  {{clientChoosed.userName}}</h5>
                     <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -104,18 +103,12 @@
                                 <div class="d-flex justify-content-between">
                                     <div class=" mb-3 p-2 rounded-pill" style = "width : 40%;background-color: #1FD1FD; color : #fff;">Identity paper number</div>
                                     <span class="fw-bold ms-5">{{clientChoosed.cinNumber}}</span>
-                                </div><hr>
-                                <div class="d-flex justify-content-between">
-                                    <div class=" mb-3 p-2 rounded-pill" style = "width : 40%;background-color: #1FD1FD; color : #fff;">Username</div>
-                                    <span class="fw-bold ms-5">{{clientChoosed.username}}</span>
-                                </div><hr>
-                                <div class="d-flex justify-content-between">
-                                    <div class=" mb-3 p-2 rounded-pill" style = "width : 40%;background-color: #1FD1FD; color : #fff;">Password</div>
-                                    <span class="fw-bold ms-5">{{clientChoosed.password}}</span>
-                                </div><hr>
+                                </div>
+                              
+                                <hr>
                                 <div class="d-flex justify-content-between">
                                     <div class=" mb-3 p-2 rounded-pill" style = "width : 40%;background-color: #1FD1FD; color : #fff;">Wallet Balance</div>
-                                    <span class="fw-bold ms-5"></span>
+                                    <span class="fw-bold ms-5">{{clientChoosed.accounts[0]?.balance}}</span>
                                 </div><hr>
                                 <div class="modal-footer">
                                     <button type="button" id="" data-bs-dismiss="modal" class="btn btn-secondary">Fermer</button>
@@ -132,7 +125,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                <div class="modal-header">
-                  <h5 class="modal-title" id="updateClientModalLabel">Modifier Client {{updateClient?.username}}</h5>
+                  <h5 class="modal-title" id="updateClientModalLabel">Modifier Client {{updateClient.userName}}</h5>
                   <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                   </button>
@@ -141,75 +134,70 @@
                   <form #editForm="ngForm">
                     <div class="form-group">
                         <label for="name">ID Client</label>
-                        <input disabled type="text" ngModel="{{updateClient?.id}}" name="id" class="form-control" id="name" aria-describedby="emailHelp">
+                        <input disabled type="text" ngModel="{{updateClient.id}}" name="id" class="form-control" id="name" aria-describedby="emailHelp" disabled="true">
                      </div>
                      <div class="form-group">
                         <label for="name">Gender</label>
-                        <select ngModel="{{updateClient?.firstName}}" name="gender" id="dropdownOption" class='form-control'>
-                            <option value="1">Male</option>
-                            <option value="2">Female</option>
+                        <select ngModel='{{updateClient.gender}}' name="gender" id="dropdownOption" class='form-control'>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
                         </select>
                     </div>
                      <div class="form-group">
                         <label for="name">First Name</label>
-                        <input type="text" ngModel="{{updateClient?.firstName}}" name="username" class="form-control" id="name" aria-describedby="emailHelp" placeholder="username">
+                        <input type="text" ngModel="{{updateClient.firstName}}" name="firstName" class="form-control" id="name" aria-describedby="emailHelp" placeholder="username">
                      </div>
                      <div class="form-group">
                         <label for="name">Last Name</label>
-                        <input type="text" ngModel="{{updateClient?.lastName}}" name="first_name" class="form-control" id="name" aria-describedby="emailHelp" placeholder="first_name">
+                        <input type="text" ngModel="{{updateClient.lastName}}" name="lastName" class="form-control" id="name" aria-describedby="emailHelp" placeholder="first_name">
                      </div>
                      <div class="form-group">
                         <label for="name">Birthday</label>
-                        <input type="text" ngModel="{{updateClient?.birthday}}" name="birthday" class="form-control" id="name" aria-describedby="emailHelp" placeholder="birthday">
+                        <input type="datetime" ngModel="{{updateClient.birthday}}" name="birthday" class="form-control" id="name" aria-describedby="emailHelp" placeholder="birthday">
                      </div>
                      <div class="form-group">
                         <label for="name">Email</label>
-                        <input type="text" ngModel="{{updateClient?.email}}" name="email" class="form-control" id="name" aria-describedby="emailHelp" placeholder="email">
+                        <input type="text" ngModel="{{updateClient.email}}" name="email" class="form-control" id="name" aria-describedby="emailHelp" placeholder="email">
                      </div>
                      <div class="form-group">
                         <label for="name">Phone Number</label>
-                        <input type="text" ngModel="{{updateClient?.phoneNumber}}" name="phoneNumber" class="form-control" id="name" aria-describedby="emailHelp" placeholder="phoneNumber">
+                        <input type="text" ngModel="{{updateClient.phoneNumber}}" name="phoneNumber" class="form-control" id="name" aria-describedby="emailHelp" placeholder="phoneNumber">
                      </div>
                      <div class="form-group">
                         <label for="name">Address</label>
-                        <input type="text" ngModel="{{updateClient?.address}}" name="address" class="form-control" id="name" aria-describedby="emailHelp" placeholder="address">
+                        <input type="text" ngModel="{{updateClient.address}}" name="address" class="form-control" id="name" aria-describedby="emailHelp" placeholder="address">
                      </div>
+                    
                      <div class="form-group">
                         <label for="name">Zip Code</label>
-                        <input type="text" ngModel="{{updateClient?.zip_code}}" name="zipCode" class="form-control" id="name" aria-describedby="emailHelp" placeholder="address">
+                        <input type="text" ngModel="{{updateClient.zip_code}}" name="zipCode" class="form-control" id="name" aria-describedby="emailHelp" placeholder="address">
                      </div>
                      <div class="form-group">
                         <label for="name">City</label>
-                        <input type="text" ngModel="{{updateClient?.city}}" name="city" class="form-control" id="name" aria-describedby="emailHelp" placeholder="address">
+                        <input type="text" ngModel="{{updateClient.city}}" name="city" class="form-control" id="name" aria-describedby="emailHelp" placeholder="address">
                      </div>
                      <div class="form-group">
                         <label for="name">Country</label>
-                        <input type="text" ngModel="{{updateClient?.country}}" name="country" class="form-control" id="name" aria-describedby="emailHelp" placeholder="address">
+                        <input type="text" ngModel="{{updateClient.country}}" name="country" class="form-control" id="name" aria-describedby="emailHelp" placeholder="address">
                      </div>
                      <div class="form-group">
                         <label for="name">Identity Paper Type</label>
-                        <select ngModel="{{updateClient?.identity_paper_type}}" name="identity_paper_type" id="dropdownOption" class='form-control'>
-                            <option value="1">C.I.N</option>
-                            <option value="2">Passport</option>
-                            <option value="3">Driver License</option>
+                        <select ngModel="{{updateClient.identity_paper_type}}" name="identity_paper_type" id="dropdownOption" class='form-control'>
+                            <option value="CIN">C.I.N</option>
+                            <option value="Passport">Passport</option>
+                            <option value="Driver_License">Driver License</option>
                             </select>
                     </div>
                      <div class="form-group">
                         <label for="name">Identity Paper Number</label>
-                        <input type="text" ngModel="{{updateClient?.cinNumber}}" name="identity_paper_number" class="form-control" id="name" aria-describedby="emailHelp" placeholder="numero carte bancaire">
+                        <input type="text" ngModel="{{updateClient.cinNumber}}" name="cinNumber" class="form-control" id="name" aria-describedby="emailHelp" placeholder="numero carte bancaire">
                      </div>
                      <div class="form-group">
                         <label for="name">Username</label>
-                        <input type="text" ngModel="{{updateClient?.username}}" name="password" class="form-control" id="name" aria-describedby="emailHelp" placeholder="password">
+                        <input type="text" ngModel="{{updateClient.userName}}" name="userName" class="form-control" id="name" aria-describedby="emailHelp" placeholder="username">
                      </div>
-                     <div class="form-group">
-                        <label for="name">Password</label>
-                        <input type="text" ngModel="{{updateClient?.password}}" name="password" class="form-control" id="name" aria-describedby="emailHelp" placeholder="password">
-                     </div>
-                     <div class="form-group">
-                        <label for="name">Account Balance</label>
-                        <input type="number" ngModel="" name="balance" class="form-control" id="name" aria-describedby="emailHelp" placeholder="password">
-                     </div>
+                    
+                    
                      
                      <div class="modal-footer">
                         <button type="button" id="" data-bs-dismiss="modal" class="btn btn-secondary">Fermer</button>
@@ -228,23 +216,5 @@
     </div>
 </div>
 
-<div class="modal fade" id="deleteClientModal" tabindex="-1" role="dialog" aria-labelledby="deleteModelLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-           <div class="modal-header">
-              <h5 class="modal-title" id="deleteModelLabel">Supprimer Client</h5>
-              <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-              </button>
-           </div>
-           <div class="modal-body">
-              <p>Etes vous sûr de vouloir supprier le client  {{deleteClient.username}} ?</p>
-              <div class="modal-footer">
-                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
-                 <button  class="btn btn-danger" data-bs-dismiss="modal">Yes</button>
-              </div>
-           </div>
-     </div>
-   </div>
-</div>
+
 

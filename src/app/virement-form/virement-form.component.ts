@@ -29,13 +29,16 @@ import { beneficiaryResponseObject } from '../ResponseEntities/beneficiaryRespon
   phoneNumber:String;
   listData: Client[] = [];
   transfert : MTransfer = new MTransfer();
+  montantTransfert: Number = new Number(0);
   beneficiaries : Array<beneficiaryResponseObject>
   newBeneficiairy : Beneficiare = new Beneficiare();
   
   public client:clientResponseObject = new clientResponseObject();
    
     showNotEnoughCredit:boolean = false;
-    constructor(private router: Router,private clientServices: ClientServicesService) {}
+    constructor(private router: Router,private clientServices: ClientServicesService) {
+      this.montantTransfert = 0;
+    }
     ngOnInit(): void {
       }
 
