@@ -85,13 +85,13 @@
                             </div>
                             <div class="col-md-6">
                               <label class="form-label">Email</label>
-                              <input required id="email" [(ngModel)]='client.email' class="form-control shadow" type="text" name="" placeholder="Enter your email"
+                              <input required id="email" [(ngModel)]='client.email' class="form-control shadow" type="text" name="email" placeholder="Enter your email"
                               name="email" [disabled]="clientDataAvailbale">
                             </div>
                             <div class="row" style="padding-top: 15px;">
                               <div class="col-md-6">
                                 <label class="form-label">Birthday</label>
-                                <input required id="birthday" [(ngModel)]='client.birthday' class="form-control shadow" type="datetime" placeholder="Enter your Phone Number"
+                                <input required id="birthday" [(ngModel)]='client.birthday' class="form-control shadow" type="datetime-local" placeholder="Enter your Phone Number"
                                  name="birthday" [disabled]="clientDataAvailbale">
                               </div>
                               <div class="col-md-6">
@@ -172,8 +172,8 @@
                               <label class="form-label">Notification</label>
                                 <mat-card class="form-control shadow" >
                                   <mat-card-content>
-                                <section class="example-section">
-                                  <mat-checkbox value="senDnotification" >Checked</mat-checkbox>
+                                <section class="example-section" >
+                                  <mat-checkbox  [checked]="senDnotification" (change)="toggleSwitchSendNotification()" >Checked</mat-checkbox>
                                 </section>
                               </mat-card-content>
                           </mat-card></div>
@@ -181,11 +181,10 @@
                               <label class="example-margin" style="padding-top: 20px; padding-bottom:20px;"> Cost management</label>
                               <mat-card>
                                   <mat-card-content>
-                                <section class="example-section">
-                                  <mat-radio-group ngModel="typeFrais" value="typeFrais">
-                                    <mat-radio-button class="example-margin" value="CHARGE_CLIENT_DONNEUR_ORDER"  style="margin-right:70px; "> Costs to be paid by the ordering customer</mat-radio-button>
-                                    <mat-radio-button class="example-margin" value="CHARGE_BENIFICIAIRE" style="margin-right:70px; "> Fees to be paid by the beneficiary client</mat-radio-button>
-                                    <mat-radio-button class="example-margin" value="CHARGE_BOTH"> Shared costs between clients (Principal and beneficiary)</mat-radio-button>
+                                <section class="example-section" [(ngModel)]="typeFraiChoisie">
+                                  <mat-radio-group  >
+                                    <mat-radio-button class="example-margin" *ngFor="let type of typeFrais" [value]="type"  style="margin-right:70px; "> {{type}}</mat-radio-button>
+                                    
                                   </mat-radio-group>
                           
                                 </section>
@@ -201,14 +200,9 @@
                   <div class="card-body" style="background-color: #D4D5D5;">
                     <span style="font-weight: bold; font-size: 20px; margin: vertical 5px;">Receiver Informations </span> <hr>
                           <div class="row mb-1">
-                      <form #clientForm="ngForm" (ngSubmit)="onSearchReceiver()">
-                        <div style="padding-top: 10px;">
-                          <label class="form-label">Identity Paper Number</label>
-                          <input required id="cin" [(ngModel)]="cinNumber" class="form-control shadow" type="text" placeholder="Enter your Identity Paper Number"
-                           name="Identity_paper_number">
-                        </div>
+                      <form #clientForm="ngForm">
+                       
                         <div style="padding-top: 20px ;padding-bottom: 20px;">
-                          <button type="submit" class="btn btn-primary">Search</button>
                           <a (click) = "onOpenModal(client,'add')" class="btn btn-success m-1">Add Reciever Client</a>
                         </div>
                          <!-- Add Reciever Client Modal -->
@@ -220,20 +214,14 @@
                               <th scope="col">First Name</th>
                               <th scope="col">Last Name</th>
                               <th scope="col">Phone Number</th>
-                              <th scope="col">Amount</th>
 
                               <th scope="col">Identity_paper_number</th>
                             </tr>
                           </thead>
-                          <tbody id="excel-table" *ngIf="beneficiaries != null">
-                           <!--tr
-                              *ngFor="let item of listData">
-                              <input type="radio" name="choice" />
-                              <th>&nbsp; {{ item.firstName }} &nbsp;&nbsp;</th>
-                              <th>&nbsp; {{ item.lastName }}</th>
-                              <th>&nbsp; {{ item.phoneNumber}}</th-->
-                                <tr *ngFor="let beneficiary in beneficiaries">
-                                  <th scope="row"><input type="checkbox" name="choice1" /></th>
+                          <tbody id="excel-table" >
+                          
+                                <tr *ngFor="let beneficiary of client.beneficiaries" >
+                                  <th scope="row"><input type="checkbox" name="choice1"  (change)="onchange($event,beneficiary)" /></th>
                                   <td>{{beneficiary.firstName}}</td>
                                   <td>{{beneficiary.lastName}}</td>
                                   <td>{{beneficiary.phoneNumber}}</td>
@@ -246,17 +234,16 @@
                                
                                 
                                
-                              <!--th>&nbsp; <button class="btn btn-danger">Delete</button></th-->
                           </tbody>
                         </table>
                         <div style="padding-top: 20px ;padding-bottom: 20px;" *ngIf="Search==true">
-                          <button type="submit" class="btn btn-primary">Finish</button>
+                          <button type="submit" (click)="finishClicked()" class="btn btn-primary">Finish</button>
                       </div>
                       </form>
                   </div>
               </div>
             </div>
-            <div style="margin-top: 20px ;padding-bottom: 20px;" *ngIf="SearchReceiver==true">
+            <div style="margin-top: 20px ;padding-bottom: 20px;" *ngIf="fondsAvailable">
               <form #clientForm="ngForm" (ngSubmit)="onSendOTP()"> 
                 <button type="submit" class="btn btn-primary">Send OTP Code</button>
               </form>
@@ -269,7 +256,7 @@
                     <div style="padding-top: 10px;">
                       <label class="form-label">OTP Code</label>
                       <input required id="phoneNumber" class="form-control shadow" type="text" placeholder="Enter the OTP received by SMS"
-                       name="Identity_paper_number">
+                       name="Identity_paper_number" [(ngModel)]="codeOTPReceived">
                     </div>
                     <div style="padding-top: 20px ;padding-bottom: 20px;">
                       <button type="submit" class="btn btn-primary">Verify</button>
@@ -299,7 +286,7 @@
           </button>
        </div>
        <div class="modal-body">
-          <form #addForm="ngForm" (ngSubmit)="onAddClient()">
+          <form #addForm="ngForm">
             <div class="form-group">
               <label for="firstName">First Name</label>
               <input type="text" [(ngModel)]="newBeneficiairy.firstName" name="firstName" value="newBeneficiairy.firstName" class="form-control" id="firstName" placeholder="firstName" required>
@@ -315,8 +302,8 @@
             
           </form>
           <div class="modal-footer">
-            <button type="button" id="add-employee-form" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button [disabled]="addForm.invalid" type="submit" class="btn btn-primary" >Save</button>
+            <button type="submit" id="add-employee-form" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button [disabled]="addForm.invalid" type="submit" (click)="onAddClient()" class="btn btn-primary" >Save</button>
           </div>
         </div>
     </div>

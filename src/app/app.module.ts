@@ -80,9 +80,9 @@ export class AppModule {
     private keycloakAngular: KeycloakService,
  
     ) {
-      this.keycloakAngular.init({
+     this.keycloakAngular.init({
         config: {
-         url: 'http://ec2-54-84-8-63.compute-1.amazonaws.com:8080/auth/',
+         url: 'http://ec2-3-86-255-67.compute-1.amazonaws.com:8080/auth',
          realm: 'test',
          clientId: 'transfert_front',
          
@@ -120,9 +120,10 @@ export class AppModule {
 
        // keycloak initialized
      }).catch((error: any) => console.error(error));
-
+  
     }
 
+  
 
   }
 

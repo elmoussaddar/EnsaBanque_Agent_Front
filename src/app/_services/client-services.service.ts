@@ -23,10 +23,20 @@ private apiServerURL = environment.apiBaseURL;
    httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
-      'No-Auth': 'True'
+      'No-Auth': 'True',
 
     })
   };
+
+  httpOptions2 = {
+    headers: new HttpHeaders({
+      'Accept': 'application/pdf',  
+      responseType: 'blob',     
+
+    })
+  };
+
+
 
 constructor(private http : HttpClient) { }
 
@@ -34,11 +44,11 @@ public getClients() : Observable<clientResponseObject[]>{
   return this.http.get<clientResponseObject[]>(`https://client-service-01.herokuapp.com/api/v0/client_service_api/clients`,this.httpOptions);
 }
 
-public getClientByPhoneNumber(phone : String) : Observable<clientResponseObject>{
+public getClientByPhoneNumber(phone : String | null) : Observable<clientResponseObject>{
   return this.http.get<clientResponseObject>(`https://client-service-01.herokuapp.com/api/v0/client_service_api/clients/${phone}`);
 }
 
-public getClientByCIN(CIN : String) : Observable<clientResponseObject>{
+public getClientByCIN(CIN : String | null) : Observable<clientResponseObject>{
   return this.http.get<clientResponseObject>(`https://client-service-01.herokuapp.com/api/v0/client_service_api/clients/${CIN}?cin`,this.httpOptions);
 }
 
@@ -79,18 +89,18 @@ public getBeneficiairiesPerClient(clientCIN : String) : Observable<Array<benefic
 
 }
 
-public addBeneficiairieToClient(beneficiairieObject :prospectBeneficiare, clientCIN : String ):Observable<any>{
+public addBeneficiairieToClient(beneficiairieObject :prospectBeneficiare, clientCIN : String ):Observable<clientResponseObject>{
 
-  return this.http.post(`https://client-service-01.herokuapp.com/api/v0/client_service_api/clients/${clientCIN}/addNewBenif`,beneficiairieObject,this.httpOptions);
+  return this.http.post<clientResponseObject>(`https://client-service-01.herokuapp.com/api/v0/client_service_api/clients/${clientCIN}/addNewBenif`,beneficiairieObject);
 }
 
-public getConfirmationOfFondAvailability(clientCIN :string, amount:Number):Observable<String>{
+public getConfirmationOfFondAvailability(clientCIN :String, amount:Number):Observable<string>{
 
-  return this.http.get<String>(`https://client-service-01.herokuapp.com/api/v0/client_service_api/clients/${clientCIN}/${amount}?verify`,this.httpOptions);
+  return this.http.get<string>(`https://client-service-01.herokuapp.com/api/v0/client_service_api/clients/${clientCIN}/${amount}?verify`);
 }
 
 public registerTransfert(transfertObject:MTransfer):Observable<Number>{
-  return this.http.post<Number>("https://transfert-service-1.herokuapp.com/api/v0/transfer_service/mTransfer/createTransfer/agent",transfertObject,this.httpOptions)
+  return this.http.post<Number>("https://transfert-service-01.herokuapp.com/api/v0/transfer_service/mTransfer/createTransfer/agent",transfertObject,this.httpOptions)
 
 }
 
@@ -113,9 +123,15 @@ public verifyOTP(clientPhoneNumber : String,codeOTP:Number) :Observable<Boolean>
   return this.http.post<Boolean>(`https://agent-service-01.herokuapp.com/api/v0/agent_service/agent/verifyOTP?phone=${clientPhoneNumber}&otp=${codeOTP}`,this.httpOptions);
 }
 
-public serveTransfert(){
-  console.log("transfert served");
+public serveTransfert(reference : string): Observable<MTransferResponseObject>{
 
+  return this.http.get<MTransferResponseObject>(`https://transfert-service-01.herokuapp.com/api/v0/transfer_service_api/UTransfer/serve/${reference}`);
 }
+
+
+public verifyPinCode(reference : String,code_pin:string) :Observable<any>{
+  return this.http.get<MTransferResponseObject>(`https://transfert-service-01.herokuapp.com/api/v0/transfer_service_api/UTransfer/pin_code/${reference}?code_pin=${code_pin}`);
+}
+
 
 }

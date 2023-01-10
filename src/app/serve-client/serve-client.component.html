@@ -61,6 +61,7 @@
     <div class="card" style="margin-top:20px" *ngIf="search_ref==true">
         <div class="card-body" style="background-color: #D4D5D5;">
             <form #clientForm="ngForm" *ngIf="payment_type == 1">
+
                 <span style="font-weight: bold; font-size: 20px; margin: vertical 5px;">Receiver Informations</span> <hr>
                 <div class="row mb-1">
                     <div class="col-md-6">
@@ -88,7 +89,7 @@
                     <div class="row" style="padding-top: 15px;">
                       <div class="col-md-6">
                         <label class="form-label">Birthday</label>
-                        <input required id="birthday" class="form-control shadow" type="datetime" [(ngModel)]="client.birthday" placeholder="Phone Number"
+                        <input required id="birthday" class="form-control shadow" type="datetime-local" [(ngModel)]="client.birthday" placeholder="Phone Number"
                          name="birthday" [disabled]="receiverInfoIsAvailable">
                       </div>
                       <div class="col-md-6">
@@ -133,12 +134,28 @@
                         <input required id="Identity_paper_number" class="form-control shadow" type="text" placeholder="Identity Paper Number" [disabled]="receiverInfoIsAvailable"
                          name="Identity_paper_number" [(ngModel)] = 'client.cinNumber' name="Identity_paper_number">
                       </div>
-                      <div style="padding-top: 40px ; padding-bottom: 60px;">
-                        <button [disabled]="payment_done" type="submit" class="btn btn-warning" style="color: #fff;" (click)="validatePayment()">Validate Payment</button>
-                      </div>
+                    
+                    </div>
+                    <div style="padding-top: 40px ; padding-bottom: 60px;" *ngIf="!receiverInfoIsAvailable">
+                      <button type="submit" class="btn btn-warning" style="color: #fff;" (click)="saveAccount()">create receiver Account </button>
                     </div>
               </div>
-          </form>
+              <form  #clientForm="ngForm" style=" padding-top: 25px;" *ngIf="receiverInfoIsAvailable">
+                <span style="font-weight: bold; font-size: 20px; margin: vertical 5px;">PinCode Verification</span> <hr>
+               
+              </form>
+              <form #clientForm="ngForm" *ngIf="receiverInfoIsAvailable">
+                <div style="padding-top: 10px;">
+                  <label class="form-label">Verify PinCode</label>
+                  <input [disabled]="payment_done" required id="otpCode" class="form-control shadow" type="text" placeholder="Enter the Pin Code received by SMS"
+                   name="Identity_paper_number"   [(ngModel)] = 'PinCode'>
+                </div>
+                <div style="padding-top: 20px ;padding-bottom: 20px; display: flex; justify-content: space-around;">
+                  <button [disabled]="payment_done" type="submit" class="btn btn-primary" (click)="verifyPinCode()">Verify</button>
+                  <button [disabled]="payment_done" type="submit" class="btn btn-danger" *ngIf="otpVerified==false" (click)="goToHome()">Quit</button>
+                </div>
+              </form>
+            </form>
 
           <form #clientForm="ngForm" *ngIf="payment_type == 2">
             <span style="font-weight: bold; font-size: 20px; margin: vertical 5px;">Receiver Informations</span> <hr>
@@ -258,7 +275,7 @@
             </div>
 
             <div class="row mb-1" *ngIf="have_wallet == 2">
-              <form (ngSubmit)="saveAccount(clientForm)" #clientForm="ngForm" style=" padding-top: 25px;">
+              <form (ngSubmit)="saveAccount()" #clientForm="ngForm" style=" padding-top: 25px;">
                 <span style="font-weight: bold; font-size: 20px; margin: vertical 5px;">Payment account subscription</span> <hr>
                 <div class="row mb-1">
                   <div class="col-md-6">
@@ -343,13 +360,13 @@
                   </div>
                 </div>
 
-                <form (ngSubmit)="sendOTP()" #clientForm="ngForm" style=" padding-top: 25px;">
+                <form (ngSubmit)="sendOTP()" #clientForm="ngForm" style=" padding-top: 25px;" *ngIf="receiverInfoIsAvailable">
                   <span style="font-weight: bold; font-size: 20px; margin: vertical 5px;">OTP Verification</span> <hr>
                   <div class="row mb-1">
                     <div>
                       <label for="firstName" class="form-label">Enter the OTP code to Send</label>
                       <input [disabled]="payment_done" required id="otp" class="form-control shadow" type="text" placeholder="Enter the OTP code to send"
-                      [(ngModel)] = 'client.firstName' name="otpSend">
+                      [(ngModel)] = 'otpCode' name="otpSend">
                     </div>
                     <div style="margin-top: 20px ;padding-bottom: 20px;">
                       <button [disabled]="payment_done" type="submit" class="btn btn-primary">Send OTP Code</button>
@@ -371,13 +388,22 @@
               </form>
             </div>
 
-            <div style="padding-top: 40px ; padding-bottom: 60px;" *ngIf="otpVerified && walletIsAvailable">
-              <button [disabled]="payment_done" type="submit" class="btn btn-warning" style="color: #fff;" (click)="validatePayment()">Validate Payment</button>
-            </div>
+           
 
           </form>
-
+          <div style="padding-top: 40px ; padding-bottom: 60px;" *ngIf="otpVerified || PinCodeVerified">
+            <button [disabled]="payment_done" type="submit" class="btn btn-warning" style="color: #fff;" (click)="validatePayment()">Validate Payment</button>
+          </div>
         </div>
+
+       
+
+
+
+
+
+
+
     </div>
     <div style="display: flex; justify-content: space-around;" *ngIf="payment_done==true">
       <div style="padding-top: 40px ; padding-bottom: 50px;">

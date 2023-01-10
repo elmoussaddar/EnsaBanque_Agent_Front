@@ -3,12 +3,11 @@ import { transfertResponseObject } from './../ResponseEntities/transfertResponse
 import { MTransferResponseObject } from './../ResponseEntities/MTransferResponseObject';
 import { ClientServicesService } from './../_services/client-services.service';
 import { Component, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
-import { Client } from '../Models/client';
 import { TransferStatus } from '../enum/TransferStatus';
 import { AccountStatus } from '../enum/AccountStatus';
+
 
 @Component({
   selector: 'app-serve-client',
@@ -35,6 +34,11 @@ export class ServeClientComponent implements OnInit {
   walletNumber: string ;
   walletIsAvailable: boolean= false;
   transfertObject : MTransferResponseObject = new MTransferResponseObject();
+  PinCode: string;
+  PinCodeVerified = false;
+
+  fileName = 'my-pdf-file.pdf';
+
 
   constructor(private router: Router,private clientServices : ClientServicesService) { }
 
@@ -57,13 +61,18 @@ export class ServeClientComponent implements OnInit {
             location.reload();
           });
 
+        } else if(data.transfers[0].status == TransferStatus.SERVIE){
+          Swal.fire('Sorry\nThe transfert was already served', ':(', 'error').then(() => {
+            location.reload();
+          });
+
         } else  if(this.client_blist){
           Swal.fire('Sorry\nThe receiver\n\n' + this.s + '\n\nis blacklisted', ':(', 'error');
         }else {
           this.transfertObject = data;
           console.log(this.transfertObject);
 
-          this.clientServices.getClientByPhoneNumber(this.transfertObject.senderPhoneNumber).subscribe(data => {
+          this.clientServices.getClientByPhoneNumber(this.transfertObject.transfers[0].receiverPhoneNumber).subscribe(data => {
 
             if(data == null){
               Swal.fire('Sorry\nThe receiver does not not seem to be present in our database', 'you can go ahead and create an account.', 'info').then(() => {
@@ -73,6 +82,7 @@ export class ServeClientComponent implements OnInit {
               this.client = data;
               console.log(this.client);
               this.receiverInfoIsAvailable = true;
+
 
             }
           })
@@ -93,14 +103,39 @@ export class ServeClientComponent implements OnInit {
    
   }
 
+  verifyPinCode(){
+
+    this.clientServices.verifyPinCode(this.transfertRef,this.PinCode).subscribe(data => {
+      console.log(data);
+      Swal.fire('Pin Code verified', 'you may proceed', 'success').then(()=> {
+        this.PinCodeVerified = true;
+      }); },
+
+
+    
+    error => {console.log(error);
+      Swal.fire('Invalid Pin Code !', ':(', 'error');
+    }
+      )
+  }
+
   validatePayment(){
     // tout le traitement a faire pour valider le payement
-    this.payment_done = true;
-    if(this.payment_done){
-      Swal.fire('Transfert payed', 'Congratulations', 'success');
-    }
+   
 
-    this.clientServices.serveTransfert();
+    this.clientServices.serveTransfert(this.transfertRef).subscribe(response => {
+      console.log(response);
+
+      Swal.fire('Good Job', 'Transfert Was Paied', 'success');
+      this.payment_done = true;
+    },
+    error => {
+      console.log(error);
+      Swal.fire('Sorry\n error while serving transfert !', error.message, 'error').then(() => {
+        location.reload();
+      });
+
+    });
   }
 
   searchWallet(){
@@ -136,15 +171,17 @@ export class ServeClientComponent implements OnInit {
     this.router.navigate(['/clientHome/Home']);
   }
 
-  saveAccount(clientForm: NgForm){
-    this.sub_account_created = true;
+  saveAccount(){
  
     this.clientServices.addClient(this.client).subscribe(data =>{
       console.log(data);
 
       if(data != null){
         Swal.fire('Congratulations', 'Subscription Account Created', 'success').then(() =>{
-          this.walletIsAvailable = true
+          this.walletIsAvailable = true;
+          this.sub_account_created = true;
+          this.receiverInfoIsAvailable = true;
+
         });
 
       }
@@ -155,7 +192,9 @@ export class ServeClientComponent implements OnInit {
       // handle the error here
       Swal.fire(" the registration process encountred an error ", error.message,'error' ).then(()=>{
         this.walletIsAvailable = false;
-        location.reload();
+        this.sub_account_created = false;
+        this.receiverInfoIsAvailable = false;
+
   
       });
     }

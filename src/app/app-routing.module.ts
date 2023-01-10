@@ -15,10 +15,9 @@ import { VirementDoneComponent } from './virement-done/virement-done.component';
 import { VirementFormComponent } from './virement-form/virement-form.component';
 
 const routes: Routes = [
-  { path: '', component: ClientLoginFormComponent, pathMatch: 'full' },
-  {path:"login", component: ClientLoginFormComponent},
+  { path: '', component: ProfileComponent, pathMatch: 'full' },
   {path:"clientHome",component: ClientHomeComponent ,children:[
-      {path:"profile",component: ProfileComponent},
+      {path:"profile",component: ProfileComponent,pathMatch: 'full'},
       {path:"bankTransfert",component:VirementFormComponent},
       {path:"bankTransfert/success",component:VirementDoneComponent},
       {path:"addClient" , component:AddClientComponent},

@@ -4,7 +4,7 @@ export class MTransfer {
 
     public createdAt : Date| null = new Date();
     public endedAt : Date| null = new Date();
-    public id_client : Number = new Number();
+    public id_client : Number | null = new Number();
     public totalAmount : Number = new Number();
 
     public  motif : String = new String();
@@ -19,8 +19,9 @@ export class MTransfer {
 
     public sentByAgentWithId : Number = new Number();
 
-    public  transferByCash : Boolean = false;
+    public  transferByCash : Boolean | null = false;
     public  notifyBeneficiary : Boolean = false;
+    public typeFrais : string ;
 
     public transfers : Array<Transfert> = new Array<Transfert>();
 

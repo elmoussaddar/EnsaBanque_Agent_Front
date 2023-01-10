@@ -4,20 +4,20 @@ import { TypeFrais } from "../enum/TypeFrais";
 
 export class Transfert {
 
-  public id : Number = new Number();
+  public id : Number | null = new Number();
   public receivedAt : Date| null = new Date();
   public  transferReference : String = new String("");
   public  codePin : String = new String();
 
-  public ransferCost : Number = new Number();
-  public typeFrais : TypeFrais;
+  public ransferCost : Number | null = new Number();
+  public typeFrais : TypeFrais | null | String;
 
-  public transferAmount : Number = new Number();
+  public transferAmount : Number | null = new Number();
 
   public toBeNotified : Boolean = false;
-  public status : TransferStatus;
+  public status : TransferStatus | null;
 
-  public  type: TransfertType ;
+  public  type: TransfertType | null;
 
   public motifExtourne: String ;
 
@@ -31,15 +31,15 @@ export class Transfert {
 
   public   JDeblocage : Date | null ;
 
-  public transferCost : Number=50;
+  public transferCost : Number | null;
 
-  public finalAmountOperation : Number = new Number();
-  public finalAmountTransfer : Number = new Number();
+  public finalAmountOperation : Number | null = new Number();
+  public finalAmountTransfer : Number | null = new Number();
 
-  public  receiverFirstName : String = new String();
+  public  receiverFirstName : String | null = new String();
 
-  public  receiverLastName : String = new String();
+  public  receiverLastName : String | null = new String();
 
-  public  receiverPhoneNumber : String = new String();
+  public  receiverPhoneNumber : String | null = new String();
 
 }

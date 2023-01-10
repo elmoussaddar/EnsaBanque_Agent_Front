@@ -21,7 +21,7 @@ export class ListTransfertComponent implements OnInit {
      
     }
 
-    ViewDetailsClicked(transfertId:Number){
+    ViewDetailsClicked(transfertId:Number | null){
 
       let transfertObject : MTransferResponseObject | undefined = this.transferts.find(transfert=>transfert.transfers[0].id == transfertId );
 

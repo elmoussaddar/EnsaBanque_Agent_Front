@@ -48,6 +48,7 @@ export class ProfileComponent implements OnInit {
     if(this.isAgent){
       this.agentServices.getAgentByEmail(this.email).subscribe(agent => {
         this.client = agent;
+        localStorage.setItem("agentId",agent.id.toString());
         console.log(agent);
 
       })
